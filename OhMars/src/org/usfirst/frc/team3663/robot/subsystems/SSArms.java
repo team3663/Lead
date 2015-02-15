@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,7 +13,7 @@ public class SSArms extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	Talon intakeMotor1, intakeMotor2, armsUpAndDownMotor1, armsUpAndDownMotor2;
-	Solenoid armOpenClose1, armOpenClose2;
+	DoubleSolenoid armOpenClose1, armOpenClose2;
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -23,8 +24,8 @@ public class SSArms extends Subsystem {
     	armsUpAndDownMotor1 = new Talon(1);
     	armsUpAndDownMotor2 = new Talon(2);
     	
-    	armOpenClose1 = new Solenoid(0,1);
-    	armOpenClose2 = new Solenoid(6,7);
+    	armOpenClose2 = new DoubleSolenoid(0,1);
+    	armOpenClose1 = new DoubleSolenoid(6,7);
     }
     
     public void intakeMotorsSet(double speed){
@@ -45,8 +46,21 @@ public class SSArms extends Subsystem {
     public void arm2UpDown(double speed){
     	armsUpAndDownMotor2.set(speed);
     }
-    public void armIn1(boolean in){
-    	armOpenClose1.set(true);
+    public void arm1OutIn(boolean in){
+    	if(in){
+    		armOpenClose1.set(DoubleSolenoid.Value.kForward);
+    	}
+    	else{
+    		armOpenClose1.set(DoubleSolenoid.Value.kReverse);
+    	}
+    }
+    public void arm2OutIn(boolean in){
+    	if(in){
+    		armOpenClose2.set(DoubleSolenoid.Value.kForward);
+    	}
+    	else{
+    		armOpenClose2.set(DoubleSolenoid.Value.kReverse);
+    	}
     }
 }
 
