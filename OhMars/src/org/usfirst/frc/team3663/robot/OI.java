@@ -36,6 +36,7 @@ public class OI {
 	public JoystickButton elevMoveAndSetZero;
 	public JoystickButton incrementElevEncoderTicks;
 	public JoystickButton decrementElevEncoderTicks;
+	public JoystickButton testArmSolenoids;
 	
 	public OI(){
 	//	testSensors = new JoystickButton(driveStick, 1);
@@ -70,6 +71,9 @@ public class OI {
 		
 		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
 		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+		
+		testArmSolenoids = new JoystickButton(driveStick, 7);
+		testArmSolenoids.whileHeld(new C_Test());
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
