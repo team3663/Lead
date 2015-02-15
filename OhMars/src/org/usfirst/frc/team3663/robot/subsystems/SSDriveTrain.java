@@ -84,7 +84,6 @@ public class SSDriveTrain extends Subsystem {
     	boolean leftEnd = false;
     	
     	while(end){
-    		
     	}
     }
 }
