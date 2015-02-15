@@ -85,12 +85,12 @@ public class SSElevator extends Subsystem {
     
     public boolean moveAndSetZero()
     {
-    	if (!elevLimitSwitch.get())
+    	if (elevLimitSwitch.get())
     	{
     		bikeBrakeTriggerOpen();
     		motorsSet(-1.0);
     	}
-    	if (elevLimitSwitch.get())
+    	if (!elevLimitSwitch.get())
     	{
     		motorsSet(0);
     		bikeBrakeTriggerClose();

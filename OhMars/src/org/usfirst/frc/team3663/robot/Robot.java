@@ -109,6 +109,8 @@ public class Robot extends IterativeRobot {
 		case 12:
 			testMotorName = "BothArms";
 			break;
+		case 13:
+			testMotorName = "ElevatorEncoder";
 		default:
 			break;
     	}
