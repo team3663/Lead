@@ -66,13 +66,26 @@ public class SSDriveTrain extends Subsystem {
     {
     	driveMotorR2.set(speed);
     }
-    
-    public void logValues()
-    {
-    	SmartDashboard.putNumber("leftDriveEncoder: ", Robot.ssDriveTrain.leftEncoder.get());
-    	SmartDashboard.putNumber("rightDriveEncoder: ", Robot.ssDriveTrain.rightEncoder.get());    	
+    public void motorRightSet(double speed){
+    	driveMotorR2.set(speed);
+    	driveMotorR1.set(speed);
     }
-    
-    
+    public void motorLeftSet(double speed){
+    	driveMotorL2.set(speed);
+    	driveMotorL1.set(speed);
+    }
+    public void driveForwardDistance(double speed, int inches){
+    	int currentTicksLeft = leftEncoder.get();
+    	int currentTicksRight = rightEncoder.get();
+    	int targetTicksRight = ((360/4)*inches) + currentTicksRight;
+    	int targetTicksLeft = ((360/4)*inches) + currentTicksLeft;
+    	boolean end = false;
+    	boolean rightEnd = false;
+    	boolean leftEnd = false;
+    	
+    	while(end){
+    		
+    	}
+    }
 }
 
