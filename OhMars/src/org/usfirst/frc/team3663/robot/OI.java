@@ -21,6 +21,7 @@ import org.usfirst.frc.team3663.robot.commands.C_DecrementElevEncoderTicks;
 public class OI {
 	
 	public Joystick driveStick = new Joystick(0);
+	public Joystick logitech = new Joystick(1);
 	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
@@ -72,8 +73,7 @@ public class OI {
 		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
 		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
 		
-		testArmSolenoids = new JoystickButton(driveStick, 7);
-		testArmSolenoids.whileHeld(new C_Test());
+		
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
