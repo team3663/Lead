@@ -2,11 +2,15 @@ package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3663.robot.Robot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class C_MotorDriveTest extends Command {
+	
+	boolean finished;
+	int i;
 	
     public C_MotorDriveTest() {
         // Use requires() here to declare subsystem dependencies
@@ -15,6 +19,7 @@ public class C_MotorDriveTest extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	i = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -55,6 +60,7 @@ public class C_MotorDriveTest extends Command {
 			Robot.ssElevator.moveInAndOut(Robot.motorTestSpeed);
 			break;
 		case 10:
+			SmartDashboard.putNumber("i: ", i++);
 			Robot.ssArms.intakeMotorLSet(Robot.motorTestSpeed);
 			break;
 		case 11:
@@ -64,7 +70,7 @@ public class C_MotorDriveTest extends Command {
 			Robot.ssArms.intakeMotorsSet(Robot.motorTestSpeed);
 			break;
 		case 13:
-			Robot.ssElevator.moveToPos(Robot.encoderTicks);
+			finished = Robot.ssElevator.moveToPos(Robot.encoderTicks);
 		default:
 			break;
     	}
@@ -72,6 +78,10 @@ public class C_MotorDriveTest extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        if (finished || i > 100)
+    	{
+        	return true;
+    	}
         return false;
     }
 
