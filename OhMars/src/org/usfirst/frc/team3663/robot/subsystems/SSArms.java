@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,8 +12,9 @@ public class SSArms extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+
 	Talon intakeMotorL, intakeMotorR, armsUpAndDownMotorL, armsUpAndDownMotorR;
-	Solenoid armOpenCloseL, armOpenCloseR;
+	DoubleSolenoid armOpenCloseL, armOpenCloseR;
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -22,9 +24,8 @@ public class SSArms extends Subsystem {
     	intakeMotorR = new Talon(3);
     	armsUpAndDownMotorL = new Talon(1);
     	armsUpAndDownMotorR = new Talon(2);
-    	
-    	armOpenCloseL = new Solenoid(0,1);
-    	armOpenCloseR = new Solenoid(6,7);
+    	armOpenCloseL= new DoubleSolenoid(0,1);
+    	armOpenCloseR = new DoubleSolenoid(6,7);
     }
     
     public void intakeMotorsSet(double speed){
@@ -45,20 +46,20 @@ public class SSArms extends Subsystem {
     public void armRUpDownRSet(double speed){
     	armsUpAndDownMotorR.set(speed);
     }
-    public void armInL(boolean in){
-    	if(!armOpenCloseL.get())
-    	armOpenCloseL.set(true);
+    public void armLOutIn(boolean in){
+    	if(in){
+    		armOpenCloseL.set(DoubleSolenoid.Value.kForward);
+    	}
+    	else{
+    		armOpenCloseL.set(DoubleSolenoid.Value.kReverse);
+    	}
     }
-    public void armOutL(boolean out){
-    	if(armOpenCloseL.get())
-    	armOpenCloseL.set(false);
-    }
-    public void armInR(boolean in){
-    	if(!armOpenCloseR.get())
-    	armOpenCloseR.set(true);
-    }
-    public void armOutR(boolean out){
-    	if(armOpenCloseR.get())
-    	armOpenCloseR.set(false);
+    public void armROutIn(boolean in){
+    	if(in){
+    		armOpenCloseR.set(DoubleSolenoid.Value.kForward);
+    	}
+    	else{
+    		armOpenCloseR.set(DoubleSolenoid.Value.kReverse);
+    	}
     }
 }
