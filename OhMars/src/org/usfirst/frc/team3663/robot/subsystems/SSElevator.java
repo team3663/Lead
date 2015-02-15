@@ -21,7 +21,7 @@ public class SSElevator extends Subsystem {
 	Talon elevInAndOut;
 	DoubleSolenoid bikeBreak;
 	public Encoder winchEncoder;
-	public DigitalInput elevLimitSwitch;
+	public DigitalInput elevLimitSwitch, toteSensor;
 	
 	public boolean brakeOn;
 	
@@ -31,6 +31,7 @@ public class SSElevator extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public SSElevator(){
+    	toteSensor = new DigitalInput(7);
     	bikeBreak = new DoubleSolenoid(2,3);
     	elevInAndOut = new Talon(4);
     	elevMotor1 = new CANTalon(15);
@@ -67,13 +68,12 @@ public class SSElevator extends Subsystem {
     public boolean moveToPos(int ticks)
     {
     	bikeBrakeTriggerOpen();
-    	SmartDashboard.putBoolean("elevLimitSwitch: ", elevLimitSwitch.get());
-    	SmartDashboard.putNumber("winchEncoder: ", winchEncoder.get());
+    	SmartDashboard.putBoolean("elevLimitSwtich: ", elevLimitSwitch.get());
     	if (winchEncoder.get() < ticks)
     	{
-    		motorsSet(0.7);
+    		motorsSet(1.0);
     	}
-    	else if (winchEncoder.get() > ticks)
+    	else if (winchEncoder.get() > ticks && !elevLimitSwitch.get())
     	{
     		motorsSet(-0.4);
     	}
@@ -108,4 +108,8 @@ public class SSElevator extends Subsystem {
     	SmartDashboard.putNumber("winchEncoder: ", Robot.ssElevator.winchEncoder.get());
     	SmartDashboard.putBoolean("elevLimitSwitch: ", Robot.ssElevator.elevLimitSwitch.get());
     }
+    public boolean getToteSwitch(){
+    	return toteSensor.get();
+    }
+    
 }
