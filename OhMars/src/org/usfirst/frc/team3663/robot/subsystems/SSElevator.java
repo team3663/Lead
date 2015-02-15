@@ -67,12 +67,13 @@ public class SSElevator extends Subsystem {
     public boolean moveToPos(int ticks)
     {
     	bikeBrakeTriggerOpen();
-    	SmartDashboard.putBoolean("elevLimitSwtich: ", elevLimitSwitch.get());
+    	SmartDashboard.putBoolean("elevLimitSwitch: ", elevLimitSwitch.get());
+    	SmartDashboard.putNumber("winchEncoder: ", winchEncoder.get());
     	if (winchEncoder.get() < ticks)
     	{
-    		motorsSet(1.0);
+    		motorsSet(0.7);
     	}
-    	else if (winchEncoder.get() > ticks && !elevLimitSwitch.get())
+    	else if (winchEncoder.get() > ticks)
     	{
     		motorsSet(-0.4);
     	}
