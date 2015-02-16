@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class A_Log extends Command {
+public class C_Bogus extends Command {
 
-    public A_Log() {
+    public C_Bogus() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
