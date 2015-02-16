@@ -19,7 +19,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
 import org.usfirst.frc.team3663.robot.commands.C_IncrementElevEncoderTicks;
 import org.usfirst.frc.team3663.robot.commands.C_DecrementElevEncoderTicks;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseToggle;
+
 
 public class OI {
 	

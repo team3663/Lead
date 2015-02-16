@@ -2,6 +2,7 @@ package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.subsystems.SSArms;
@@ -15,6 +16,7 @@ public class C_Arms extends Command {
 	boolean intakeR,intakeL = false;
 	boolean canChangeStateB1 = true;
 	boolean intakeOn = false;
+	double intakeSpeed = 0.0;
 	
     public C_Arms() {
         // Use requires() here to declare subsystem dependencies
@@ -33,11 +35,11 @@ public class C_Arms extends Command {
     	if(Robot.oi.logitech.getRawButton(1)){
     		if(canChangeStateB1){
     			if(!intakeOn){
-    				Robot.ssArms.intakeMotorsSet(1.0);
+    				intakeSpeed = 0.7;
     				intakeOn = true;
     				canChangeStateB1 = false;
     			}else{
-    				Robot.ssArms.intakeMotorsSet(0.0);
+    				intakeSpeed = 0.0;
     				intakeOn = false;
     				canChangeStateB1 = false;
     			}
@@ -45,6 +47,14 @@ public class C_Arms extends Command {
     	}else{
     		canChangeStateB1 = true;
     	}
+    	
+    	if(Robot.oi.logitech.getRawButton(3))
+    		intakeSpeed = -intakeSpeed;
+
+		SmartDashboard.putNumber("intakeSpeed", intakeSpeed);
+		
+		Robot.ssArms.intakeMotorsSet(intakeSpeed);
+    	
     	Robot.ssArms.armUpDownRSet(Robot.oi.logitech.getRawAxis(1));
     	Robot.ssArms.armUpDownLSet(Robot.oi.logitech.getRawAxis(1));
     	Robot.ssArms.armLClose(Robot.oi.logitech.getRawButton(5));
