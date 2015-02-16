@@ -90,7 +90,7 @@ public class OI {
 //		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
 		elevMoveToPos0 = new JoystickButton(driveStick, 10);
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
-		elevMoveToPos1.whenReleased(new C_MotorDriveTestInterrupt());
+		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());

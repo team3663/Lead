@@ -71,7 +71,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-    	//Auto.start();
+    	Auto.start();
     }
 
     /**
