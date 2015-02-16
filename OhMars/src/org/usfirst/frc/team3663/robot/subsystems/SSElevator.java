@@ -73,11 +73,11 @@ public class SSElevator extends Subsystem {
     	{
     		motorsSet(1.0);
     	}
-    	else if (winchEncoder.get() > ticks && !elevLimitSwitch.get())
+    	else if (winchEncoder.get() > ticks && elevLimitSwitch.get())
     	{
     		motorsSet(-0.4);
     	}
-    	else if (winchEncoder.get() > ticks-5 || winchEncoder.get() < ticks+5 || elevLimitSwitch.get())
+    	else if (winchEncoder.get() > ticks-5 || winchEncoder.get() < ticks+5 || !elevLimitSwitch.get())
     	{
     		bikeBrakeTriggerClose();
     		return true;

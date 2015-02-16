@@ -1,31 +1,23 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team3663.robot.Robot;
 
 /**
  *
  */
-public class C_TestSensors extends Command {
+public class C_MotorDriveTestInterrupt extends Command {
 
-	int i;
-	
-    public C_TestSensors() {
+    public C_MotorDriveTestInterrupt() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssDriveTrain);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	i = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("counter: ", i++);
-    	Robot.ssElevator.logValues();
     }
 
     // Make this return true when this Command no longer needs to run execute()

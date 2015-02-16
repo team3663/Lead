@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3663.robot.commands.C_Test;
 import org.usfirst.frc.team3663.robot.commands.C_TestSensors;
 import org.usfirst.frc.team3663.robot.commands.C_MotorDriveTest;
+import org.usfirst.frc.team3663.robot.commands.C_MotorDriveTestInterrupt;
 import org.usfirst.frc.team3663.robot.commands.C_IncrementMotorSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_DecrementMotorSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_IncrementTestMotor;
@@ -44,7 +45,11 @@ public class OI {
 		//testSensors.whileHeld(new C_TestSensors());
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
-		motorDriveTest.whileHeld(new C_MotorDriveTest());
+		motorDriveTest.whenPressed(new C_MotorDriveTest());
+		motorDriveTest.whenReleased(motorDriveTest.);
+		
+		motorDriveTestInterrupt = new JoystickButton(driveStick, 1);
+		motorDriveTestInterrupt.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		incrementSpeed = new JoystickButton(driveStick, 5);
 		incrementSpeed.whenPressed(new C_IncrementMotorSpeed());

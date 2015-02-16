@@ -26,6 +26,8 @@ public class A_Log extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	//this is a test
+    	//this is a test2
         return false;
     }
 
