@@ -25,8 +25,9 @@ public class C_ArmsUpDown extends Command {
     protected void execute() {
     	axisValue = Robot.oi.logitech.getRawAxis(1);
     	if(Math.abs(axisValue) < 0.2) axisValue = 0;
-    	//Robot.ssArms.armUpDownRSet(axisValue);
-    	SmartDashboard.putNumber("yAxis", axisValue);
+    	SmartDashboard.putNumber("yAxis", axisValue);;
+    	Robot.ssArms.armUpDownRSet(axisValue);
+    	if(!Robot.oi.logitech.getRawButton(3))
     	Robot.ssArms.armUpDownLSet(axisValue);
     }
 

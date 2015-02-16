@@ -16,11 +16,13 @@ public class SSArms extends Subsystem {
     public boolean rArmClose = false;
     public double lArmIntakeSpeed = 0.0;
     public double rArmIntakeSpeed = 0.0;
-    
+
     public double lArmUpDownPos = 0;
     public double rArmUpDownPos = 0;
     public double lastTimeLArmUD = 0;
     public double lastSpeedLArmUD = 0;
+    public double lastTimeRArmUD = 0;
+    public double lastSpeedRArmUD = 0;
     
 	Talon intakeMotorL, intakeMotorR, armsUpAndDownMotorL, armsUpAndDownMotorR;
 	DoubleSolenoid armOpenCloseL, armOpenCloseR;
@@ -60,8 +62,7 @@ public class SSArms extends Subsystem {
     	double currentTime = Timer.getFPGATimestamp();
     	double deltaTime = currentTime - lastTimeLArmUD;
     	double scaleFactor = 1;
-    	SmartDashboard.putNumber("L_ArmScaleFactor", 1.135);
-    	if(lastSpeedLArmUD < 0) scaleFactor = SmartDashboard.getNumber("L_ArmScaleFactor");
+    	if(lastSpeedLArmUD < 0) scaleFactor = 1.228;/*SmartDashboard.getNumber("L_ArmScaleFactor");*/
     	//Higher sF if pos reads higher consistenly
     	//Use a Lower sF is pos reads as too low after moving
     	lArmUpDownPos += deltaTime * lastSpeedLArmUD*scaleFactor;
@@ -70,13 +71,20 @@ public class SSArms extends Subsystem {
     	armsUpAndDownMotorL.set(speed);
     	
     	SmartDashboard.putNumber("LeftArmPos", lArmUpDownPos);
-    	SmartDashboard.putNumber("LeftArmSpeed", speed);
-    	SmartDashboard.putNumber("LeftArmLastSpeed", lastSpeedLArmUD);
-    	SmartDashboard.putNumber("deltaTime", deltaTime);
-    	
     }
     public void armUpDownRSet(double speed){
+    	double currentTime = Timer.getFPGATimestamp();
+    	double deltaTime = currentTime - lastTimeRArmUD;
+    	double scaleFactor = 1;
+    	if(lastSpeedLArmUD < 0) scaleFactor = 1.228;/*SmartDashboard.getNumber("R_ArmScaleFactor");*/
+    	//Higher sF if pos reads higher consistenly
+    	//Use a Lower sF is pos reads as too low after moving
+    	rArmUpDownPos += deltaTime * lastSpeedRArmUD*scaleFactor;
+    	lastTimeRArmUD = currentTime;
+    	lastSpeedRArmUD = speed;
     	armsUpAndDownMotorR.set(speed);
+
+    	SmartDashboard.putNumber("RightArmPos", rArmUpDownPos);
     }
     public void armLClose(){
     	if(!lArmClose){
