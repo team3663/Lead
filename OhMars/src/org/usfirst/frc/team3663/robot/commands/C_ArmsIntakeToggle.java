@@ -19,11 +19,11 @@ public class C_ArmsIntakeToggle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.ssArms.lArmIntakeSpeed != 0){
+    	/*if(Robot.ssArms.){
     		Robot.ssArms.intakeMotorsSet(0.0);
     	}else{
     		Robot.ssArms.intakeMotorsSet(1.0);
-    	}
+    	}*/
     }
 
     // Called repeatedly when this Command is scheduled to run

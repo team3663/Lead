@@ -12,7 +12,7 @@ import org.usfirst.frc.team3663.robot.OI;
  *
  */
 public class C_ArmsUpDown extends Command {
-	
+	double axisValue;
     public C_ArmsUpDown(){
     	
     }
@@ -23,8 +23,11 @@ public class C_ArmsUpDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssArms.armUpDownRSet(Robot.oi.logitech.getRawAxis(1));
-    	Robot.ssArms.armUpDownLSet(Robot.oi.logitech.getRawAxis(1));
+    	axisValue = Robot.oi.logitech.getRawAxis(1);
+    	if(Math.abs(axisValue) < 0.2) axisValue = 0;
+    	//Robot.ssArms.armUpDownRSet(axisValue);
+    	SmartDashboard.putNumber("yAxis", axisValue);
+    	Robot.ssArms.armUpDownLSet(axisValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
