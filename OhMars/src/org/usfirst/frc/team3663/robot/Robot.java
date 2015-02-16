@@ -38,13 +38,10 @@ public class Robot extends IterativeRobot {
 
 	Command arcadeDrive;
 	Command ALog;
-<<<<<<< HEAD
 	Command Auto;
-=======
     Command autonomousCommand;
     Command aLog;
     CommandGroup armExecutables;
->>>>>>> 52919965d422f946eca713b9a820d2a225fd69cc
     
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
@@ -194,66 +191,4 @@ public class Robot extends IterativeRobot {
     	}
     	SmartDashboard.putString("testMotor: ", testMotorName);
     }
-<<<<<<< HEAD
 }
-=======
-	
-    public void robotInit() {
-    	ssDashBoard = new SSDashBoard();
-    	ssDriveTrain = new SSDriveTrain();
-    	ssElevator = new SSElevator();
-    	ssArms = new SSArms();
-		oi = new OI();
-		
-		arcadeDrive = new C_ArcadeDrive();
-		ALog = new A_Log();
-		ALog.start();
-		armExecutables = new CG_ArmsExecute();
-		armExecutables.start();
-       //autonomousCommand = new ExampleCommand();
-		
-    }
-	
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
-
-    public void autonomousInit() {
-        //if (autonomousCommand != null) autonomousCommand.start();
-    }
-
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
-
-    public void teleopInit() {
-       // if (autonomousCommand != null) autonomousCommand.cancel();
-        arcadeDrive.start();
-    }
-
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
-
-    }
-
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
-}
->>>>>>> 52919965d422f946eca713b9a820d2a225fd69cc
