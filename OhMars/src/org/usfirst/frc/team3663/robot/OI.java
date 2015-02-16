@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_Test;
 import org.usfirst.frc.team3663.robot.commands.C_TestSensors;
 import org.usfirst.frc.team3663.robot.commands.C_MotorDriveTest;
@@ -24,6 +25,7 @@ public class OI {
 	
 	public Joystick driveStick = new Joystick(0);
 	public Joystick logitech = new Joystick(1);
+	public Joystick buttonStick = new Joystick(2);
 	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
@@ -42,6 +44,7 @@ public class OI {
 	public JoystickButton testArmSolenoids;
 	public JoystickButton motorDriveTestInterrupt;
 	public JoystickButton armsInOutToggle;
+	public JoystickButton testEncoderDrive;
 	
 	public OI(){
 	//	testSensors = new JoystickButton(driveStick, 1);
@@ -49,7 +52,6 @@ public class OI {
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
 		motorDriveTest.whenPressed(new C_MotorDriveTest());
-		
 		motorDriveTest.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		incrementSpeed = new JoystickButton(driveStick, 5);
@@ -79,8 +81,9 @@ public class OI {
 		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
 		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
 		
-		armsInOutToggle = new JoystickButton(logitech, 1);
-		armsInOutToggle.whenPressed(new C_ArmsOpenCloseToggle());
+		testEncoderDrive = new JoystickButton(buttonStick, 1);
+		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
+
 		
 	}
     //// CREATING BUTTONS

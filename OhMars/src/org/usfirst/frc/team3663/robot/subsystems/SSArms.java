@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class SSArms extends Subsystem {
     public boolean lArmClose,rArmClose;
-
+    public boolean manualControlOC = true;
+    public boolean manualControlUD = true;
+    public boolean manualControlIM = true;
+    
 	Talon intakeMotorL, intakeMotorR, armsUpAndDownMotorL, armsUpAndDownMotorR;
 	DoubleSolenoid armOpenCloseL, armOpenCloseR;
     public void initDefaultCommand() {

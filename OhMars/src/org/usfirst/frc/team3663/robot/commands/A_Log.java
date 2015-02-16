@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot.commands;
 import org.usfirst.frc.team3663.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class A_Log extends Command {
 
     public A_Log() {
+        // Use requires() here to declare subsystem dependencies
         requires(Robot.ssDashBoard);
     }
 
@@ -19,6 +21,9 @@ public class A_Log extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
+    	Robot.ssDashBoard.putDashInt("Left Drive Encoder", Robot.ssDriveTrain.leftEncoder.get());
+    	Robot.ssDashBoard.putDashInt("Right Drive Encoder", Robot.ssDriveTrain.rightEncoder.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()

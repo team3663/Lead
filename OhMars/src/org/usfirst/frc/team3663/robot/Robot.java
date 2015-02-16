@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
+import org.usfirst.frc.team3663.robot.commands.A_Log;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
@@ -18,6 +20,7 @@ import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.subsystems.SSElevator;
+import org.usfirst.frc.team3663.robot.commands.A_Log;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,12 +38,15 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command arcadeDrive;
+	Command ALog;
     Command autonomousCommand;
+    Command aLog;
     
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
 	public static int encoderTicks = 0;
 	static String testMotorName;
+	public static boolean runCommand;
 
 	public static void encoderTicksChange(int delta)
 	{
@@ -116,21 +122,26 @@ public class Robot extends IterativeRobot {
 			break;
 		case 13:
 			testMotorName = "ElevatorEncoder";
+			break;
 		default:
+			testMotorName = "NothingSelected";
 			break;
     	}
     	SmartDashboard.putString("testMotor: ", testMotorName);
     }
 	
     public void robotInit() {
- //   	ssDashBoard = new SSDashBoard();
+    	ssDashBoard = new SSDashBoard();
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
     	ssArms = new SSArms();
 		oi = new OI();
 		
 		arcadeDrive = new C_ArcadeDrive();
+		ALog = new A_Log();
+		ALog.start();
        //autonomousCommand = new ExampleCommand();
+		
     }
 	
 	public void disabledPeriodic() {
