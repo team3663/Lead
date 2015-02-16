@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.commands.A_Log;
 import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
@@ -14,6 +15,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
+import org.usfirst.frc.team3663.robot.commands.C_EncoderTurnLeft;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
@@ -39,8 +41,6 @@ public class Robot extends IterativeRobot {
 	Command arcadeDrive;
 	Command ALog;
 	Command Auto;
-    Command autonomousCommand;
-    Command aLog;
     CommandGroup armExecutables;
     
 	public static double motorTestSpeed = 0;
@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
     	ssElevator = new SSElevator();
     	ssArms = new SSArms();
 		oi = new OI();
-		Auto = new C_EncoderDriveStrait();
+		Auto = new C_EncoderTurnLeft();
 		
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();

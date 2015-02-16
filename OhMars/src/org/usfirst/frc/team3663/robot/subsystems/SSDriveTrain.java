@@ -22,8 +22,8 @@ public class SSDriveTrain extends Subsystem {
 	public Encoder leftEncoder, rightEncoder;
 	RobotDrive chassis;
 	
-	
-	private int finalTicksL;
+	public int finalTicksL;
+	public int finalTicksR;
 	public boolean encoderDriving = false;
 
     public void initDefaultCommand() {
@@ -72,8 +72,8 @@ public class SSDriveTrain extends Subsystem {
     }
     
     public void motorRightSet(double speed){
-    	driveMotorR2.set(speed);
-    	driveMotorR1.set(speed);
+    	driveMotorR2.set(-speed);
+    	driveMotorR1.set(-speed);
     }
     
     public void motorLeftSet(double speed){
@@ -81,14 +81,38 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorL1.set(speed);
     }
     
-    public void driveForwardDistance(){
-    	if(leftEncoder.get() < finalTicksL){
-    		encoderDriving = false;
+    /**all of the encoder driving stuff**/
+    public boolean driveForwardDistance(){
+    	if(leftEncoder.get() >= finalTicksL){
+    		return true;
     	}
+    	else if(rightEncoder.get() >= finalTicksR){
+    		return true;
+    	}
+    	return false;
     }
     
-    public void setFinalLeft(int distance){
-    	finalTicksL = ((90 * distance) + leftEncoder.get());
+    /*NOTES FOR DISTANCE
+    /* cicumfrance of the wheel is 12.56inch
+    /* one revolution of the wheels is 250ticks
+    /* this makes it so that there is aproximently 19 ticks per inch
+    /* distance between the wheels 26 inches
+     */
+    public void setFinalLeft(int pDistance){
+    	finalTicksL = ((int)(/*250/(4*Math.PI)*/19 * pDistance) + leftEncoder.get());
+    }
+    
+    public void setFinalRight(int pDistance){
+    	finalTicksR = ((int)(/*250/(4*Math.PI)*/19 * pDistance) + leftEncoder.get());
+    }
+    
+    public void eDistanceArk(int pRadius, int pAngel){
+    	/*NOTES ON THIS METHOD: 
+    	 * (Length = (angle/360)*(2piR))
+    	 * (Angle = (360*Length)/(2piR))*/
+    	setFinalLeft((int)((pAngel/360)*(2*Math.PI*(pRadius - 13))));
+    	setFinalRight((int)((pAngel/360)*(2*Math.PI*(pRadius + 13))));
+    	
     }
     
     public void zeroMotors(){
@@ -97,5 +121,13 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorR1.set(0);
     	driveMotorR2.set(0);
     }
+    
+    public void breakmodeDriveMotors(boolean pBreak){
+    	driveMotorL1.enableBrakeMode(pBreak);
+    	driveMotorL2.enableBrakeMode(pBreak);
+    	driveMotorR1.enableBrakeMode(pBreak);
+    	driveMotorR2.enableBrakeMode(pBreak);
+    }
 }
+
 

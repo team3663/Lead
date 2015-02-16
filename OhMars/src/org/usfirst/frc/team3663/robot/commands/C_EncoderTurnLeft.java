@@ -3,16 +3,15 @@ package org.usfirst.frc.team3663.robot.commands;
 import org.usfirst.frc.team3663.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class A_Log extends Command {
+public class C_EncoderTurnLeft extends Command {
 
-    public A_Log() {
+    public C_EncoderTurnLeft() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssDashBoard);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -21,17 +20,12 @@ public class A_Log extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDashBoard.putDashInt("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
-    	//**Driving
-    	Robot.ssDashBoard.putDashInt("Left Drive Encoder", Robot.ssDriveTrain.leftEncoder.get());
-    	Robot.ssDashBoard.putDashInt("Right Drive Encoder", Robot.ssDriveTrain.rightEncoder.get());
-    	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Left", Robot.ssDriveTrain.finalTicksL);
-    	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Right", Robot.ssDriveTrain.finalTicksR);
+    	Robot.ssDriveTrain.eDistanceArk(34, 90);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
