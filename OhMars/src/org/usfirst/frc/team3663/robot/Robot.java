@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
+import org.usfirst.frc.team3663.robot.commands.A_Log;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
@@ -36,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command arcadeDrive;
+	Command ALog;
     Command autonomousCommand;
     Command aLog;
     
@@ -135,8 +138,10 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		arcadeDrive = new C_ArcadeDrive();
-		aLog = new A_Log();
+		ALog = new A_Log();
+		ALog.start();
        //autonomousCommand = new ExampleCommand();
+		
     }
 	
 	public void disabledPeriodic() {
@@ -157,7 +162,6 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
        // if (autonomousCommand != null) autonomousCommand.cancel();
         arcadeDrive.start();
-        aLog.start();
     }
 
     /**
