@@ -25,7 +25,6 @@ public class C_TestSensors extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putNumber("counter: ", i++);
-    	Robot.ssElevator.logValues();
     }
 
     // Make this return true when this Command no longer needs to run execute()
