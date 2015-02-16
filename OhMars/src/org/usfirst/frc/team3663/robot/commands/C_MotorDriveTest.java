@@ -74,6 +74,7 @@ public class C_MotorDriveTest extends Command {
 			break;
 		case 13:
 			finished = Robot.ssElevator.moveToPos(Robot.encoderTicks);
+			SmartDashboard.putNumber("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
 			return finished;
 		default:
 			break;

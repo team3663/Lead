@@ -73,9 +73,9 @@ public class SSElevator extends Subsystem {
     	{
     		if (winchEncoder.get() > ticks-50)
     		{
-    			motorsSet(0.3);
+    			motorsSet(0.2);//0.3
     		}
-    		motorsSet(1.0);
+    		motorsSet(0.2);//1.0
     	}
     	else if (winchEncoder.get() > ticks && elevLimitSwitch.get())
     	{
@@ -83,7 +83,7 @@ public class SSElevator extends Subsystem {
     		{
     			motorsSet(-0.2);
     		}
-    		motorsSet(-0.4);
+    		motorsSet(-0.2);//0.4
     	}
     	else if (winchEncoder.get() > ticks-15 || winchEncoder.get() < ticks+15 || !elevLimitSwitch.get())
     	{
