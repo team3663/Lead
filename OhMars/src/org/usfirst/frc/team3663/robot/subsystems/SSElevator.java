@@ -71,13 +71,21 @@ public class SSElevator extends Subsystem {
     	SmartDashboard.putBoolean("elevLimitSwtich: ", elevLimitSwitch.get());
     	if (winchEncoder.get() < ticks)
     	{
+    		if (winchEncoder.get() > ticks-50)
+    		{
+    			motorsSet(0.3);
+    		}
     		motorsSet(1.0);
     	}
     	else if (winchEncoder.get() > ticks && elevLimitSwitch.get())
     	{
+    		if (winchEncoder.get() < ticks+50)
+    		{
+    			motorsSet(-0.2);
+    		}
     		motorsSet(-0.4);
     	}
-    	else if (winchEncoder.get() > ticks-5 || winchEncoder.get() < ticks+5 || !elevLimitSwitch.get())
+    	else if (winchEncoder.get() > ticks-15 || winchEncoder.get() < ticks+15 || !elevLimitSwitch.get())
     	{
     		bikeBrakeTriggerClose();
     		return true;

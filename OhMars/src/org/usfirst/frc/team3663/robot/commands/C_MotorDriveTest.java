@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class C_MotorDriveTest extends Command {
 	
 	boolean finished;
-	int i;
 	
     public C_MotorDriveTest() {
         // Use requires() here to declare subsystem dependencies
@@ -19,66 +18,72 @@ public class C_MotorDriveTest extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	i = 0;
+    	Robot.runCommand = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	motorTestCases(Robot.motorTestSpeed);
+    }
+    
+    boolean motorTestCases(double speed)
+    {
     	switch (Robot.testMotor)
     	{
 		case 0:
-	    	Robot.ssDriveTrain.motor1Set(Robot.motorTestSpeed);
+	    	Robot.ssDriveTrain.motor1Set(speed);
     		break;
 		case 1:
-			Robot.ssDriveTrain.motor2Set(Robot.motorTestSpeed);
+			Robot.ssDriveTrain.motor2Set(speed);
 			break;
 		case 2:
-			Robot.ssDriveTrain.motor3Set(Robot.motorTestSpeed);
+			Robot.ssDriveTrain.motor3Set(speed);
 			break;
 		case 3:
-			Robot.ssDriveTrain.motor4Set(Robot.motorTestSpeed);
+			Robot.ssDriveTrain.motor4Set(speed);
 			break;
 		case 4:
-	    	Robot.ssDriveTrain.motor1Set(Robot.motorTestSpeed);
-	    	Robot.ssDriveTrain.motor2Set(Robot.motorTestSpeed);
+	    	Robot.ssDriveTrain.motor1Set(speed);
+	    	Robot.ssDriveTrain.motor2Set(speed);
 			break;
 		case 5:
-	    	Robot.ssDriveTrain.motor3Set(Robot.motorTestSpeed);
-	    	Robot.ssDriveTrain.motor4Set(Robot.motorTestSpeed);
+	    	Robot.ssDriveTrain.motor3Set(speed);
+	    	Robot.ssDriveTrain.motor4Set(speed);
 			break;
 		case 6:
-			Robot.ssElevator.motor1Set(Robot.motorTestSpeed);
+			Robot.ssElevator.motor1Set(speed);
 			break;
 		case 7:
-			Robot.ssElevator.motor2Set(Robot.motorTestSpeed);
+			Robot.ssElevator.motor2Set(speed);
 			break;
 		case 8:
-			Robot.ssElevator.motor1Set(Robot.motorTestSpeed);
-			Robot.ssElevator.motor2Set(Robot.motorTestSpeed);
+			Robot.ssElevator.motor1Set(speed);
+			Robot.ssElevator.motor2Set(speed);
 			break;
 		case 9:
-			Robot.ssElevator.moveInAndOut(Robot.motorTestSpeed);
+			Robot.ssElevator.moveInAndOut(speed);
 			break;
 		case 10:
-			SmartDashboard.putNumber("i: ", i++);
-			Robot.ssArms.intakeMotorLSet(Robot.motorTestSpeed);
+			Robot.ssArms.intakeMotorLSet(speed);
 			break;
 		case 11:
-			Robot.ssArms.intakeMotorRSet(Robot.motorTestSpeed);
+			Robot.ssArms.intakeMotorRSet(speed);
 			break;
 		case 12:
-			Robot.ssArms.intakeMotorsSet(Robot.motorTestSpeed);
+			Robot.ssArms.intakeMotorsSet(speed);
 			break;
 		case 13:
 			finished = Robot.ssElevator.moveToPos(Robot.encoderTicks);
+			return finished;
 		default:
 			break;
     	}
+    	return false;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || i > 100)
+        if (finished || !Robot.runCommand)
     	{
         	return true;
     	}
@@ -87,60 +92,21 @@ public class C_MotorDriveTest extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	switch (Robot.testMotor)
+    	{
+		case 13: 
+			Robot.ssElevator.motorsSet(0);
+			Robot.ssElevator.bikeBrakeTriggerClose();
+			break;
+		default:
+			motorTestCases(0);
+			break;
+    	}
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	switch (Robot.testMotor)
-    	{
-		case 0:
-	    	Robot.ssDriveTrain.motor1Set(0);
-    		break;
-		case 1:
-			Robot.ssDriveTrain.motor2Set(0);
-			break;
-		case 2:
-			Robot.ssDriveTrain.motor3Set(0);
-			break;
-		case 3:
-			Robot.ssDriveTrain.motor4Set(0);
-			break;
-		case 4:
-	    	Robot.ssDriveTrain.motor1Set(0);
-	    	Robot.ssDriveTrain.motor2Set(0);
-			break;
-		case 5:
-	    	Robot.ssDriveTrain.motor3Set(0);
-	    	Robot.ssDriveTrain.motor4Set(0);
-			break;
-		case 6:
-			Robot.ssElevator.motor1Set(0);
-			break;
-		case 7:
-			Robot.ssElevator.motor2Set(0);
-			break;
-		case 8:
-			Robot.ssElevator.motor1Set(0);
-			Robot.ssElevator.motor2Set(0);
-			break;
-		case 9:
-			Robot.ssElevator.moveInAndOut(0);
-			break;
-		case 10:
-			Robot.ssArms.intakeMotorLSet(0);
-			break;
-		case 11:
-			Robot.ssArms.intakeMotorRSet(0);
-			break;
-		case 12:
-			Robot.ssArms.intakeMotorsSet(0);
-			break;
-		case 13: 
-			Robot.ssElevator.motorsSet(0);
-			Robot.ssElevator.bikeBrakeTriggerClose();
-		default:
-			break;
-    	}
+    	end();
     }
 }

@@ -47,7 +47,6 @@ public class OI {
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
 		motorDriveTest.whenPressed(new C_MotorDriveTest());
-		
 		motorDriveTest.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		incrementSpeed = new JoystickButton(driveStick, 5);
