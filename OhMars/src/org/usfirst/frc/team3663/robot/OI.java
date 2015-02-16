@@ -44,6 +44,7 @@ public class OI {
 	public JoystickButton decrementElevEncoderTicks;
 	public JoystickButton testArmSolenoids;
 	public JoystickButton motorDriveTestInterrupt;
+	public JoystickButton armsInOutToggle;
 	public JoystickButton testEncoderDrive;
 	
 	public OI(){
@@ -87,6 +88,7 @@ public class OI {
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
+
 		
 	}
     //// CREATING BUTTONS
