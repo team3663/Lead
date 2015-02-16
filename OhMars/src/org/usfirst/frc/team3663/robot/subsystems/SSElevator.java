@@ -129,7 +129,7 @@ public class SSElevator extends Subsystem {
     	{
     		int diff = encoderVal - ticks;
     		speed = -1.0;
-    		if (diff <= 0 || !elevLimitSwitch.get())//ticksPerSec)
+    		if (diff <= 0)//ticksPerSec)
     		{
     			return true;
     		}

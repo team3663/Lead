@@ -62,16 +62,16 @@ public class C_ElevMoveToPos extends Command {
     		switch(origTicks)
     		{
     		case -1:
-    			ticks = 30;//lowest position we want
+    			ticks = 30+Robot.encoderZeroAdjust;//lowest position we want
     			break;
     		case -10:
-    			ticks = 305;//unloading on scoring platform
+    			ticks = 305+Robot.encoderZeroAdjust;//unloading on scoring platform
     			break;
     		case -20:
-    			ticks = 525;//POSSIBLY the step
+    			ticks = 525+Robot.encoderZeroAdjust;//POSSIBLY the step
     			break;
     		case -45:
-    			ticks = 1098;//highest position we want
+    			ticks = 1098+Robot.encoderZeroAdjust;//highest position we want
     			break;
     		case -50:
     			ticks = (int)(SmartDashboard.getNumber("encoderTicks: "));
