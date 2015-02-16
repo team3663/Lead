@@ -1,38 +1,32 @@
 package org.usfirst.frc.team3663.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
-import org.usfirst.frc.team3663.robot.OI;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class C_ArmsUpDown extends Command {
-	double axisValue;
-    public C_ArmsUpDown(){
-    	
+public class C_EncoderTurnLeft extends Command {
+
+    public C_EncoderTurnLeft() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ssDriveTrain.encoderDriving = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	axisValue = Robot.oi.logitech.getRawAxis(1);
-    	if(Math.abs(axisValue) < 0.2) axisValue = 0;
-    	//Robot.ssArms.armUpDownRSet(axisValue);
-    	SmartDashboard.putNumber("yAxis", axisValue);
-    	Robot.ssArms.armUpDownLSet(axisValue);
+    	Robot.ssDriveTrain.eDistanceArk(34, 90);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

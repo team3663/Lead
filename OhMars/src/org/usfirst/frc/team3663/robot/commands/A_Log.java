@@ -17,15 +17,17 @@ public class A_Log extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ssDashBoard.putDashInt("encoderPosition: ", -50);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDashBoard.putDashBool("elevLimitSwitch", Robot.ssElevator.elevLimitSwitch.get());
     	Robot.ssDashBoard.putDashInt("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
+    	//**Driving
     	Robot.ssDashBoard.putDashInt("Left Drive Encoder", Robot.ssDriveTrain.leftEncoder.get());
     	Robot.ssDashBoard.putDashInt("Right Drive Encoder", Robot.ssDriveTrain.rightEncoder.get());
+    	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Left", Robot.ssDriveTrain.finalTicksL);
+    	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Right", Robot.ssDriveTrain.finalTicksR);
+    	Robot.ssDashBoard.putDashBool("Encoder Running", Robot.ssDriveTrain.encoderDriving);
     }
 
     // Make this return true when this Command no longer needs to run execute()
