@@ -26,12 +26,12 @@ public class SSArms extends Subsystem {
     	intakeMotorR = new Talon(0);
     	armsUpAndDownMotorL = new Talon(1);
     	armsUpAndDownMotorR = new Talon(2);
-    	armOpenCloseL= new DoubleSolenoid(0,1);
-    	armOpenCloseR = new DoubleSolenoid(6,7);
+    	armOpenCloseL= new DoubleSolenoid(7,6);
+    	armOpenCloseR = new DoubleSolenoid(1,0);
     }
     
     public void intakeMotorsSet(double speed){
-    	intakeMotorL.set(-speed);
+    	intakeMotorL.set(speed);
     	intakeMotorR.set(-speed);
     }
     public void intakeMotorLSet(double speed)
