@@ -3,16 +3,12 @@ package org.usfirst.frc.team3663.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
-
-
-
-
 import org.usfirst.frc.team3663.robot.commands.A_Log;
+import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
@@ -43,7 +39,7 @@ public class Robot extends IterativeRobot {
 	Command ALog;
     Command autonomousCommand;
     Command aLog;
-    Command armIntake;
+    CommandGroup armExecutables;
     
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
@@ -144,8 +140,8 @@ public class Robot extends IterativeRobot {
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
-		armIntake = new C_ArmsIntakeControl();
-		armIntake.start();
+		armExecutables = new CG_ArmsExecute();
+		armExecutables.start();
        //autonomousCommand = new ExampleCommand();
 		
     }
