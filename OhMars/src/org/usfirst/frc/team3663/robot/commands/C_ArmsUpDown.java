@@ -2,6 +2,7 @@ package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.subsystems.SSArms;
@@ -10,45 +11,20 @@ import org.usfirst.frc.team3663.robot.OI;
 /**
  *
  */
-public class C_Arms extends Command {
+public class C_ArmsUpDown extends Command {
 	
-	boolean intakeR,intakeL = false;
-	boolean canChangeStateB1 = true;
-	boolean intakeOn = false;
-	
-    public C_Arms() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssArms);
+    public C_ArmsUpDown(){
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.ssArms.intakeMotorLSet(Robot.oi.logitech.getRawAxis(2));
-    	//Robot.ssArms.intakeMotorRSet(Robot.oi.logitech.getRawAxis(3));
-    	if(Robot.oi.logitech.getRawButton(1)){
-    		if(canChangeStateB1){
-    			if(!intakeOn){
-    				Robot.ssArms.intakeMotorsSet(1.0);
-    				intakeOn = true;
-    				canChangeStateB1 = false;
-    			}else{
-    				Robot.ssArms.intakeMotorsSet(0.0);
-    				intakeOn = false;
-    				canChangeStateB1 = false;
-    			}
-    		}
-    	}else{
-    		canChangeStateB1 = true;
-    	}
     	Robot.ssArms.armUpDownRSet(Robot.oi.logitech.getRawAxis(1));
     	Robot.ssArms.armUpDownLSet(Robot.oi.logitech.getRawAxis(1));
-    	Robot.ssArms.armLClose(Robot.oi.logitech.getRawButton(5));
-    	Robot.ssArms.armRClose(Robot.oi.logitech.getRawButton(6));
     }
 
     // Make this return true when this Command no longer needs to run execute()

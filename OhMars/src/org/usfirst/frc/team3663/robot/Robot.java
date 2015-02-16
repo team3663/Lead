@@ -17,6 +17,7 @@ import org.usfirst.frc.team3663.robot.commands.A_Log;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;

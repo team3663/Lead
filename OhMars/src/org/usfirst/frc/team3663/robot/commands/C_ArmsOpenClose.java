@@ -1,30 +1,41 @@
 package org.usfirst.frc.team3663.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.Robot;
+import org.usfirst.frc.team3663.robot.subsystems.SSArms;
+import org.usfirst.frc.team3663.robot.OI;
 
 /**
  *
  */
-public class C_ArcadeDrive extends Command {
-
-    public C_ArcadeDrive() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssDriveTrain);
+public class C_ArmsOpenClose extends Command {
+	
+	boolean leftSide;
+	
+    public C_ArmsOpenClose(boolean pLeftSide) {
+        leftSide = pLeftSide;
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(leftSide)
+    		Robot.ssArms.toggleArmLOpenClose();
+    	else
+    		Robot.ssArms.toggleArmROpenClose();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.arcadeDrive(-Robot.oi.driveStick.getY(), Robot.oi.driveStick.getZ());
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

@@ -46,9 +46,9 @@ public class SSDriveTrain extends Subsystem {
     	System.out.println("SSDriveTrain created");
     }
     
-    public void arcadeDrive(Joystick driveStick)
+    public void arcadeDrive(double yDirection, double xDirection)
     {
-    	chassis.arcadeDrive(driveStick);
+    	chassis.arcadeDrive(yDirection, xDirection);;
     }
     
     public void motor1Set(double speed)
