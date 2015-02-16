@@ -107,7 +107,7 @@ public class SSElevator extends Subsystem {
     		{
     			return true;
     		}
-    		speed = 0.5;
+    		speed = 0.8;
     	}
     	else
     	{
