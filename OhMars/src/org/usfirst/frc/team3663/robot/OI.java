@@ -47,13 +47,8 @@ public class OI {
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
 		motorDriveTest.whenPressed(new C_MotorDriveTest());
-<<<<<<< HEAD
 		
-		motorDriveTestInterrupt = new JoystickButton(driveStick, 1);
-		motorDriveTestInterrupt.whenReleased(new C_MotorDriveTestInterrupt());
-=======
 		motorDriveTest.whenReleased(new C_MotorDriveTestInterrupt());
->>>>>>> f5c741a0624273eb9097cd0ed32a7ff90683e1a3
 		
 		incrementSpeed = new JoystickButton(driveStick, 5);
 		incrementSpeed.whenPressed(new C_IncrementMotorSpeed());
