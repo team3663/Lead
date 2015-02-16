@@ -17,16 +17,12 @@ public class C_ArmsOpenCloseToggle extends Command {
     protected void initialize() {
     	//Right is the same as the left on purpose
     	//to make them the same
-    	Robot.ssArms.armLClose(!Robot.ssArms.lArmClose);
-    	Robot.ssArms.armRClose(Robot.ssArms.lArmClose);
-    	//Update the states
-    	Robot.ssArms.lArmClose = !Robot.ssArms.lArmClose;
-    	Robot.ssArms.rArmClose = Robot.ssArms.lArmClose;
+    	Robot.ssArms.armLClose(true);
+    	Robot.ssArms.armRClose(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(Robot.ssArms.lArmClose);
     }
 
     // Make this return true when this Command no longer needs to run execute()

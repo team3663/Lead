@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class SSArms extends Subsystem {
-    public boolean lArmClose,rArmClose = false;
+    public boolean lArmClose,rArmClose;
 
 	Talon intakeMotorL, intakeMotorR, armsUpAndDownMotorL, armsUpAndDownMotorR;
 	DoubleSolenoid armOpenCloseL, armOpenCloseR;
@@ -34,7 +34,7 @@ public class SSArms extends Subsystem {
     }
     public void intakeMotorLSet(double speed)
     {
-    	intakeMotorL.set(speed);
+    	intakeMotorL.set(-speed);
     }
     public void intakeMotorRSet(double speed)
     {
