@@ -19,18 +19,26 @@ public class C_EncoderDriveStrait extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.ssDriveTrain.driveForwardDistance(0.2, 8);
-    }  
+    protected void execute() {  
+    	//Robot.ssDriveTrain.driveForwardDistance(0.2, 8);
+    	//Robot.ssDriveTrain.encoderDriving = true;
+    	Robot.ssDriveTrain.driveForwardDistance();
+    	Robot.ssDriveTrain.motorLeftSet(0.2);
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	if(Robot.ssDriveTrain.encoderDriving == true){
+    		return false;
+    	}
+    	else{
+    		return false;
+    	}
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ssDriveTrain.encoderDriving = false;
+    	Robot.ssDriveTrain.zeroMotors();
     }
 
     // Called when another command which requires one or more of the same

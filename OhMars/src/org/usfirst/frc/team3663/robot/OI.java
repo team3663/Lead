@@ -27,6 +27,7 @@ public class OI {
 	public Joystick logitech = new Joystick(1);
 	public Joystick buttonStick = new Joystick(2);
 	
+	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
 	public JoystickButton incrementSpeed;
@@ -86,7 +87,7 @@ public class OI {
 		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
 		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
 		
-		testEncoderDrive = new JoystickButton(buttonStick, 1);
+		testEncoderDrive = new JoystickButton(driveStick, 9);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
 
 		

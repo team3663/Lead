@@ -81,22 +81,21 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorL1.set(speed);
     }
     
-    public void driveForwardDistance(double speed, int inches){
-    	if(encoderDriving == false){
-        	finalTicksL = (((360/4)*inches) + leftEncoder.get());
+    public void driveForwardDistance(){
+    	if(leftEncoder.get() < finalTicksL){
+    		encoderDriving = false;
     	}
-    	if(speed < 0){
-    		while(finalTicksL > leftEncoder.get()){
-    			motorRightSet(speed);
-    			motorLeftSet(speed);
-    		}
-    	}
-    	else if(speed > 0){
-    		while(finalTicksL < leftEncoder.get()){
-    			motorRightSet(speed);
-    			motorLeftSet(speed);
-    		}
-    	}
+    }
+    
+    public void setFinalLeft(int distance){
+    	finalTicksL = ((90 * distance) + leftEncoder.get());
+    }
+    
+    public void zeroMotors(){
+    	driveMotorL1.set(0);
+    	driveMotorL2.set(0);
+    	driveMotorR1.set(0);
+    	driveMotorR2.set(0);
     }
 }
 

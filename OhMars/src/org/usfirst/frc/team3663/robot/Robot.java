@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
 import org.usfirst.frc.team3663.robot.commands.A_Log;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
+import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
@@ -39,8 +41,7 @@ public class Robot extends IterativeRobot {
 
 	Command arcadeDrive;
 	Command ALog;
-    Command autonomousCommand;
-    Command aLog;
+	Command Auto;
     
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
@@ -48,6 +49,66 @@ public class Robot extends IterativeRobot {
 	static String testMotorName;
 	public static boolean runCommand;
 
+
+	
+    public void robotInit() {
+    	ssDashBoard = new SSDashBoard();
+    	ssDriveTrain = new SSDriveTrain();
+    	ssElevator = new SSElevator();
+    	ssArms = new SSArms();
+		oi = new OI();
+		Auto = new C_EncoderDriveStrait();
+		
+		arcadeDrive = new C_ArcadeDrive();
+		ALog = new A_Log();
+		ALog.start();
+		
+    }
+	
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+    public void autonomousInit() {
+    	Auto.start();
+    }
+
+    /**
+     * This function is called periodically during autonomous
+     */
+    public void autonomousPeriodic() {
+        Scheduler.getInstance().run();
+    }
+
+    public void teleopInit() {
+        arcadeDrive.start();
+    }
+
+    /**
+     * This function is called when the disabled button is hit.
+     * You can use it to reset subsystems before shutting down.
+     */
+    public void disabledInit(){
+
+    }
+
+    /**
+     * This function is called periodically during operator control
+     */
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+    }
+    
+    /**
+     * This function is called periodically during test mode
+     */
+    public void testPeriodic() {
+        LiveWindow.run();
+    }
+    
+    
+    
+    /*for Testing*/
 	public static void encoderTicksChange(int delta)
 	{
 		encoderTicks+=delta;
@@ -129,61 +190,5 @@ public class Robot extends IterativeRobot {
 			break;
     	}
     	SmartDashboard.putString("testMotor: ", testMotorName);
-    }
-	
-    public void robotInit() {
-    	ssDashBoard = new SSDashBoard();
-    	ssDriveTrain = new SSDriveTrain();
-    	ssElevator = new SSElevator();
-    	ssArms = new SSArms();
-		oi = new OI();
-		
-		arcadeDrive = new C_ArcadeDrive();
-		ALog = new A_Log();
-		ALog.start();
-       //autonomousCommand = new ExampleCommand();
-		
-    }
-	
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
-
-    public void autonomousInit() {
-        //if (autonomousCommand != null) autonomousCommand.start();
-    }
-
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
-
-    public void teleopInit() {
-       // if (autonomousCommand != null) autonomousCommand.cancel();
-        arcadeDrive.start();
-    }
-
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
-
-    }
-
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
     }
 }
