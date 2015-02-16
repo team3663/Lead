@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3663.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
@@ -25,7 +27,8 @@ public class C_Arms extends Command {
     	Robot.ssArms.intakeMotorRSet(Robot.oi.logitech.getRawAxis(3));
     	Robot.ssArms.armUpDownRSet(Robot.oi.logitech.getRawAxis(1));
     	Robot.ssArms.armUpDownLSet(Robot.oi.logitech.getRawAxis(5));
-    	
+    	Robot.ssArms.armLClose(Robot.oi.logitech.getRawButton(5));
+    	Robot.ssArms.armRClose(Robot.oi.logitech.getRawButton(6));
     }
 
     // Make this return true when this Command no longer needs to run execute()
