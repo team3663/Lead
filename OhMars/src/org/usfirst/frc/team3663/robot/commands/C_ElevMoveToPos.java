@@ -57,7 +57,7 @@ public class C_ElevMoveToPos extends Command {
     	{
     		if (origTicks == -49)
     		{
-    			origTicks = (int)(SmartDashboard.getNumber("encoderPosition: "));
+    			origTicks = (int)(Robot.ssDashBoard.getFromDashInt("encoderPosition: "));
     		}
     		switch(origTicks)
     		{
