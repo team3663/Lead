@@ -19,17 +19,17 @@ public class SSDashBoard extends Subsystem {
     }
 
 	@SuppressWarnings("deprecation")
-	public void SendToDashInt(String Title, int Number){
+	public void putDashInt(String Title, int Number){
 		SmartDashboard.putInt(Title, Number);
 	}
-	public void SendToDashBool(String Title, boolean Bool){
+	public void putDashBool(String Title, boolean Bool){
 		SmartDashboard.putBoolean(Title, Bool);
 	}
-	public void SendToDashString(String Title, String lable){
+	public void putDashString(String Title, String lable){
 		SmartDashboard.putString(Title, lable);
 	}
 	@SuppressWarnings("deprecation")
-	public void SendToDashDouble(String Title, double Number){
+	public void putDashDouble(String Title, double Number){
 		SmartDashboard.putDouble(Title, Number);
 	}
 	
@@ -42,44 +42,44 @@ public class SSDashBoard extends Subsystem {
  * 		that does not crash the code.) 
  */
 	@SuppressWarnings("deprecation")
-	public int GetFromDashInt(String Title){
+	public int getFromDashInt(String Title){
 		try{
 			return SmartDashboard.getInt(Title);
 		}
 		catch(Exception E){
-			SendToDashString("ERROR_INT", "Title" + Title);
-			SendToDashInt(Title, 0);
+			putDashString("ERROR_INT", "Title" + Title);
+			putDashInt(Title, 0);
 			return 0;
 		}
 	}
-	public boolean GetFromDashBool(String Title){
+	public boolean getFromDashBool(String Title){
 		try{
 			return SmartDashboard.getBoolean(Title);
 		}
 		catch(Exception E){
-			SendToDashString("ERROR_BOOL", "Title" + Title);
-			SendToDashBool(Title, false);
+			putDashString("ERROR_BOOL", "Title" + Title);
+			putDashBool(Title, false);
 			return false;
 		}
 	}
-	public String GetFromDashString(String Title){
+	public String getFromDashString(String Title){
 		try{
 			return SmartDashboard.getString(Title);
 		}
 		catch(Exception E){
-			SendToDashString("ERROR_STRING", "Title" + Title);
-			SendToDashString(Title, "ERROR");
+			putDashString("ERROR_STRING", "Title" + Title);
+			putDashString(Title, "ERROR");
 			return "ERROR";
 		}
 	}
 	@SuppressWarnings("deprecation")
-	public double GetFromDashDouble(String Title){
+	public double getFromDashDouble(String Title){
 		try{
 			return SmartDashboard.getDouble(Title);
 		}
 		catch(Exception E){
-			SendToDashString("ERROR", "Title" + Title);
-			SendToDashDouble(Title, 0);
+			putDashString("ERROR", "Title" + Title);
+			putDashDouble(Title, 0);
 			return 0;
 		}
 	}
