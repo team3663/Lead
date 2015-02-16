@@ -24,6 +24,7 @@ public class SSElevator extends Subsystem {
 	public DigitalInput elevLimitSwitch, toteSensor;
 	
 	public boolean brakeOn;
+	int dir;
 	
     public void initDefaultCommand() {
     	
@@ -38,6 +39,8 @@ public class SSElevator extends Subsystem {
     	elevMotor2 = new CANTalon(25);
     	winchEncoder = new Encoder(1,2);
     	elevLimitSwitch = new DigitalInput(0);
+    	
+    	bikeBrakeTriggerClose();
     }
     
     public void motorsSet(double speed)
@@ -56,40 +59,70 @@ public class SSElevator extends Subsystem {
     }
     public void bikeBrakeTriggerOpen()
     {
-    	bikeBreak.set(DoubleSolenoid.Value.kForward);
-    	brakeOn = false;
-    	SmartDashboard.putBoolean("brakeOn: ", brakeOn);
+    	if (brakeOn)
+    	{
+	    	bikeBreak.set(DoubleSolenoid.Value.kForward);
+	    	brakeOn = false;
+	    	SmartDashboard.putBoolean("brakeOn: ", brakeOn);
+    	}
     }
     public void bikeBrakeTriggerClose(){
-    	bikeBreak.set(DoubleSolenoid.Value.kReverse);
-    	brakeOn = true;
+    	if (!brakeOn)
+    	{
+	    	bikeBreak.set(DoubleSolenoid.Value.kReverse);
+	    	brakeOn = true;
+	    	SmartDashboard.putBoolean("brakeOn: ", brakeOn);
+    	}
+    }
+    
+    public void terminateMove()
+    {
+		bikeBrakeTriggerClose();
+		motorsSet(0);
+    }
+    
+    public void prepForMove(int ticks)
+    {
+    	bikeBrakeTriggerOpen();
+    	int encoderVal = winchEncoder.get();
+    	if (encoderVal < ticks)
+    	{
+    		dir = 1;
+    	}
+    	else
+		{
+    		dir = -1;
+		}
+		SmartDashboard.putNumber("ticksEntered: ", ticks);
     }
     
     public boolean moveToPos(int ticks)
     {
-    	bikeBrakeTriggerOpen();
-    	SmartDashboard.putBoolean("elevLimitSwtich: ", elevLimitSwitch.get());
-    	if (winchEncoder.get() < ticks)
+    	double speed;
+    	int encoderVal = winchEncoder.get();
+    	SmartDashboard.putBoolean("elevLimitSwitch: ", elevLimitSwitch.get());
+    	if (dir == 1)
     	{
-    		if (winchEncoder.get() > ticks-50)
+    		if (encoderVal > ticks)
     		{
-    			motorsSet(0.2);//0.3
+    			return true;
     		}
-    		motorsSet(0.2);//1.0
+    		speed = 0.5;
     	}
-    	else if (winchEncoder.get() > ticks && elevLimitSwitch.get())
+    	else
     	{
-    		if (winchEncoder.get() < ticks+50)
+    		int diff = encoderVal - ticks;
+    		if (diff <= 0)
     		{
-    			motorsSet(-0.2);
+    			return true;
     		}
-    		motorsSet(-0.2);//0.4
+    		else if (diff < 60)
+    		{
+    			speed = -0.2;
+    		}
+    		speed = -0.4;
     	}
-    	else if (winchEncoder.get() > ticks-15 || winchEncoder.get() < ticks+15 || !elevLimitSwitch.get())
-    	{
-    		bikeBrakeTriggerClose();
-    		return true;
-    	}
+    	motorsSet(speed);
     	return false;
     }
     
