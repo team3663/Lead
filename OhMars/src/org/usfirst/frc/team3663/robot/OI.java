@@ -18,6 +18,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
 import org.usfirst.frc.team3663.robot.commands.C_IncrementElevEncoderTicks;
 import org.usfirst.frc.team3663.robot.commands.C_DecrementElevEncoderTicks;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseToggle;
 
 public class OI {
 	
@@ -40,6 +41,7 @@ public class OI {
 	public JoystickButton decrementElevEncoderTicks;
 	public JoystickButton testArmSolenoids;
 	public JoystickButton motorDriveTestInterrupt;
+	public JoystickButton armsInOutToggle;
 	
 	public OI(){
 	//	testSensors = new JoystickButton(driveStick, 1);
@@ -77,6 +79,8 @@ public class OI {
 		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
 		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
 		
+		armsInOutToggle = new JoystickButton(logitech, 1);
+		armsInOutToggle.whenPressed(new C_ArmsOpenCloseToggle());
 		
 	}
     //// CREATING BUTTONS

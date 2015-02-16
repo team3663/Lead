@@ -10,9 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class SSArms extends Subsystem {
-    
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    public boolean lArmClose,rArmClose = false;
 
 	Talon intakeMotorL, intakeMotorR, armsUpAndDownMotorL, armsUpAndDownMotorR;
 	DoubleSolenoid armOpenCloseL, armOpenCloseR;
@@ -51,17 +49,22 @@ public class SSArms extends Subsystem {
     public void armLClose(boolean close){
     	if(close){
     		armOpenCloseL.set(DoubleSolenoid.Value.kForward);
+    		lArmClose = true;
     	}
     	else{
     		armOpenCloseL.set(DoubleSolenoid.Value.kReverse);
+    		lArmClose = false;
     	}
     }
     public void armRClose(boolean close){
     	if(close){
     		armOpenCloseR.set(DoubleSolenoid.Value.kForward);
+    		rArmClose = true;
     	}
     	else{
     		armOpenCloseR.set(DoubleSolenoid.Value.kReverse);
+    		rArmClose = false;
     	}
     }
+	
 }
