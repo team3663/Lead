@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_Test;
 import org.usfirst.frc.team3663.robot.commands.C_TestSensors;
@@ -19,7 +20,6 @@ import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
 import org.usfirst.frc.team3663.robot.commands.C_IncrementElevEncoderTicks;
 import org.usfirst.frc.team3663.robot.commands.C_DecrementElevEncoderTicks;
-
 
 public class OI {
 	
@@ -43,8 +43,8 @@ public class OI {
 	public JoystickButton decrementElevEncoderTicks;
 	public JoystickButton testArmSolenoids;
 	public JoystickButton motorDriveTestInterrupt;
-	public JoystickButton armsInOutToggle;
 	public JoystickButton testEncoderDrive;
+	public JoystickButton armOpenCloseToggle;
 	
 	public OI(){
 	//	testSensors = new JoystickButton(driveStick, 1);
@@ -83,6 +83,18 @@ public class OI {
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
+
+		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
+		
+		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
+		
+		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
+		
+		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
 
 		
 	}
