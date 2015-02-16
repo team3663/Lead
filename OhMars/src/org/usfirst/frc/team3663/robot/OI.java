@@ -109,9 +109,6 @@ public class OI {
 		
 		armIntakeToggle = new JoystickButton(logitech, 4);
 		armIntakeToggle.whenPressed(new C_ArmsIntakeToggle());
-		
-		armExecutables = new JoystickButton(logitech, 8);
-		armExecutables.whenPressed(new CG_ArmsExecute());
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
