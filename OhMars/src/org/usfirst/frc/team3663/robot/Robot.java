@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
     
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
-	public static int encoderTicks = 0;
+	public final static int encoderZeroAdjust = -92;
 	static String testMotorName;
 	public static boolean runCommand;
 
@@ -112,7 +112,7 @@ public class Robot extends IterativeRobot {
     
     /*for Testing*/
 	public static void encoderTicksChange(int delta)
-	{
+	{/*
 		encoderTicks+=delta;
 		if (encoderTicks > 1150)
 		{
@@ -124,7 +124,9 @@ public class Robot extends IterativeRobot {
 		}
 	//	encoderTicks = (int)(SmartDashboard.getNumber("encoderTicks: "));
 		SmartDashboard.putNumber("encoderTicks: ", encoderTicks);
+		*/
 	}
+	
 	
     public static void motorSpeedChange(double delta)
     {

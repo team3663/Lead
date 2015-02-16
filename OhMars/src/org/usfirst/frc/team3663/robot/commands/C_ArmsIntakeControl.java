@@ -22,7 +22,7 @@ public class C_ArmsIntakeControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!Robot.ssElevator.getToteSwitch())
+    	if(Robot.ssElevator.getToteSwitch())
     		Robot.ssArms.intakeMotorsSet(Robot.oi.logitech.getRawAxis(5));
     	
     }

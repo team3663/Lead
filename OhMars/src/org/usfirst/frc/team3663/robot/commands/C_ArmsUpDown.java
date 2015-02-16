@@ -27,8 +27,9 @@ public class C_ArmsUpDown extends Command {
     	if(Math.abs(axisValue) < 0.2) axisValue = 0;
     	SmartDashboard.putNumber("yAxis", axisValue);;
     	Robot.ssArms.armUpDownRSet(axisValue);
-    	if(!Robot.oi.logitech.getRawButton(3))
-    	Robot.ssArms.armUpDownLSet(axisValue);
+    	if(!Robot.oi.logitech.getRawButton(3)){
+    		Robot.ssArms.armUpDownLSet(axisValue);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
