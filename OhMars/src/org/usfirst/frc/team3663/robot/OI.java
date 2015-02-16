@@ -39,6 +39,7 @@ public class OI {
 	public JoystickButton incrementElevEncoderTicks;
 	public JoystickButton decrementElevEncoderTicks;
 	public JoystickButton testArmSolenoids;
+	public JoystickButton motorDriveTestInterrupt;
 	
 	public OI(){
 	//	testSensors = new JoystickButton(driveStick, 1);
@@ -46,7 +47,6 @@ public class OI {
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
 		motorDriveTest.whenPressed(new C_MotorDriveTest());
-		motorDriveTest.whenReleased(motorDriveTest.);
 		
 		motorDriveTestInterrupt = new JoystickButton(driveStick, 1);
 		motorDriveTestInterrupt.whenReleased(new C_MotorDriveTestInterrupt());

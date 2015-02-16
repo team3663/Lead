@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
+import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SSArms;
@@ -29,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static SSArms ssArms;
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
-//	public static SSDashBoard ssDashBoard;
+  	public static SSDashBoard ssDashBoard;
 	public static OI oi;
 
 	Command arcadeDrive;
