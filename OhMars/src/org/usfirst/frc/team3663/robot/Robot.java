@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
 import org.usfirst.frc.team3663.robot.commands.A_Log;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
 	Command ALog;
     Command autonomousCommand;
     Command aLog;
+    Command armIntake;
     
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
@@ -141,6 +144,8 @@ public class Robot extends IterativeRobot {
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
+		armIntake = new C_ArmsIntakeControl();
+		armIntake.start();
        //autonomousCommand = new ExampleCommand();
 		
     }
