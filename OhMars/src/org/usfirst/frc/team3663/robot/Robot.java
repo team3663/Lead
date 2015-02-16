@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
 		{
 			encoderTicks = 0;
 		}
+		encoderTicks = (int)(SmartDashboard.getNumber("encoderTicks: "));
 		SmartDashboard.putNumber("encoderTicks: ", encoderTicks);
 	}
 	

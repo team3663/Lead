@@ -2,6 +2,7 @@ package org.usfirst.frc.team3663.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
@@ -35,6 +36,7 @@ public class OI {
 	public JoystickButton decrementTestMotor;
 	public JoystickButton reverseMotorSpeed;
 	public JoystickButton toggleBrake;
+	public JoystickButton elevMoveToPos;
 	public JoystickButton elevMoveToPos0;
 	public JoystickButton elevMoveToPos1;
 	public JoystickButton elevMoveToPos2;
@@ -49,6 +51,10 @@ public class OI {
 	public OI(){
 	//	testSensors = new JoystickButton(driveStick, 1);
 		//testSensors.whileHeld(new C_TestSensors());
+		
+		elevMoveToPos = new JoystickButton(driveStick, 7);
+		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-10));
+		elevMoveToPos.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
 		motorDriveTest.whenPressed(new C_MotorDriveTest());
