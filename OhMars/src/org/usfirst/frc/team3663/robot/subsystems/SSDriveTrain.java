@@ -21,6 +21,10 @@ public class SSDriveTrain extends Subsystem {
 	CANTalon driveMotorL1, driveMotorL2, driveMotorR1, driveMotorR2;
 	public Encoder leftEncoder, rightEncoder;
 	RobotDrive chassis;
+	
+	
+	private int finalTicksL;
+	public boolean encoderDriving = false;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -66,24 +70,32 @@ public class SSDriveTrain extends Subsystem {
     {
     	driveMotorR2.set(speed);
     }
+    
     public void motorRightSet(double speed){
     	driveMotorR2.set(speed);
     	driveMotorR1.set(speed);
     }
+    
     public void motorLeftSet(double speed){
     	driveMotorL2.set(speed);
     	driveMotorL1.set(speed);
     }
+    
     public void driveForwardDistance(double speed, int inches){
-    	int currentTicksLeft = leftEncoder.get();
-    	int currentTicksRight = rightEncoder.get();
-    	int targetTicksRight = ((360/4)*inches) + currentTicksRight;
-    	int targetTicksLeft = ((360/4)*inches) + currentTicksLeft;
-    	boolean end = false;
-    	boolean rightEnd = false;
-    	boolean leftEnd = false;
-    	
-    	while(end){
+    	if(encoderDriving == false){
+        	finalTicksL = (((360/4)*inches) + leftEncoder.get());
+    	}
+    	if(speed < 0){
+    		while(finalTicksL > leftEncoder.get()){
+    			motorRightSet(speed);
+    			motorLeftSet(speed);
+    		}
+    	}
+    	else if(speed > 0){
+    		while(finalTicksL < leftEncoder.get()){
+    			motorRightSet(speed);
+    			motorLeftSet(speed);
+    		}
     	}
     }
 }
