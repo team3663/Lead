@@ -60,7 +60,9 @@ public class SSArms extends Subsystem {
     	double currentTime = Timer.getFPGATimestamp();
     	double deltaTime = currentTime - lastTimeLArmUD;
     	double scaleFactor = 1;
-    	if(lastSpeedLArmUD < 0) scaleFactor = 1.135; //Higher sF if pos reads higher consistenly
+    	SmartDashboard.putNumber("L_ArmScaleFactor", 1.135);
+    	if(lastSpeedLArmUD < 0) scaleFactor = SmartDashboard.getNumber("L_ArmScaleFactor");
+    	//Higher sF if pos reads higher consistenly
     	//Use a Lower sF is pos reads as too low after moving
     	lArmUpDownPos += deltaTime * lastSpeedLArmUD*scaleFactor;
     	lastTimeLArmUD = currentTime;

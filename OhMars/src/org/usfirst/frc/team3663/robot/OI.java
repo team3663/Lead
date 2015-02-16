@@ -53,11 +53,8 @@ public class OI {
 	public JoystickButton armExecutables;
 	
 	public OI(){
-	//	testSensors = new JoystickButton(driveStick, 1);
-		//testSensors.whileHeld(new C_TestSensors());
-		
 		elevMoveToPos = new JoystickButton(driveStick, 7);
-		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-10));
+		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-50));
 		elevMoveToPos.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
@@ -83,13 +80,17 @@ public class OI {
 		toggleBrake.whenPressed(new C_ToggleBrake());
 		
 		elevMoveAndSetZero = new JoystickButton(driveStick, 11);
-		elevMoveAndSetZero.whileHeld(new C_ElevMoveAndSetZero());
+		elevMoveAndSetZero.whenPressed(new C_ElevMoveAndSetZero());
+		elevMoveAndSetZero.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		incrementElevEncoderTicks = new JoystickButton(driveStick, 8);
 		incrementElevEncoderTicks.whenPressed(new C_IncrementElevEncoderTicks());
 		
-		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
-		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+//		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
+//		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+		elevMoveToPos0 = new JoystickButton(driveStick, 10);
+		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
+		elevMoveToPos1.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
