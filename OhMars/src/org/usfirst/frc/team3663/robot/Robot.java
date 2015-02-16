@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
     }
 	
     public void robotInit() {
- //   	ssDashBoard = new SSDashBoard();
+    	ssDashBoard = new SSDashBoard();
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
     	ssArms = new SSArms();
