@@ -16,6 +16,7 @@ public class C_EncoderTurnLeft extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ssDriveTrain.encoderDriving = true;
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeToggle;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_Test;
@@ -28,7 +30,6 @@ public class OI {
 	public Joystick logitech = new Joystick(1);
 	public Joystick buttonStick = new Joystick(2);
 	
-	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
 	public JoystickButton incrementSpeed;
@@ -48,13 +49,12 @@ public class OI {
 	public JoystickButton motorDriveTestInterrupt;
 	public JoystickButton testEncoderDrive;
 	public JoystickButton armOpenCloseToggle;
+	public JoystickButton armIntakeToggle;
+	public JoystickButton armExecutables;
 	
 	public OI(){
-	//	testSensors = new JoystickButton(driveStick, 1);
-		//testSensors.whileHeld(new C_TestSensors());
-		
 		elevMoveToPos = new JoystickButton(driveStick, 7);
-		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-10));
+		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-50));
 		elevMoveToPos.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		motorDriveTest = new JoystickButton(driveStick, 1);
@@ -80,15 +80,19 @@ public class OI {
 		toggleBrake.whenPressed(new C_ToggleBrake());
 		
 		elevMoveAndSetZero = new JoystickButton(driveStick, 11);
-		elevMoveAndSetZero.whileHeld(new C_ElevMoveAndSetZero());
+		elevMoveAndSetZero.whenPressed(new C_ElevMoveAndSetZero());
+		elevMoveAndSetZero.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		incrementElevEncoderTicks = new JoystickButton(driveStick, 8);
 		incrementElevEncoderTicks.whenPressed(new C_IncrementElevEncoderTicks());
 		
-		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
-		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+//		decrementElevEncoderTicks = new JoystickButton(driveStick, 10);
+//		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+		elevMoveToPos0 = new JoystickButton(driveStick, 10);
+		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
+		elevMoveToPos1.whenReleased(new C_MotorDriveTestInterrupt());
 		
-		testEncoderDrive = new JoystickButton(driveStick, 9);
+		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
 
 		armOpenCloseToggle = new JoystickButton(logitech, 5);
@@ -102,8 +106,12 @@ public class OI {
 		
 		armOpenCloseToggle = new JoystickButton(logitech, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
-
 		
+		armIntakeToggle = new JoystickButton(logitech, 4);
+		armIntakeToggle.whenPressed(new C_ArmsIntakeToggle());
+		
+		armExecutables = new JoystickButton(logitech, 8);
+		armExecutables.whenPressed(new CG_ArmsExecute());
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

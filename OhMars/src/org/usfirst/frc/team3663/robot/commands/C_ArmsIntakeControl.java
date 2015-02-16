@@ -12,7 +12,7 @@ import org.usfirst.frc.team3663.robot.OI;
  *
  */
 public class C_ArmsIntakeControl extends Command {
-	
+	int increment = 0;
     public C_ArmsIntakeControl(){
     	
     }

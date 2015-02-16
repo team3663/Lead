@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
+		armExecutables = new CG_ArmsExecute();
 		
     }
 	
@@ -70,7 +71,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-    	Auto.start();
+    	//Auto.start();
     }
 
     /**
@@ -82,6 +83,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
         arcadeDrive.start();
+		armExecutables.start();
     }
 
     /**

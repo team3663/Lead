@@ -27,6 +27,7 @@ public class A_Log extends Command {
     	Robot.ssDashBoard.putDashInt("Right Drive Encoder", Robot.ssDriveTrain.rightEncoder.get());
     	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Left", Robot.ssDriveTrain.finalTicksL);
     	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Right", Robot.ssDriveTrain.finalTicksR);
+    	Robot.ssDashBoard.putDashBool("Encoder Running", Robot.ssDriveTrain.encoderDriving);
     }
 
     // Make this return true when this Command no longer needs to run execute()

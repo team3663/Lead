@@ -1,10 +1,12 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
+
 //test
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
@@ -25,6 +27,9 @@ public class SSElevator extends Subsystem {
 	
 	public boolean brakeOn;
 	int dir;
+	double currTime, lastTime;
+	int lastTicks;
+	double ticksPerSec;
 	
     public void initDefaultCommand() {
     	
@@ -39,6 +44,9 @@ public class SSElevator extends Subsystem {
     	elevMotor2 = new CANTalon(25);
     	winchEncoder = new Encoder(1,2);
     	elevLimitSwitch = new DigitalInput(0);
+    	
+    	elevMotor1.enableBrakeMode(true);
+    	elevMotor2.enableBrakeMode(true);
     	
     	bikeBrakeTriggerClose();
     }
@@ -83,8 +91,10 @@ public class SSElevator extends Subsystem {
     
     public void prepForMove(int ticks)
     {
-    	bikeBrakeTriggerOpen();
     	int encoderVal = winchEncoder.get();
+    	currTime = lastTime = Timer.getFPGATimestamp();
+    	lastTicks = encoderVal;
+    	bikeBrakeTriggerOpen();
     	if (encoderVal < ticks)
     	{
     		dir = 1;
@@ -100,29 +110,37 @@ public class SSElevator extends Subsystem {
     {
     	double speed;
     	int encoderVal = winchEncoder.get();
-    	SmartDashboard.putBoolean("elevLimitSwitch: ", elevLimitSwitch.get());
+    	currTime = Timer.getFPGATimestamp();
+    	ticksPerSec = Math.abs((encoderVal-lastTicks)/(currTime-lastTime));
+    	SmartDashboard.putNumber("ticksPerSecElevator: ", ticksPerSec);
     	if (dir == 1)
     	{
-    		if (encoderVal > ticks)
+    		speed = 1.0;
+    		if (encoderVal > ticks)//(encoderVal > ticks-ticksPerSec)//(encoderVal > ticks)
     		{
     			return true;
     		}
-    		speed = 0.8;
+    		else if (encoderVal > ticks-15)
+    		{
+    			speed = 0.3;
+    		}
     	}
     	else
     	{
     		int diff = encoderVal - ticks;
-    		if (diff <= 0)
+    		speed = -1.0;
+    		if (diff <= 0 || !elevLimitSwitch.get())//ticksPerSec)
     		{
     			return true;
     		}
-    		else if (diff < 60)
+    		else if (diff < 30)
     		{
     			speed = -0.2;
     		}
-    		speed = -0.4;
     	}
     	motorsSet(speed);
+    	lastTime = currTime;
+    	lastTicks = encoderVal;
     	return false;
     }
     
@@ -131,24 +149,23 @@ public class SSElevator extends Subsystem {
     	if (elevLimitSwitch.get())
     	{
     		bikeBrakeTriggerOpen();
-    		motorsSet(-0.2);
+    		motorsSet(-1.0);
     	}
-    	SmartDashboard.putBoolean("elevLimitSwitch: ", elevLimitSwitch.get());
     	if (!elevLimitSwitch.get())
     	{
-    		motorsSet(0);
-    		bikeBrakeTriggerClose();
     		winchEncoder.reset();
+    		stopElevator();
     		return true;
     	}
     	return false;
     }
     
-    public void logValues()
+    public void stopElevator()
     {
-    	SmartDashboard.putNumber("winchEncoder: ", Robot.ssElevator.winchEncoder.get());
-    	SmartDashboard.putBoolean("elevLimitSwitch: ", Robot.ssElevator.elevLimitSwitch.get());
+		bikeBrakeTriggerClose();
+		motorsSet(0);
     }
+    
     public boolean getToteSwitch(){
     	return toteSensor.get();
     }

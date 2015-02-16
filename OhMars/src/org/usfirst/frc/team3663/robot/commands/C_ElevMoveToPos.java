@@ -13,19 +13,16 @@ public class C_ElevMoveToPos extends Command {
 	int ticks, origTicks;
 	boolean finished;
 	
-    public C_ElevMoveToPos(int Ticks) {
+    public C_ElevMoveToPos(int pTicks) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.ssElevator);
-        origTicks = ticks = Ticks;
+        origTicks = pTicks;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.runCommand = true;
-    	if (origTicks == -10)
-    	{
-    		ticks = (int)(SmartDashboard.getNumber("encoderTicks: "));
-    	}
+    	ticks = getTicks();
     	Robot.ssElevator.prepForMove(ticks);
     }
 
@@ -53,4 +50,39 @@ public class C_ElevMoveToPos extends Command {
     protected void interrupted() {
     	end();
     }
+    
+    int getTicks()
+    {
+    	if (origTicks < 0)
+    	{
+    		if (origTicks == -49)
+    		{
+    			origTicks = (int)(SmartDashboard.getNumber("encoderPosition: "));
+    		}
+    		switch(origTicks)
+    		{
+    		case -1:
+    			ticks = 30;//lowest position we want
+    			break;
+    		case -10:
+    			ticks = 305;//unloading on scoring platform
+    			break;
+    		case -20:
+    			ticks = 525;//POSSIBLY the step
+    			break;
+    		case -45:
+    			ticks = 1098;//highest position we want
+    			break;
+    		case -50:
+    			ticks = (int)(SmartDashboard.getNumber("encoderTicks: "));
+    			break;
+    		}
+    	}
+    	else 
+    	{
+    		ticks = origTicks;
+    	}
+    	return ticks;
+    }
+    
 }

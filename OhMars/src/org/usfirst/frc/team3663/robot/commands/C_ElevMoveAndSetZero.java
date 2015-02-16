@@ -17,6 +17,7 @@ public class C_ElevMoveAndSetZero extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.runCommand = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,7 +27,7 @@ public class C_ElevMoveAndSetZero extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (finished)
+    	if (finished || !Robot.runCommand)
     	{
     		return true;
     	}
@@ -35,12 +36,12 @@ public class C_ElevMoveAndSetZero extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ssElevator.stopElevator();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.ssElevator.motorsSet(0);
-    	Robot.ssElevator.bikeBrakeTriggerClose();
+    	end();
     }
 }
