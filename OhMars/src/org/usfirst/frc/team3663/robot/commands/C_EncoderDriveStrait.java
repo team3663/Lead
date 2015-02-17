@@ -25,8 +25,8 @@ public class C_EncoderDriveStrait extends Command {
     	//Robot.ssDriveTrain.driveForwardDistance(0.2, 8);
     	//Robot.ssDriveTrain.encoderDriving = true;
     	Robot.ssDriveTrain.driveForwardDistance();
-    	Robot.ssDriveTrain.motorLeftSet(0.2);
-    	Robot.ssDriveTrain.motorRightSet(0.2);
+    	//Robot.ssDriveTrain.motorLeftSet(0.2);
+    	//Robot.ssDriveTrain.motorRightSet(0.2);
     }
 
     // Make this return true when this Command no longer needs to run execute()

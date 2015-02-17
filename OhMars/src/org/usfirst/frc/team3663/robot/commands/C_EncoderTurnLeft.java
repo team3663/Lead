@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class C_EncoderTurnLeft extends Command {
 
+	boolean r = false,l = false;
     public C_EncoderTurnLeft() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -17,24 +18,47 @@ public class C_EncoderTurnLeft extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ssDriveTrain.encoderDriving = true;
+    	Robot.ssDriveTrain.eDistanceArk(40, 45);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.eDistanceArk(34, 90);
+    	Robot.ssDriveTrain.setTheSpeedsLeft(.5);
+    	if(r == false){
+    		Robot.ssDriveTrain.motorRightSet(Robot.ssDriveTrain.speedR);
+    	}
+    	if(l == false){
+    		Robot.ssDriveTrain.motorLeftSet(Robot.ssDriveTrain.speedL);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	boolean r = false,l = false;
+    	if(Robot.ssDriveTrain.checkIfLeftDone()){
+    		Robot.ssDriveTrain.motorLeftSet(0);
+    		l = true;
+    	}
+    	if(Robot.ssDriveTrain.checkIfRightDone()){
+    		Robot.ssDriveTrain.motorRightSet(0);
+    		r = true;
+    	}
+    	if(r == true && l == true){
+    		return true;
+    	}
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ssDriveTrain.encoderDriving = false;
+    	Robot.ssDriveTrain.zeroMotors();
     }
+    
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

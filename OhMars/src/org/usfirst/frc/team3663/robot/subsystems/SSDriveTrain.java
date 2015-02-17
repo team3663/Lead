@@ -22,8 +22,8 @@ public class SSDriveTrain extends Subsystem {
 	public Encoder leftEncoder, rightEncoder;
 	RobotDrive chassis;
 	
-	public int finalTicksL;
-	public int finalTicksR;
+	public int finalTicksL, finalTicksR;
+	public double speedR, speedL;
 	public boolean encoderDriving = false;
 
     public void initDefaultCommand() {
@@ -109,10 +109,10 @@ public class SSDriveTrain extends Subsystem {
     public void eDistanceArk(int pRadius, int pAngel){
     	/*NOTES ON THIS METHOD: 
     	 * (Length = (angle/360)*(2piR))
-    	 * (Angle = (360*Length)/(2piR))*/
-    	setFinalLeft((int)((pAngel/360)*(2*Math.PI*(pRadius - 13))));
-    	setFinalRight((int)((pAngel/360)*(2*Math.PI*(pRadius + 13))));
-    	
+    	 * (Angle = (360*Length)/(2piR))
+    	 * these numbers are multiplyed by ten to make sure there are no doubles in this numbers*/
+    	setFinalLeft((int)((pAngel*10/360)*(2*Math.PI*(pRadius - 13))/10));
+    	setFinalRight((int)((pAngel*10/360)*(2*Math.PI*(pRadius + 13))/10));
     }
     
     public void zeroMotors(){
@@ -127,6 +127,23 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorL2.enableBrakeMode(pBreak);
     	driveMotorR1.enableBrakeMode(pBreak);
     	driveMotorR2.enableBrakeMode(pBreak);
+    }
+    
+    public void setTheSpeedsLeft(double highspeed){
+    	/*NOTES
+    	 *RT = D */
+    	speedR = highspeed;
+    	float time = (float)(finalTicksR/speedR);
+    	speedL = finalTicksL/time;
+    	
+    }
+    
+    public boolean checkIfLeftDone(){
+    	return (leftEncoder.get() >= finalTicksL);
+    }
+
+    public boolean checkIfRightDone(){
+    	return (rightEncoder.get() >= finalTicksR);
     }
 }
 
