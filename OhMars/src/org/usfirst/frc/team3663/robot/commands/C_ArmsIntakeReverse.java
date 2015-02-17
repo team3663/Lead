@@ -12,21 +12,13 @@ import org.usfirst.frc.team3663.robot.OI;
  *
  */
 public class C_ArmsIntakeReverse extends Command {
-	boolean pOn;
-    public C_ArmsIntakeReverse(boolean on){
-    	pOn = on;
+    public C_ArmsIntakeReverse(){
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.ssElevator.getToteSwitch()){
-	    	if(pOn){
-	    		for(int i = 0; i < 50; i++){
-	    			Robot.ssArms.intakeMotorsSet(Robot.ssArms.rArmIntakeSpeed + 0.02);
-	    		}
-	    	}else{
-	    		Robot.ssArms.intakeMotorsSet(0.0);
-	    	}
+    	for(;Robot.ssArms.lArmIntakeSpeed >= -.95;){
+    		Robot.ssArms.intakeMotorsSet(Robot.ssArms.lArmIntakeSpeed -= 0.0005);
     	}
     }
 
