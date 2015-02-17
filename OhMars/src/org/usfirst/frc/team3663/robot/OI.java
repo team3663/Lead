@@ -29,11 +29,8 @@ public class OI {
 	public Joystick driveStick = new Joystick(0);
 	public Joystick logitech = new Joystick(1);
 	public Joystick buttonStick = new Joystick(2);
-<<<<<<< HEAD
-	public Joystick driveControler = new Joystick(3);
-=======
+	public Joystick driveController = new Joystick(3);
 	public Joystick testStick = new Joystick(5);
->>>>>>> e91db1fb4fa425e71e3a55f45e6ae04ec7a7ee40
 	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
@@ -124,22 +121,22 @@ public class OI {
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
 
-		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
 
-		armIntakeToggleOn = new JoystickButton(logitech, 1);
+		armIntakeToggleOn = new JoystickButton(driveController, 1);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
 		
-		armIntakeToggleOff = new JoystickButton(logitech, 2);
+		armIntakeToggleOff = new JoystickButton(driveController, 2);
 		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
 	}
     //// CREATING BUTTONS
