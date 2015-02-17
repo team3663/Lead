@@ -61,7 +61,9 @@ public class OI {
 	public JoystickButton armOpenCloseToggle;
 	public JoystickButton armIntakeToggleOn;
 	public JoystickButton armIntakeToggleOff;
+	public JoystickButton armIntakeToggleReverse;
 	public JoystickButton armExecutables;
+	public JoystickButton armIntakeReverse;
 	//-------------
 	public JoystickButton pickUp;
 	public JoystickButton dropOnSP;
@@ -138,6 +140,7 @@ public class OI {
 		
 //		decrementElevEncoderTicks = new JoystickButton(testStick, 10);
 //		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+		
 		elevMoveToPos0 = new JoystickButton(testStick, 10);
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
@@ -147,21 +150,21 @@ public class OI {
 
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
-		
+		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
+
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
-		
-		armOpenCloseToggle = new JoystickButton(driveController, 5);
-		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
-		
-		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
 
-		armIntakeToggleOn = new JoystickButton(driveController, 1);
-		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
+		armIntakeToggleOn = new JoystickButton(driveController, 3);
+		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1));
 		
-		armIntakeToggleOff = new JoystickButton(driveController, 2);
-		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
+		armIntakeToggleOff = new JoystickButton(driveController, 1);
+		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(0));
+		
+		armIntakeToggleReverse = new JoystickButton(driveController, 2);
+		armIntakeToggleReverse.whenPressed(new C_ArmsIntakeToggle(2));
+		
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

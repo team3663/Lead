@@ -17,17 +17,21 @@ public class C_EncoderTurnLeft extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.eDistanceArk(40, 45);
+    	Robot.ssDriveTrain.eDistanceArk(9, 45);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.setTheSpeedsLeft(.5);
+    	Robot.ssDriveTrain.timeRunningL++;
+    	Robot.ssDriveTrain.setTheSpeedsLeft(.2);
     	if(r == false){
+        	Robot.ssDriveTrain.timeRunningR++;
     		Robot.ssDriveTrain.motorRightSet(Robot.ssDriveTrain.speedR);
     	}
     	if(l == false){
+        	Robot.ssDriveTrain.timeRunningL++;
     		Robot.ssDriveTrain.motorLeftSet(Robot.ssDriveTrain.speedL);
     	}
     }

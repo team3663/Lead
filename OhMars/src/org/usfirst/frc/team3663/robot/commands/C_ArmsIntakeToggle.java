@@ -12,20 +12,25 @@ import org.usfirst.frc.team3663.robot.OI;
  *
  */
 public class C_ArmsIntakeToggle extends Command {
-	boolean pOn;
-    public C_ArmsIntakeToggle(boolean on){
-    	pOn = on;
+	int pState;
+    public C_ArmsIntakeToggle(int state){
+    	//state 0 is off, 1 is intake, 2 is out...take?
+    	pState = state;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	if(Robot.ssElevator.getToteSwitch()){
-	    	if(pOn){
-	    		Robot.ssArms.intakeMotorsSet(1.0);
-	    	}else{
-	    		Robot.ssArms.intakeMotorsSet(0.0);
-	    	}
-//    	}
+    	switch(pState){
+    	case 0:
+    		Robot.ssArms.intakeMotorsSet(0.0);
+    		break;
+    	case 1:
+    		if(Robot.ssElevator.getToteSwitch())
+			Robot.ssArms.intakeMotorsSet(1.0);
+			break;
+		case 2:
+			Robot.ssArms.intakeMotorsSet(-1.0);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

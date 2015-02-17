@@ -22,7 +22,8 @@ public class SSDriveTrain extends Subsystem {
 	public Encoder leftEncoder, rightEncoder;
 	RobotDrive chassis;
 	
-	public int finalTicksL, finalTicksR;
+	
+	public int finalTicksL, finalTicksR, timeRunningR = 0, timeRunningL = 0;
 	public double speedR, speedL;
 	public boolean encoderDriving = false;
 
@@ -103,7 +104,7 @@ public class SSDriveTrain extends Subsystem {
     }
     
     public void setFinalRight(int pDistance){
-    	finalTicksR = ((int)(/*250/(4*Math.PI)*/19 * pDistance) + leftEncoder.get());
+    	finalTicksR = ((int)(/*250/(4*Math.PI)*/19 * pDistance) + rightEncoder.get());
     }
     
     public void eDistanceArk(int pRadius, int pAngel){
@@ -135,6 +136,7 @@ public class SSDriveTrain extends Subsystem {
     	speedR = highspeed;
     	float time = (float)(finalTicksR/speedR);
     	speedL = finalTicksL/time;
+    	//speedL = .4;
     	
     }
     
