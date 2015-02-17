@@ -23,12 +23,17 @@ import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
 import org.usfirst.frc.team3663.robot.commands.C_IncrementElevEncoderTicks;
 import org.usfirst.frc.team3663.robot.commands.C_DecrementElevEncoderTicks;
+import org.usfirst.frc.team3663.robot.commands.CG_PickUp;
+import org.usfirst.frc.team3663.robot.commands.CG_DropOffStep;
+import org.usfirst.frc.team3663.robot.commands.CG_DropOffSP;
+import org.usfirst.frc.team3663.robot.commands.CG_RestartToStartPos;
+import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
 
 public class OI {
 	
 	public Joystick driveStick = new Joystick(0);
-	public Joystick logitech = new Joystick(1);
-	public Joystick buttonStick = new Joystick(2);
+	public Joystick buttonController = new Joystick(1);
+	public Joystick logitech = new Joystick(2);
 	public Joystick testStick = new Joystick(5);
 	
 	public JoystickButton testSensors;
@@ -54,29 +59,23 @@ public class OI {
 	public JoystickButton armIntakeToggleOff;
 	public JoystickButton armExecutables;
 	//-------------
-	public JoystickButton forkOut;
-	public JoystickButton forkIn;
 	public JoystickButton pickUp;
 	public JoystickButton dropOnSP;
 	public JoystickButton dropOnStep;
 	public JoystickButton resetToStart;
-	public JoystickButton movePos6;
-	public JoystickButton movePos5;
-	public JoystickButton movePos4;
-	public JoystickButton movePos3;
 	public JoystickButton movePos2;
 	public JoystickButton movePos1;
+	public JoystickButton forkIn;
 	//-------------
 	
 	public OI(){
 		//----------------
-		forkOut = new JoystickButton(driveStick, 1);
+		pickUp = new JoystickButton(buttonController, 8);
+		pickUp.whenPressed(new CG_PickUp());
+		pickUp.whenReleased(new C_MotorDriveTestInterrupt());
 		
-		forkIn = new JoystickButton(driveStick, 2);
-		
-		pickUp = new JoystickButton(driveStick, 3);
-		
-		dropOnSP = new JoystickButton(driveStick, 8);
+		dropOnSP = new JoystickButton(buttonController, 3);
+		dropOnSP.whenPressed(new CG_DropOffSP());
 		//----------------
 		elevMoveToPos = new JoystickButton(testStick, 7);
 		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-50));
@@ -117,9 +116,6 @@ public class OI {
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
 		
-		testEncoderDrive = new JoystickButton(buttonStick, 1);
-		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
-
 		armOpenCloseToggle = new JoystickButton(logitech, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
 		
