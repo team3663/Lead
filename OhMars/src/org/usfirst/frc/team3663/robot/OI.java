@@ -76,7 +76,7 @@ public class OI {
 		
 		pickUp = new JoystickButton(driveStick, 3);
 		
-		dropOnSP = new JoystickButton
+		dropOnSP = new JoystickButton(driveStick, 8);
 		//----------------
 		elevMoveToPos = new JoystickButton(testStick, 7);
 		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-50));
