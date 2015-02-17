@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeToggle;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseTogether;
+import org.usfirst.frc.team3663.robot.commands.C_DriveControllerSafetyOff;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_Test;
 import org.usfirst.frc.team3663.robot.commands.C_TestSensors;
@@ -32,8 +34,14 @@ import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 import org.usfirst.frc.team3663.robot.commands.CG_MoveToPos1;
 import org.usfirst.frc.team3663.robot.commands.CG_MoveToPos2;
 import org.usfirst.frc.team3663.robot.commands.CG_ForkIn;
+import org.usfirst.frc.team3663.robot.commands.CG_MovePos3;
 
 public class OI {
+	public boolean driveControllerOn = false;
+	//public boolean buttonControllerOn = false;
+	public JoystickButton driveControllerSafetyEnable;
+	//public Joystick buttonControllerSafetyEnable;
+	
 	public Joystick driveController = new Joystick(0);
 	public Joystick buttonController = new Joystick(1);
 	public Joystick logitech = new Joystick(2);
@@ -71,10 +79,14 @@ public class OI {
 	public JoystickButton resetToStart;
 	public JoystickButton movePos1;
 	public JoystickButton movePos2;
+	public JoystickButton movePos3;
 	public JoystickButton forkIn;
 	//-------------
 	
 	public OI(){
+		driveControllerSafetyEnable = new JoystickButton(driveController, 7);
+		driveControllerSafetyEnable.whenPressed(new C_DriveControllerSafetyOff());
+		
 		//----------------
 		pickUp = new JoystickButton(buttonController, 1);
 		pickUp.whenPressed(new CG_PickUp());
@@ -99,6 +111,10 @@ public class OI {
 		movePos2 = new JoystickButton(buttonController, 6);
 		movePos2.whenPressed(new CG_MoveToPos2());
 		movePos2.whenReleased(new C_MotorDriveTestInterrupt());
+		
+		movePos3 = new JoystickButton(buttonController, 4);
+		movePos3.whenPressed(new CG_MovePos3());
+		movePos3.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		forkIn = new JoystickButton(buttonController, 7);
 		forkIn.whenPressed(new CG_ForkIn());
@@ -147,7 +163,7 @@ public class OI {
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
-
+/*
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
@@ -155,7 +171,13 @@ public class OI {
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
-
+*/
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(true));
+		
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(false));
+		
 		armIntakeToggleOn = new JoystickButton(driveController, 3);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1));
 		

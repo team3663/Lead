@@ -25,7 +25,7 @@ public class C_ForkOut extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.runCommand = true;
-    	endTime = Timer.getFPGATimestamp()+4;
+    	endTime = Timer.getFPGATimestamp()+6;
     	if (goOut)
     	{
     		speed = 1.0;

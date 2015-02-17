@@ -9,7 +9,7 @@ import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
- *
+ ************CURRENTLY NOT IN USE*********
  */
 public class C_ArmsIntakeControl extends Command {
     public C_ArmsIntakeControl(){
