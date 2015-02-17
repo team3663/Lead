@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
 import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeReverse;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeToggle;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
@@ -58,6 +57,7 @@ public class OI {
 	public JoystickButton armOpenCloseToggle;
 	public JoystickButton armIntakeToggleOn;
 	public JoystickButton armIntakeToggleOff;
+	public JoystickButton armIntakeToggleReverse;
 	public JoystickButton armExecutables;
 	public JoystickButton armIntakeReverse;
 	//-------------
@@ -115,6 +115,7 @@ public class OI {
 		
 //		decrementElevEncoderTicks = new JoystickButton(testStick, 10);
 //		decrementElevEncoderTicks.whenPressed(new C_DecrementElevEncoderTicks());
+		
 		elevMoveToPos0 = new JoystickButton(testStick, 10);
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
@@ -124,24 +125,20 @@ public class OI {
 
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
-		
+		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
+
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
-		
-		armOpenCloseToggle = new JoystickButton(driveController, 5);
-		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
-		
-		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
 
-		armIntakeToggleOn = new JoystickButton(driveController, 1);
-		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
+		armIntakeToggleOn = new JoystickButton(driveController, 3);
+		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1));
 		
-		armIntakeToggleOff = new JoystickButton(driveController, 3);
-		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
+		armIntakeToggleOff = new JoystickButton(driveController, 1);
+		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(0));
 		
-		armIntakeReverse = new JoystickButton(driveController, 2);
-		armIntakeReverse.whenPressed(new C_ArmsIntakeReverse());
+		armIntakeToggleReverse = new JoystickButton(driveController, 2);
+		armIntakeToggleReverse.whenPressed(new C_ArmsIntakeToggle(2));
 		
 	}
     //// CREATING BUTTONS
