@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
+import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 
 /**
  *
@@ -11,7 +12,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
 public class CG_RestartToStartPos extends CommandGroup {
     
     public  CG_RestartToStartPos() {
-    	Robot.runCG = true;
+    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveAndSetZero());
     	addSequential(new C_ElevMoveToPos(-20));
         // Add Commands here:

@@ -28,6 +28,10 @@ import org.usfirst.frc.team3663.robot.commands.CG_DropOffStep;
 import org.usfirst.frc.team3663.robot.commands.CG_DropOffSP;
 import org.usfirst.frc.team3663.robot.commands.CG_RestartToStartPos;
 import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
+import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
+import org.usfirst.frc.team3663.robot.commands.CG_MoveToPos1;
+import org.usfirst.frc.team3663.robot.commands.CG_MoveToPos2;
+import org.usfirst.frc.team3663.robot.commands.CG_ForkIn;
 
 public class OI {
 	public Joystick driveController = new Joystick(0);
@@ -63,19 +67,40 @@ public class OI {
 	public JoystickButton dropOnSP;
 	public JoystickButton dropOnStep;
 	public JoystickButton resetToStart;
-	public JoystickButton movePos2;
 	public JoystickButton movePos1;
+	public JoystickButton movePos2;
 	public JoystickButton forkIn;
 	//-------------
 	
 	public OI(){
 		//----------------
-		pickUp = new JoystickButton(buttonController, 8);
+		pickUp = new JoystickButton(buttonController, 1);
 		pickUp.whenPressed(new CG_PickUp());
 		pickUp.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		dropOnSP = new JoystickButton(buttonController, 3);
 		dropOnSP.whenPressed(new CG_DropOffSP());
+		dropOnSP.whenReleased(new C_MotorDriveTestInterrupt());
+		
+		dropOnStep = new JoystickButton(buttonController, 2);
+		dropOnStep.whenPressed(new CG_DropOffStep());
+		dropOnStep.whenReleased(new C_MotorDriveTestInterrupt());
+		
+		resetToStart = new JoystickButton(buttonController, 8);
+		resetToStart.whenPressed(new CG_RestartToStartPos());
+		resetToStart.whenReleased(new C_MotorDriveTestInterrupt());
+		
+		movePos1 = new JoystickButton(buttonController, 5);
+		movePos1.whenPressed(new CG_MoveToPos1());
+		movePos1.whenReleased(new C_MotorDriveTestInterrupt());
+		
+		movePos2 = new JoystickButton(buttonController, 6);
+		movePos2.whenPressed(new CG_MoveToPos2());
+		movePos2.whenReleased(new C_MotorDriveTestInterrupt());
+		
+		forkIn = new JoystickButton(buttonController, 7);
+		forkIn.whenPressed(new CG_ForkIn());
+		forkIn.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		//----------------
 		elevMoveToPos = new JoystickButton(testStick, 7);

@@ -1,23 +1,15 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 
 /**
  *
  */
-public class CG_DropOffStep extends CommandGroup {
+public class CG_ForkIn extends CommandGroup {
     
-    public  CG_DropOffStep() {
+    public  CG_ForkIn() {
     	addSequential(new C_ResetRuns());
-    	addSequential(new C_ElevMoveToPos(-15));
-    	addSequential(new C_ForkOut(true));
-    	addSequential(new C_ElevMoveToPos(-5));
     	addSequential(new C_ForkOut(false));
-    	addSequential(new C_ElevMoveToPos(-20));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

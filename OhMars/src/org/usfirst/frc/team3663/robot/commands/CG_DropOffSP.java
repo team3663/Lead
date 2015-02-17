@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
+import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 
 /**
  *
@@ -11,7 +12,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
 public class CG_DropOffSP extends CommandGroup {
     
     public  CG_DropOffSP() {
-    	Robot.runCG = true;
+    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-10));
     	addSequential(new C_ForkOut(true));
     	addSequential(new C_ElevMoveToPos(-1));
