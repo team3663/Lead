@@ -24,7 +24,6 @@ public class C_ArmsIntakeControl extends Command {
     protected void execute() {
     	if(Robot.ssElevator.getToteSwitch())
     		Robot.ssArms.intakeMotorsSet(Robot.oi.logitech.getRawAxis(5));
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

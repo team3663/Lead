@@ -49,7 +49,8 @@ public class OI {
 	public JoystickButton motorDriveTestInterrupt;
 	public JoystickButton testEncoderDrive;
 	public JoystickButton armOpenCloseToggle;
-	public JoystickButton armIntakeToggle;
+	public JoystickButton armIntakeToggleOn;
+	public JoystickButton armIntakeToggleOff;
 	public JoystickButton armExecutables;
 	
 	public OI(){
@@ -106,9 +107,12 @@ public class OI {
 		
 		armOpenCloseToggle = new JoystickButton(logitech, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
+
+		armIntakeToggleOn = new JoystickButton(logitech, 1);
+		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
 		
-		armIntakeToggle = new JoystickButton(logitech, 4);
-		armIntakeToggle.whenPressed(new C_ArmsIntakeToggle());
+		armIntakeToggleOff = new JoystickButton(logitech, 2);
+		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
