@@ -11,9 +11,9 @@ import org.usfirst.frc.team3663.robot.OI;
 /**
  *
  */
-public class C_ArmsIntakeToggle extends Command {
+public class C_ArmsIntakeReverse extends Command {
 	boolean pOn;
-    public C_ArmsIntakeToggle(boolean on){
+    public C_ArmsIntakeReverse(boolean on){
     	pOn = on;
     }
 

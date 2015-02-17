@@ -111,7 +111,7 @@ public class OI {
 		armIntakeToggleOn = new JoystickButton(logitech, 1);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
 		
-		armIntakeToggleOff = new JoystickButton(logitech, 2);
+		armIntakeToggleOff = new JoystickButton(logitech, 3);
 		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
 	}
     //// CREATING BUTTONS
