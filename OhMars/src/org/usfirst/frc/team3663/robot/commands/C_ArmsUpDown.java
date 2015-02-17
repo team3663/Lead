@@ -30,7 +30,7 @@ public class C_ArmsUpDown extends Command {
 	    	}
 	    	//SmartDashboard.putNumber("yAxis", axisValue);
 	    	Robot.ssArms.armUpDownRSet(axisValue);
-	    	if(!Robot.oi.driveController.getRawButton(3)){
+	    	if(!Robot.oi.driveController.getRawButton(4)){
 	    		Robot.ssArms.armUpDownLSet(axisValue);
 	    	}
     	}
