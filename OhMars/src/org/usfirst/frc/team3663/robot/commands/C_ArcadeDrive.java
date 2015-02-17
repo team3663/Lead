@@ -20,22 +20,17 @@ public class C_ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	double Speed;
-    	if(Robot.oi.driveController.getRawButton(4) == false){
-    		Speed = Robot.oi.driveController.getRawAxis(2) - Robot.oi.driveController.getRawAxis(3);
-    		Robot.ssDriveTrain.arcadeDrive(Speed, -Robot.oi.driveController.getRawAxis(0));
-    	}
-    	else{
-    		Speed = Robot.oi.driveController.getRawAxis(2) - Robot.oi.driveController.getRawAxis(3);
-    		Robot.ssDriveTrain.arcadeDrive((Robot.oi.driveController.getRawAxis(1)/2), (-Robot.oi.driveController.getRawAxis(0)/2));
-    		//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveController.getRawAxis(0), Speed);
-=======
     	if(Robot.oi.driveControllerOn){
-	    	double Speed = Robot.oi.driveController.getRawAxis(2) - Robot.oi.driveController.getRawAxis(3);
-	    	Robot.ssDriveTrain.arcadeDrive(Speed, -Robot.oi.driveController.getRawAxis(0));
-	    	//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveController.getRawAxis(0), Speed);
->>>>>>> 0e4bbdf5b6189c5bcaa3b762f0ee4db138f81889
+	    	double Speed;
+	    	if(Robot.oi.driveController.getRawButton(4) == false){
+	    		Speed = Robot.oi.driveController.getRawAxis(2) - Robot.oi.driveController.getRawAxis(3);
+	    		Robot.ssDriveTrain.arcadeDrive(Speed, -Robot.oi.driveController.getRawAxis(0));
+	    	}
+	    	else{
+	    		Speed = Robot.oi.driveController.getRawAxis(2) - Robot.oi.driveController.getRawAxis(3);
+	    		Robot.ssDriveTrain.arcadeDrive((Robot.oi.driveController.getRawAxis(1)/2), (-Robot.oi.driveController.getRawAxis(0)/2));
+	    		//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveController.getRawAxis(0), Speed);
+	    	}
     	}
     }
 

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeToggle;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseHold;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseTogether;
 import org.usfirst.frc.team3663.robot.commands.C_DriveControllerSafetyOff;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
@@ -163,15 +164,15 @@ public class OI {
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
-/*
+		
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
-		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
-		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
-
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(true));
+		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
+		
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
-		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
-		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
-*/
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(false));
+		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
+		
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(true));
 		
@@ -179,13 +180,13 @@ public class OI {
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(false));
 		
 		armIntakeToggleOn = new JoystickButton(driveController, 3);
-		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1));
+		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1.0,1.0));
 		
 		armIntakeToggleOff = new JoystickButton(driveController, 1);
-		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(0));
+		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(0.0,0.0));
 		
 		armIntakeToggleReverse = new JoystickButton(driveController, 2);
-		armIntakeToggleReverse.whenPressed(new C_ArmsIntakeToggle(2));
+		armIntakeToggleReverse.whenPressed(new C_ArmsIntakeToggle(-1.0,-1.0));
 		
 	}
     //// CREATING BUTTONS
