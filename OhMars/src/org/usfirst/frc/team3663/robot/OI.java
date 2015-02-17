@@ -29,6 +29,7 @@ public class OI {
 	public Joystick driveStick = new Joystick(0);
 	public Joystick logitech = new Joystick(1);
 	public Joystick buttonStick = new Joystick(2);
+	public Joystick driveControler = new Joystick(3);
 	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;

@@ -139,10 +139,16 @@ public class SSDriveTrain extends Subsystem {
     }
     
     public boolean checkIfLeftDone(){
+    	/*SUDO CODE FOR NEGATIVE SPEED
+    	 * if(right forward left backward
+    	 */
     	return (leftEncoder.get() >= finalTicksL);
     }
 
     public boolean checkIfRightDone(){
+    	/*SUDO CODE FOR NEGATIVE SPEED
+    	 * 
+    	 */
     	return (rightEncoder.get() >= finalTicksR);
     }
 }
