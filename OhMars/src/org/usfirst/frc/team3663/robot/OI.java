@@ -30,10 +30,11 @@ import org.usfirst.frc.team3663.robot.commands.CG_RestartToStartPos;
 import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
 
 public class OI {
-	
-	public Joystick driveStick = new Joystick(0);
+
+	public Joystick driveControler = new Joystick(0);
 	public Joystick buttonController = new Joystick(1);
 	public Joystick logitech = new Joystick(2);
+	public Joystick buttonStick = new Joystick(3);
 	public Joystick testStick = new Joystick(5);
 	
 	public JoystickButton testSensors;
@@ -76,6 +77,7 @@ public class OI {
 		
 		dropOnSP = new JoystickButton(buttonController, 3);
 		dropOnSP.whenPressed(new CG_DropOffSP());
+		
 		//----------------
 		elevMoveToPos = new JoystickButton(testStick, 7);
 		elevMoveToPos.whenPressed(new C_ElevMoveToPos(-50));

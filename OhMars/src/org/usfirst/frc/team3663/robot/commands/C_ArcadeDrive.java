@@ -19,7 +19,9 @@ public class C_ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.arcadeDrive(-Robot.oi.driveStick.getY(), Robot.oi.driveStick.getZ());
+    	double Speed = Robot.oi.driveControler.getRawAxis(3) - Robot.oi.driveControler.getRawAxis(2);
+    	Robot.ssDriveTrain.arcadeDrive(Speed, Robot.oi.driveControler.getRawAxis(0));
+    	//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveControler.getRawAxis(0), Speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
