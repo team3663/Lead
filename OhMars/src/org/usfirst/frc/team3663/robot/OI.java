@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
 import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
+import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeReverse;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeToggle;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
@@ -29,11 +30,8 @@ public class OI {
 	public Joystick driveStick = new Joystick(0);
 	public Joystick logitech = new Joystick(1);
 	public Joystick buttonStick = new Joystick(2);
-<<<<<<< HEAD
-	public Joystick driveControler = new Joystick(3);
-=======
+	public Joystick driveController = new Joystick(3);
 	public Joystick testStick = new Joystick(5);
->>>>>>> e91db1fb4fa425e71e3a55f45e6ae04ec7a7ee40
 	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
@@ -57,6 +55,7 @@ public class OI {
 	public JoystickButton armIntakeToggleOn;
 	public JoystickButton armIntakeToggleOff;
 	public JoystickButton armExecutables;
+	public JoystickButton armIntakeReverse;
 	//-------------
 	public JoystickButton forkOut;
 	public JoystickButton forkIn;
@@ -124,23 +123,27 @@ public class OI {
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
 
-		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
 
-		armIntakeToggleOn = new JoystickButton(logitech, 1);
+		armIntakeToggleOn = new JoystickButton(driveController, 1);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
 		
-		armIntakeToggleOff = new JoystickButton(logitech, 3);
+		armIntakeToggleOff = new JoystickButton(driveController, 3);
 		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
+		
+		armIntakeReverse = new JoystickButton(driveController, 2);
+		armIntakeReverse.whenPressed(new C_ArmsIntakeReverse());
+		
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

@@ -23,11 +23,11 @@ public class C_ArmsUpDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	axisValue = Robot.oi.logitech.getRawAxis(1);
+    	axisValue = Robot.oi.driveController.getRawAxis(1);
     	if(Math.abs(axisValue) < 0.2) axisValue = 0;
     	SmartDashboard.putNumber("yAxis", axisValue);;
     	Robot.ssArms.armUpDownRSet(axisValue);
-    	if(!Robot.oi.logitech.getRawButton(3)){
+    	if(!Robot.oi.driveController.getRawButton(3)){
     		Robot.ssArms.armUpDownLSet(axisValue);
     	}
     }
