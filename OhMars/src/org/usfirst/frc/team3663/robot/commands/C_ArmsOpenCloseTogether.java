@@ -9,23 +9,27 @@ import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
- **********CURRENTLY NOT IN USE***********
+ *
  */
-public class C_ArmsOpenClose extends Command {
+public class C_ArmsOpenCloseTogether extends Command {
 	
-	boolean leftSide;
+	boolean pOpen;
 	
-    public C_ArmsOpenClose(boolean pLeftSide) {
-        leftSide = pLeftSide;
+    public C_ArmsOpenCloseTogether(boolean open) {
+        pOpen = open;
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(leftSide)
-    		Robot.ssArms.toggleArmLOpenClose();
-    	else
-    		Robot.ssArms.toggleArmROpenClose();
+    	if(pOpen){
+    		Robot.ssArms.armLOpen();
+			Robot.ssArms.armROpen();
+    	}
+    	else{
+    		Robot.ssArms.armLClose();
+			Robot.ssArms.armRClose();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

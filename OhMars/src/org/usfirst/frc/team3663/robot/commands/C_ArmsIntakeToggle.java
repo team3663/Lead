@@ -25,8 +25,10 @@ public class C_ArmsIntakeToggle extends Command {
     		Robot.ssArms.intakeMotorsSet(0.0);
     		break;
     	case 1:
-    		if(Robot.ssElevator.getToteSwitch())
-			Robot.ssArms.intakeMotorsSet(1.0);
+    		if(Robot.ssElevator.getToteSwitch()){
+	    		if(Robot.ssElevator.getToteSwitch())
+				Robot.ssArms.intakeMotorsSet(1.0);
+    		}
 			break;
 		case 2:
 			Robot.ssArms.intakeMotorsSet(-1.0);

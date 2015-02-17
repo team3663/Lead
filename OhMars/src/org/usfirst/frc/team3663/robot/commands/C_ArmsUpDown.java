@@ -23,17 +23,23 @@ public class C_ArmsUpDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.driveController.getRawButton(7)){
+    	///if(Robot.oi.driveController.getRawButton(7)){
 	    	axisValue = Robot.oi.driveController.getRawAxis(5);
 	    	if(Math.abs(axisValue) < 0.2){
 	    		axisValue = 0;
 	    	}
 	    	//SmartDashboard.putNumber("yAxis", axisValue);
 	    	Robot.ssArms.armUpDownRSet(axisValue);
-	    	if(!Robot.oi.driveController.getRawButton(3)){
+	    	if(!Robot.oi.driveController.getRawButton(8)){
 	    		Robot.ssArms.armUpDownLSet(axisValue);
+	    	}else{
+	    		Robot.ssArms.armUpDownRSet(0);
+	    		Robot.ssArms.armUpDownLSet(0);
 	    	}
-    	}
+    	///}else{
+	    	///Robot.ssArms.armUpDownRSet(0);
+    		///Robot.ssArms.armUpDownLSet(0);
+    	///}
     }
 
     // Make this return true when this Command no longer needs to run execute()
