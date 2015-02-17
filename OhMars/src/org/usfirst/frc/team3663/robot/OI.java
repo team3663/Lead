@@ -30,8 +30,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_RestartToStartPos;
 import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
 
 public class OI {
-
-	public Joystick driveControler = new Joystick(0);
+	public Joystick driveController = new Joystick(0);
 	public Joystick buttonController = new Joystick(1);
 	public Joystick logitech = new Joystick(2);
 	public Joystick buttonStick = new Joystick(3);
@@ -118,22 +117,25 @@ public class OI {
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		testEncoderDrive = new JoystickButton(buttonStick, 1);
+		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
+
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 5);
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
 		
-		armOpenCloseToggle = new JoystickButton(logitech, 6);
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
 
-		armIntakeToggleOn = new JoystickButton(logitech, 1);
+		armIntakeToggleOn = new JoystickButton(driveController, 1);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(true));
 		
-		armIntakeToggleOff = new JoystickButton(logitech, 2);
+		armIntakeToggleOff = new JoystickButton(driveController, 2);
 		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(false));
 	}
     //// CREATING BUTTONS
