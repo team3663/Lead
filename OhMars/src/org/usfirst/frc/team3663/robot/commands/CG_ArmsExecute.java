@@ -9,7 +9,8 @@ public class CG_ArmsExecute extends CommandGroup {
     
     public  CG_ArmsExecute() {
     	addParallel(new C_ArmsUpDown());
-    	addParallel(new C_ArmsIntakeControl());
+    	//addParallel(new C_ArmsIntakeControl());
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

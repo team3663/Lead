@@ -12,18 +12,20 @@ import org.usfirst.frc.team3663.robot.OI;
  *
  */
 public class C_ArmsIntakeToggle extends Command {
-	
-    public C_ArmsIntakeToggle(){
-    	
+	boolean pOn;
+    public C_ArmsIntakeToggle(boolean on){
+    	pOn = on;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	/*if(Robot.ssArms.){
-    		Robot.ssArms.intakeMotorsSet(0.0);
-    	}else{
-    		Robot.ssArms.intakeMotorsSet(1.0);
-    	}*/
+//    	if(Robot.ssElevator.getToteSwitch()){
+	    	if(pOn){
+	    		Robot.ssArms.intakeMotorsSet(1.0);
+	    	}else{
+	    		Robot.ssArms.intakeMotorsSet(0.0);
+	    	}
+//    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +35,7 @@ public class C_ArmsIntakeToggle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
