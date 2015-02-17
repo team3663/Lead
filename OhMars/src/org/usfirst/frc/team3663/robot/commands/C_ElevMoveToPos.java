@@ -33,7 +33,7 @@ public class C_ElevMoveToPos extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand)
+        if (finished || !Robot.runCommand || !Robot.runCG)
         {
         	return true;
         }
@@ -62,17 +62,22 @@ public class C_ElevMoveToPos extends Command {
     		switch(origTicks)
     		{
     		case -1:
-    			ticks = 30+Robot.encoderZeroAdjust;//lowest position we want
+    			ticks = -15;//lowest position we want
+    			break;
+    		case -5:
+    			ticks = 50;//pick up/lower drop off on step
     			break;
     		case -10:
-    			ticks = 305+Robot.encoderZeroAdjust;//unloading on scoring platform
+    			ticks = 275;//tote scoring platform
+    			break;
+    		case -15:
+    			ticks = 525;//tote step
     			break;
     		case -20:
-    			ticks = 525+Robot.encoderZeroAdjust;//POSSIBLY the step
+    			ticks = 600;//no tote in/beginning of match position
     			break;
-    		case -45:
-    			ticks = 1098+Robot.encoderZeroAdjust;//highest position we want
-    			break;
+    		case -25:
+    			ticks = 1075;//totes up & ready for next tote
     		case -50:
     			ticks = (int)(SmartDashboard.getNumber("encoderTicks: "));
     			break;

@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
 	public final static int encoderZeroAdjust = -92;
 	static String testMotorName;
 	public static boolean runCommand;
+	public static boolean runCG;
 
 
 	
