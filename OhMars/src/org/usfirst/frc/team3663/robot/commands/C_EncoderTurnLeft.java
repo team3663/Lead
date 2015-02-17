@@ -24,7 +24,7 @@ public class C_EncoderTurnLeft extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.timeRunningL++;
+    	Robot.ssDriveTrain.diffrance();
     	Robot.ssDriveTrain.setTheSpeedsLeft(.2);
     	if(r == false){
         	Robot.ssDriveTrain.timeRunningR++;
@@ -57,6 +57,7 @@ public class C_EncoderTurnLeft extends Command {
     protected void end() {
     	Robot.ssDriveTrain.encoderDriving = false;
     	Robot.ssDriveTrain.zeroMotors();
+    	Robot.ssDriveTrain.breakmodeDriveMotors(false);
     }
     
 

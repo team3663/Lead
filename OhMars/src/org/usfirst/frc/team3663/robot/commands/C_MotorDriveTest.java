@@ -31,23 +31,23 @@ public class C_MotorDriveTest extends Command {
     	switch (Robot.testMotor)
     	{
 		case 0:
-	    	Robot.ssDriveTrain.motor1Set(speed);
+	    	//Robot.ssDriveTrain.motor1Set(speed);
     		break;
 		case 1:
 			Robot.ssDriveTrain.motor2Set(speed);
 			break;
 		case 2:
-			Robot.ssDriveTrain.motor3Set(speed);
+			//Robot.ssDriveTrain.motor3Set(speed);
 			break;
 		case 3:
 			Robot.ssDriveTrain.motor4Set(speed);
 			break;
 		case 4:
-	    	Robot.ssDriveTrain.motor1Set(speed);
+	    	//Robot.ssDriveTrain.motor1Set(speed);
 	    	Robot.ssDriveTrain.motor2Set(speed);
 			break;
 		case 5:
-	    	Robot.ssDriveTrain.motor3Set(speed);
+	    	//Robot.ssDriveTrain.motor3Set(speed);
 	    	Robot.ssDriveTrain.motor4Set(speed);
 			break;
 		case 6:
