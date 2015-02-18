@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_EncoderTurnLeft extends Command {
+public class C_EncoderTurn extends Command {
 	int angle, radius;
 	boolean r = false,l = false;
-    public C_EncoderTurnLeft(int pRadius, int pAngle) {
+    public C_EncoderTurn(int pRadius, int pAngle, boolean turn) {
     	angle = pAngle;
     	radius = pRadius;
         // Use requires() here to declare subsystem dependencies
@@ -21,13 +21,13 @@ public class C_EncoderTurnLeft extends Command {
     protected void initialize() {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.eDistanceArc(radius, angle);
+    	Robot.ssDriveTrain.eDistanceArc(radius, angle, true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.ssDriveTrain.difference();
-    	Robot.ssDriveTrain.setTheSpeedsLeft(.2);
+    	Robot.ssDriveTrain.setTheSpeeds(.2);
     	if(r == false){
         	Robot.ssDriveTrain.timeRunningR++;
     		Robot.ssDriveTrain.motorRightSet(Robot.ssDriveTrain.speedR);
@@ -58,7 +58,8 @@ public class C_EncoderTurnLeft extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.ssDriveTrain.encoderDriving = false;
-    	Robot.ssDriveTrain.zeroMotors();
+    	Robot.ssDriveTrain.motorLeftSet(0);
+    	Robot.ssDriveTrain.motorRightSet(0);
     	Robot.ssDriveTrain.breakmodeDriveMotors(false);
     }
     

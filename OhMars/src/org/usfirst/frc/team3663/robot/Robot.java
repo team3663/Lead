@@ -15,7 +15,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderTurnLeft;
+import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
 import org.usfirst.frc.team3663.robot.subsystems.SSAutonomous;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
@@ -24,6 +24,7 @@ import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.subsystems.SSElevator;
 import org.usfirst.frc.team3663.robot.commands.A_Log;
 import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
+import org.usfirst.frc.team3663.robot.commands.CG_PickUpWithSensor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,14 +47,15 @@ public class Robot extends IterativeRobot {
 	Command Auto;
     CommandGroup armExecutables;
     Command defaultElevator;
+    Command pickUpWithSensor;
     
     public final static double elevDelta = 0.05;
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
 	public final static int encoderZeroAdjust = -92;
 	static String testMotorName;
-	public static boolean runCommand;
-	public static boolean runCG;
+	public static boolean runCommand = true;
+	public static boolean runCG = true;
 
 
 	
@@ -64,14 +66,14 @@ public class Robot extends IterativeRobot {
     	ssArms = new SSArms();
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
-		Auto = new C_EncoderTurnLeft(0,90);
+		Auto = new C_EncoderTurn(0,90, true);
 		
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
 		armExecutables = new CG_ArmsExecute();
 		defaultElevator = new C_DefaultElevatorRunning(0);
-		
+		pickUpWithSensor = new CG_PickUpWithSensor();
     }
 	
 	public void disabledPeriodic() {
@@ -93,6 +95,7 @@ public class Robot extends IterativeRobot {
         arcadeDrive.start();
 		armExecutables.start();
 		defaultElevator.start();
+	//	pickUpWithSensor.start();
     }
 
     /**

@@ -72,7 +72,7 @@ public class OI {
 		
 		//----------------
 		pickUp = new JoystickButton(buttonController, 1);
-		pickUp.whenPressed(new CG_PickUp());
+		pickUp.whenPressed(new CG_PickUpWithSensor());
 		pickUp.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		dropOnSP = new JoystickButton(buttonController, 3);
@@ -135,10 +135,7 @@ public class OI {
 		elevMoveToPos0 = new JoystickButton(testStick, 10);
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
-		
-		testEncoderDrive = new JoystickButton(buttonStick, 1);
-		testEncoderDrive.whenPressed(new C_EncoderDriveStrait(0));
-		
+				
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(true));
 		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));

@@ -27,7 +27,7 @@ public class SSElevator extends Subsystem {
 	public boolean brakeOn;
 	boolean startZeroState;
 	double speed;
-	final double maxSpeedP = 0.5;
+	final double maxSpeedP = 1.0;
 	double maxSpeed;
 	double delta, manualDelta;
 	int dir, manualDir;
@@ -127,7 +127,8 @@ public class SSElevator extends Subsystem {
     		}
     		else if (encoderVal > ticks-15)
     		{
-    			maxSpeed = 0.3;
+    			maxSpeed = 0.4;
+    			delta = -delta;
     		}
     	}
     	else
@@ -137,9 +138,10 @@ public class SSElevator extends Subsystem {
     		{
     			return true;
     		}
-    		else if (diff < 30)
+    		else if (diff < 60)
     		{
-    			maxSpeed = -0.2;
+    			maxSpeed = -0.5;
+    			delta = -delta;
     		}
     	}
     	speed+=delta;

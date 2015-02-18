@@ -85,11 +85,17 @@ public class SSDriveTrain extends Subsystem {
     }
     
     /**all of the encoder driving stuff**/
-    public boolean driveForwardDistance(){
-    	if(leftEncoder.get() >= finalTicksL){
+    public boolean driveForwardDistance(double speed){
+    	if(leftEncoder.get() > finalTicksL && speed > 0){
     		return true;
     	}
-    	else if(rightEncoder.get() >= finalTicksR){
+    	else if(rightEncoder.get() > finalTicksR && speed > 0){
+    		return true;
+    	}
+    	else if(leftEncoder.get() < finalTicksL && speed < 0){
+    		return true;
+    	}
+    	else if(rightEncoder.get() < finalTicksR && speed < 0){
     		return true;
     	}
     	return false;
@@ -109,22 +115,21 @@ public class SSDriveTrain extends Subsystem {
     	finalTicksR = ((int)(/*250/(4*Math.PI)*/19 * pDistance) + rightEncoder.get());
     }
     
-    public void eDistanceArc(int pRadius, int pAngle){
+    public void eDistanceArc(int pRadius, int pAngle, boolean turnLeft){
     	/*NOTES ON THIS METHOD: 
     	 * (Length = (angle/360)*(2piR))
     	 * (Angle = (360*Length)/(2piR))
     	 * these numbers are multiplyed by ten to make sure there are no doubles in this numbers*/
-    	setFinalLeft((int)((pAngle*10/360)*(2*Math.PI*(pRadius - 13))/10));
-    	setFinalRight((int)((pAngle*10/360)*(2*Math.PI*(pRadius + 13))/10));
+    	if(turnLeft){
+	    	setFinalLeft((int)((pAngle*10/360)*(2*Math.PI*(pRadius - 13))/10));
+	    	setFinalRight((int)((pAngle*10/360)*(2*Math.PI*(pRadius + 13))/10));
+    	}
+    	else{
+	    	setFinalLeft((int)((pAngle*10/360)*(2*Math.PI*(pRadius + 13))/10));
+	    	setFinalRight((int)((pAngle*10/360)*(2*Math.PI*(pRadius - 13))/10));
+    	}
     }
-    
-    public void zeroMotors(){
-    	driveMotorL1.set(0);
-    	driveMotorL2.set(0);
-    	driveMotorR1.set(0);
-    	driveMotorR2.set(0);
-    }
-    
+       
     public void breakmodeDriveMotors(boolean pBreak){
     	//driveMotorL1.enableBrakeMode(pBreak);
     	driveMotorL2.enableBrakeMode(pBreak);
@@ -132,12 +137,19 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorR2.enableBrakeMode(pBreak);
     }
     
-    public void setTheSpeedsLeft(double highspeed){
+    public void setTheSpeeds(double highspeed){
     	/*NOTES
     	 *RT = D */
-    	speedR = highspeed;
-    	float time = (float)(diffrenceR/speedR);
-    	speedL = diffrenceL/time;
+    	if(diffrenceR > diffrenceL){
+        	speedR = highspeed;
+        	float time = (float)(diffrenceR/speedR);
+        	speedL = diffrenceL/time;
+    	}
+    	else{
+        	speedL = highspeed;
+        	float time = (float)(diffrenceL/speedL);
+        	speedR = diffrenceR/time;
+    	}
     	//speedL = .4;
     	
     }
