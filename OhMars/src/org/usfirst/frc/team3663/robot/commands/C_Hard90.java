@@ -40,7 +40,7 @@ public class C_Hard90 extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.ssDriveTrain.driveForwardDistance();
+        return Robot.ssDriveTrain.driveForwardDistance(speed);
     }
 
     // Called once after isFinished returns true
