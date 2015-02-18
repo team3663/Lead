@@ -14,6 +14,7 @@ import org.usfirst.frc.team3663.robot.OI;
  */
 public class C_AutonomousMasterChoosing extends Command {
     public C_AutonomousMasterChoosing(){
+    	requires(Robot.ssAutonomous);
     	
     }
 
