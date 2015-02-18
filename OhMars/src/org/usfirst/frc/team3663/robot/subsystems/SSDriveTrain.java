@@ -109,13 +109,13 @@ public class SSDriveTrain extends Subsystem {
     	finalTicksR = ((int)(/*250/(4*Math.PI)*/19 * pDistance) + rightEncoder.get());
     }
     
-    public void eDistanceArk(int pRadius, int pAngel){
+    public void eDistanceArc(int pRadius, int pAngle){
     	/*NOTES ON THIS METHOD: 
     	 * (Length = (angle/360)*(2piR))
     	 * (Angle = (360*Length)/(2piR))
     	 * these numbers are multiplyed by ten to make sure there are no doubles in this numbers*/
-    	setFinalLeft((int)((pAngel*10/360)*(2*Math.PI*(pRadius - 13))/10));
-    	setFinalRight((int)((pAngel*10/360)*(2*Math.PI*(pRadius + 13))/10));
+    	setFinalLeft((int)((pAngle*10/360)*(2*Math.PI*(pRadius - 13))/10));
+    	setFinalRight((int)((pAngle*10/360)*(2*Math.PI*(pRadius + 13))/10));
     }
     
     public void zeroMotors(){
@@ -162,7 +162,7 @@ public class SSDriveTrain extends Subsystem {
     	return false;
     }
     
-    public void diffrance(){
+    public void difference(){
     	diffrenceR = rightEncoder.get() - finalTicksR;
     	diffrenceL = leftEncoder.get() - finalTicksL;
     }

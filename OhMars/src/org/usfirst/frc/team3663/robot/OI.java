@@ -137,7 +137,7 @@ public class OI {
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
-		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
+		testEncoderDrive.whenPressed(new C_EncoderDriveStrait(0));
 		
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(true));

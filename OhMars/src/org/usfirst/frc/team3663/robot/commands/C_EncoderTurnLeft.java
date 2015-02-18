@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class C_EncoderTurnLeft extends Command {
-	int angel, radius;
+	int angle, radius;
 	boolean r = false,l = false;
-    public C_EncoderTurnLeft(int pRadius, int pAngel) {
-    	angel = pAngel;
+    public C_EncoderTurnLeft(int pRadius, int pAngle) {
+    	angle = pAngle;
     	radius = pRadius;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,12 +21,12 @@ public class C_EncoderTurnLeft extends Command {
     protected void initialize() {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.eDistanceArk(radius, angel);
+    	Robot.ssDriveTrain.eDistanceArc(radius, angle);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.diffrance();
+    	Robot.ssDriveTrain.difference();
     	Robot.ssDriveTrain.setTheSpeedsLeft(.2);
     	if(r == false){
         	Robot.ssDriveTrain.timeRunningR++;
