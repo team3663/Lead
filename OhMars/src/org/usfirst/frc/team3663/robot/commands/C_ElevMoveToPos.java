@@ -28,7 +28,7 @@ public class C_ElevMoveToPos extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	finished = Robot.ssElevator.moveToPos(ticks);
+    	finished = Robot.ssElevator.moveToPos(ticks, 0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -78,6 +78,7 @@ public class C_ElevMoveToPos extends Command {
     			break;
     		case -25:
     			ticks = 1075;//totes up & ready for next tote
+    			break;
     		case -50:
     			ticks = (int)(SmartDashboard.getNumber("encoderTicks: "));
     			break;

@@ -22,6 +22,7 @@ import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.subsystems.SSElevator;
 import org.usfirst.frc.team3663.robot.commands.A_Log;
+import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,7 +43,9 @@ public class Robot extends IterativeRobot {
 	Command ALog;
 	Command Auto;
     CommandGroup armExecutables;
+    Command defaultElevator;
     
+    public final static double elevDelta = 0.05;
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
 	public final static int encoderZeroAdjust = -92;
@@ -64,6 +67,7 @@ public class Robot extends IterativeRobot {
 		ALog = new A_Log();
 		ALog.start();
 		armExecutables = new CG_ArmsExecute();
+		defaultElevator = new C_DefaultElevatorRunning(0);
 		
     }
 	
@@ -85,6 +89,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         arcadeDrive.start();
 		armExecutables.start();
+		defaultElevator.start();
     }
 
     /**

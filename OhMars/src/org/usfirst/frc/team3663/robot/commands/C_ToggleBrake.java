@@ -18,10 +18,12 @@ public class C_ToggleBrake extends Command {
     	if (Robot.ssElevator.brakeOn)
     	{
     		Robot.ssElevator.bikeBrakeTriggerOpen();
+    		Robot.ssElevator.enableBrakeMotors(false);
     	}
     	else
     	{
     		Robot.ssElevator.bikeBrakeTriggerClose();
+    		Robot.ssElevator.enableBrakeMotors(true);
     	}
     }
 
