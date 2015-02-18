@@ -28,7 +28,7 @@ public class C_ElevMoveToPos extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	finished = Robot.ssElevator.moveToPos(ticks, 0.5);
+    	finished = Robot.ssElevator.moveToPos(ticks, 1.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
