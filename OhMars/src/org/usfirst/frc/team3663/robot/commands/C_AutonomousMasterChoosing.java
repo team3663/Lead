@@ -1,20 +1,38 @@
 package org.usfirst.frc.team3663.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.Robot;
+import org.usfirst.frc.team3663.robot.subsystems.SSArms;
+import org.usfirst.frc.team3663.robot.OI;
 
 /**
  *
  */
-public class C_FindTote extends Command {
-
-    public C_FindTote() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssElevator);
+public class C_AutonomousMasterChoosing extends Command {
+    public C_AutonomousMasterChoosing(){
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	CommandGroup theOneToRun;
+    	int choice = Robot.ssAutonomous.getAutonomousRoutine();
+    	switch(choice){
+    		case 1: 
+    			theOneToRun = new CG_Autonomous3Totes();
+    			theOneToRun.start();
+    			break;
+    		case 2:
+    			break;
+    		case 3:
+    			break;
+    		case 4:
+    			break;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -23,11 +41,7 @@ public class C_FindTote extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (!Robot.ssElevator.getToteSwitch() || !Robot.runCommand)
-    	{
-    		return true;
-    	}
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

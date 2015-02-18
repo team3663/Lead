@@ -72,7 +72,7 @@ public class OI {
 		
 		//----------------
 		pickUp = new JoystickButton(buttonController, 1);
-		pickUp.whenPressed(new CG_PickUp());
+		pickUp.whenPressed(new CG_PickUpWithSensor());
 		pickUp.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		dropOnSP = new JoystickButton(buttonController, 3);
