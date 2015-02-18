@@ -76,12 +76,12 @@ public class SSDriveTrain extends Subsystem {
     
     public void motorRightSet(double speed){
     	driveMotorR2.set(-speed);
-    	//driveMotorR1.set(-speed);
+    	driveMotorR1.set(-speed);
     }
     
     public void motorLeftSet(double speed){
     	driveMotorL2.set(speed);
-    	//driveMotorL1.set(speed);
+    	driveMotorL1.set(speed);
     }
     
     /**all of the encoder driving stuff**/
@@ -161,6 +161,7 @@ public class SSDriveTrain extends Subsystem {
     	}
     	return false;
     }
+    
     public void diffrance(){
     	diffrenceR = rightEncoder.get() - finalTicksR;
     	diffrenceL = leftEncoder.get() - finalTicksL;
