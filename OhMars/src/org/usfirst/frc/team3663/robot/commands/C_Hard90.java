@@ -6,38 +6,41 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
- 
  */
-public class C_EncoderDriveStrait extends Command {
-	int inches;
+public class C_Hard90 extends Command {
 	double speed;
-    public C_EncoderDriveStrait(int pInches, double pSpeed) {
-    	inches = pInches;
+	boolean turnLeft;
+    public C_Hard90(double pSpeed, boolean turnLeft) {
     	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(inches < 0){
-    		speed = -speed;
-    	}
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.setFinalLeft(inches);
+    	if(turnLeft){
+        	Robot.ssDriveTrain.setFinalLeft((int)(26*Math.PI/2));
+    	}
+    	else{
+    		Robot.ssDriveTrain.setFinalRight((int)(26*Math.PI/2));
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {  
-    	//Robot.ssDriveTrain.driveForwardDistance(0.2, 8);
-    	//Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.motorLeftSet(speed);
-    	Robot.ssDriveTrain.motorRightSet(speed);
+    protected void execute() {
+    	if(turnLeft){
+        	Robot.ssDriveTrain.motorLeftSet(speed);
+    	}
+    	else{
+        	Robot.ssDriveTrain.motorRightSet(speed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.ssDriveTrain.driveForwardDistance(speed);
+        return Robot.ssDriveTrain.driveForwardDistance();
     }
 
     // Called once after isFinished returns true
@@ -49,6 +52,5 @@ public class C_EncoderDriveStrait extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

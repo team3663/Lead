@@ -15,7 +15,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderTurnLeft;
+import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
 import org.usfirst.frc.team3663.robot.subsystems.SSAutonomous;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
     	ssArms = new SSArms();
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
-		Auto = new C_EncoderTurnLeft(0,90);
+		Auto = new C_EncoderTurn(0,90, true);
 		
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
