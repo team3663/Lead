@@ -1,18 +1,14 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 
 /**
  *
  */
-public class CG_PickUp extends CommandGroup {
+public class CG_ManualRaiseElevator extends CommandGroup {
     
-    public  CG_PickUp() {
+    public  CG_ManualRaiseElevator() {
     	addSequential(new C_ResetRuns());
-    	addSequential(new C_ElevMoveToPos(-1));
     	addSequential(new C_ElevMoveToPos(-25));
         // Add Commands here:
         // e.g. addSequential(new Command1());

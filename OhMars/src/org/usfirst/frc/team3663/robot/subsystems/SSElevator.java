@@ -11,14 +11,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DigitalInput;
+import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
 
 /**
  *
  */
 public class SSElevator extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	CANTalon elevMotor1, elevMotor2;
 	Talon elevInAndOut;
 	DoubleSolenoid bikeBreak;
@@ -26,16 +25,20 @@ public class SSElevator extends Subsystem {
 	public DigitalInput elevLimitSwitch, toteSensor;
 	
 	public boolean brakeOn;
-	int dir;
+	boolean startZeroState;
+	double speed;
+	final double maxSpeedP = 0.5;
+	double maxSpeed;
+	double delta, manualDelta;
+	int dir, manualDir;
 	double currTime, lastTime;
-	int lastTicks;
+	int lastTicks, startTicks;
 	double ticksPerSec;
 	
     public void initDefaultCommand() {
-    	
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new C_DefaultElevatorRunning(0));
     }
+    
     public SSElevator(){
     	toteSensor = new DigitalInput(7);
     	bikeBreak = new DoubleSolenoid(2,3);
@@ -83,6 +86,8 @@ public class SSElevator extends Subsystem {
     	}
     }
     
+    
+    
     public void terminateMove()
     {
 		bikeBrakeTriggerClose();
@@ -92,8 +97,6 @@ public class SSElevator extends Subsystem {
     public void prepForMove(int ticks)
     {
     	int encoderVal = winchEncoder.get();
-    	currTime = lastTime = Timer.getFPGATimestamp();
-    	lastTicks = encoderVal;
     	bikeBrakeTriggerOpen();
     	if (encoderVal < ticks)
     	{
@@ -103,60 +106,81 @@ public class SSElevator extends Subsystem {
 		{
     		dir = -1;
 		}
+		delta = dir*Robot.elevDelta;
 		SmartDashboard.putNumber("ticksEntered: ", ticks);
+		speed = 0;
     }
     
-    public boolean moveToPos(int ticks)
+    public boolean moveToPos(int ticks, double pMaxSpeed)
     {
-    	double speed;
+    	if (pMaxSpeed > maxSpeedP)
+    	{
+    		pMaxSpeed = maxSpeedP;
+    	}
+    	maxSpeed = dir*pMaxSpeed;
     	int encoderVal = winchEncoder.get();
-    	currTime = Timer.getFPGATimestamp();
-    	ticksPerSec = Math.abs((encoderVal-lastTicks)/(currTime-lastTime));
-    	SmartDashboard.putNumber("ticksPerSecElevator: ", ticksPerSec);
     	if (dir == 1)
     	{
-    		speed = 1.0;
-    		if (encoderVal > ticks)//(encoderVal > ticks-ticksPerSec)//(encoderVal > ticks)
+    		if (encoderVal > ticks)
     		{
     			return true;
     		}
     		else if (encoderVal > ticks-15)
     		{
-    			speed = 0.3;
+    			maxSpeed = 0.3;
     		}
     	}
     	else
     	{
     		int diff = encoderVal - ticks;
-    		speed = -1.0;
-    		if (diff <= 0)//ticksPerSec)
+    		if (diff <= 0)
     		{
     			return true;
     		}
     		else if (diff < 30)
     		{
-    			speed = -0.2;
+    			maxSpeed = -0.2;
     		}
     	}
+    	speed+=delta;
+    	if (Math.abs(speed) > Math.abs(maxSpeed))
+    	{
+    		speed = maxSpeed;
+    	}
     	motorsSet(speed);
-    	lastTime = currTime;
-    	lastTicks = encoderVal;
     	return false;
     }
     
+    public void moveAndSetZeroInit()
+    {
+		bikeBrakeTriggerOpen();
+    	startZeroState = elevLimitSwitch.get();
+    	if (startZeroState)
+    	{
+    		dir = -1;
+    	}
+    	else
+    	{
+    		dir = 1;
+    	}
+		delta = dir*Robot.elevDelta;
+		maxSpeed = dir*maxSpeedP;
+    	speed = 0;
+    }
     public boolean moveAndSetZero()
     {
-    	if (elevLimitSwitch.get())
-    	{
-    		bikeBrakeTriggerOpen();
-    		motorsSet(-1.0);
-    	}
-    	if (!elevLimitSwitch.get())
-    	{
+		if (elevLimitSwitch.get() != startZeroState)
+		{
     		winchEncoder.reset();
     		stopElevator();
     		return true;
-    	}
+		}
+		speed+=delta;
+		if (Math.abs(speed) > Math.abs(maxSpeed))
+		{
+			speed = maxSpeed;
+		}
+		motorsSet(speed);
     	return false;
     }
     
@@ -170,4 +194,17 @@ public class SSElevator extends Subsystem {
     	return toteSensor.get();
     }
     
+    public void enableBrakeMotors(boolean enable)
+    {
+    	if (enable)
+    	{
+	    	elevMotor1.enableBrakeMode(true);
+	    	elevMotor2.enableBrakeMode(true);
+    	}
+    	else
+    	{
+    		elevMotor1.enableBrakeMode(false);
+    		elevMotor2.enableBrakeMode(false);
+    	}
+    }
 }

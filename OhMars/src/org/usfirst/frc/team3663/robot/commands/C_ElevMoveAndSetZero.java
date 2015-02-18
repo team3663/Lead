@@ -18,6 +18,7 @@ public class C_ElevMoveAndSetZero extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.runCommand = true;
+    	Robot.ssElevator.moveAndSetZeroInit();
     }
 
     // Called repeatedly when this Command is scheduled to run
