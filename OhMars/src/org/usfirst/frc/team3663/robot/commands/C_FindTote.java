@@ -23,7 +23,7 @@ public class C_FindTote extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.ssElevator.elevLimitSwitch.get() || !Robot.runCommand)
+    	if (!Robot.ssElevator.getToteSwitch() || !Robot.runCommand)
     	{
     		return true;
     	}
