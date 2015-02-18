@@ -12,15 +12,15 @@ public class CG_Autonomous3Totes extends CommandGroup {
     	addSequential(new C_ResetRuns());//don't need this?
     	addSequential(new C_ElevMoveAndSetZero());
     	
-    	addParallel(new CG_ArmGrabbingSequence());
+    	addSequential(new CG_ArmGrabbingSequence());
     	addParallel(new CG_PickUp());
     	addSequential(new C_EncoderDriveStrait(81));
     	
-    	addParallel(new CG_ArmGrabbingSequence());
+    	addSequential(new CG_ArmGrabbingSequence());
     	addParallel(new CG_PickUp());
     	addSequential(new C_EncoderDriveStrait(81));
     	
-    	addParallel(new CG_ArmGrabbingSequence());
+    	addSequential(new CG_ArmGrabbingSequence());
     	addParallel(new CG_PickUp());
     	addSequential(new C_EncoderDriveStrait(81));
     	
