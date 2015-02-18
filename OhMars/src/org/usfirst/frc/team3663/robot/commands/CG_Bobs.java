@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_MovePos3 extends CommandGroup {
+public class CG_Bobs extends CommandGroup {
     
-    public  CG_MovePos3() {
-    	addSequential(new C_ResetRuns());
-    	addSequential(new C_ElevMoveToPos(-25));
+    public  CG_Bobs() {
+    	addSequential(new C_Roberta());
+    	addSequential(new C_Roberto());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

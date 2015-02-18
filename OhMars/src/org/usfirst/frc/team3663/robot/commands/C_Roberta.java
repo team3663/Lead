@@ -1,74 +1,51 @@
 package org.usfirst.frc.team3663.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team3663.robot.Robot;
 
 /**
  *
  */
-public class C_ForkOut extends Command {
+public class C_Roberta extends Command {
 
-	double endTime;
-	double currTime;
-	double time;
-	double speed;
-	boolean goOut;
-	boolean finished;
+	int i,j = 0;
 	
-    public C_ForkOut(boolean pGoOut, double timeToRun) {
+    public C_Roberta() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssElevator);
-        goOut = pGoOut;
-        time = timeToRun;
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
-    	endTime = Timer.getFPGATimestamp()+time;
-    	if (goOut)
-    	{
-    		speed = 1.0;
-    	}
-    	else
-    	{
-    		speed = -1.0;
-    	}
+    	System.out.println("Roberta is here!!!!");
+    	//Robot.ssDashBoard.putDashString("RobertaInit: ", "Roberta is here!!!!!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	currTime = Timer.getFPGATimestamp();
-    	if (currTime < endTime)
-    	{
-    		Robot.ssElevator.moveInAndOut(speed);
-    		finished = false;
-    	}
-    	else
-    	{
-    		finished = true;
-    	}
+    	System.out.println(i++);
+    	System.out.println("Roberta is doing things! don't interfere!! -*-");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand || !Robot.runCG)
-		{
+    	System.out.println(j++);
+    	System.out.println("Am I finished? why would you even ask that?");
+        if (i == 300)
+    	{
         	return true;
-		}
+    	}
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ssElevator.moveInAndOut(0);
+    	System.out.println("Roberta is done.... do whatever you want now @-@");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+    	System.out.println("hey!!! don't do that! I'm not done yet!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GO LEAAAAVE");
     }
 }

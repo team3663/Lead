@@ -4,38 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
-
-import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeToggle;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenClose;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseHold;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsOpenCloseTogether;
-import org.usfirst.frc.team3663.robot.commands.C_DriveControllerSafetyOff;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
-import org.usfirst.frc.team3663.robot.commands.C_Test;
-import org.usfirst.frc.team3663.robot.commands.C_TestSensors;
-import org.usfirst.frc.team3663.robot.commands.C_MotorDriveTest;
-import org.usfirst.frc.team3663.robot.commands.C_MotorDriveTestInterrupt;
-import org.usfirst.frc.team3663.robot.commands.C_IncrementMotorSpeed;
-import org.usfirst.frc.team3663.robot.commands.C_DecrementMotorSpeed;
-import org.usfirst.frc.team3663.robot.commands.C_IncrementTestMotor;
-import org.usfirst.frc.team3663.robot.commands.C_DecrementTestMotor;
-import org.usfirst.frc.team3663.robot.commands.C_ReverseMotorSpeed;
-import org.usfirst.frc.team3663.robot.commands.C_ToggleBrake;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
-import org.usfirst.frc.team3663.robot.commands.C_IncrementElevEncoderTicks;
-import org.usfirst.frc.team3663.robot.commands.C_DecrementElevEncoderTicks;
-import org.usfirst.frc.team3663.robot.commands.CG_PickUp;
-import org.usfirst.frc.team3663.robot.commands.CG_DropOffStep;
-import org.usfirst.frc.team3663.robot.commands.CG_DropOffSP;
-import org.usfirst.frc.team3663.robot.commands.CG_RestartToStartPos;
-import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
-import org.usfirst.frc.team3663.robot.commands.CG_MoveToPos1;
-import org.usfirst.frc.team3663.robot.commands.CG_MoveToPos2;
-import org.usfirst.frc.team3663.robot.commands.CG_ForkIn;
-import org.usfirst.frc.team3663.robot.commands.CG_MovePos3;
+import org.usfirst.frc.team3663.robot.commands.*;
 
 public class OI {
 	public boolean driveControllerOn = false;
@@ -48,6 +17,7 @@ public class OI {
 	public Joystick logitech = new Joystick(2);
 	public Joystick buttonStick = new Joystick(3);
 	public Joystick testStick = new Joystick(5);
+	public Joystick bobStick = new Joystick(4);
 	
 	public JoystickButton testSensors;
 	public JoystickButton motorDriveTest;
@@ -78,13 +48,25 @@ public class OI {
 	public JoystickButton dropOnSP;
 	public JoystickButton dropOnStep;
 	public JoystickButton resetToStart;
-	public JoystickButton movePos1;
-	public JoystickButton movePos2;
-	public JoystickButton movePos3;
-	public JoystickButton forkIn;
+	public JoystickButton manualRaiseElevator;
+	public JoystickButton manualForkIn;
 	//-------------
 	
+	public JoystickButton bobs;
+	public JoystickButton roberto;
+	public JoystickButton roberta;
+	
 	public OI(){
+		
+		bobs = new JoystickButton(bobStick, 1);
+		bobs.whenPressed(new CG_Bobs());
+		
+		roberto = new JoystickButton(bobStick, 3);
+		roberto.whenPressed(new C_Roberto());
+		
+		roberta = new JoystickButton(bobStick, 4);
+		roberta.whenPressed(new C_Roberta());
+		
 		driveControllerSafetyEnable = new JoystickButton(driveController, 7);
 		driveControllerSafetyEnable.whenPressed(new C_DriveControllerSafetyOff());
 		
@@ -105,21 +87,13 @@ public class OI {
 		resetToStart.whenPressed(new CG_RestartToStartPos());
 		resetToStart.whenReleased(new C_MotorDriveTestInterrupt());
 		
-		movePos1 = new JoystickButton(buttonController, 5);
-		movePos1.whenPressed(new CG_MoveToPos1());
-		movePos1.whenReleased(new C_MotorDriveTestInterrupt());
+		manualRaiseElevator = new JoystickButton(buttonController, 5);
+		manualRaiseElevator.whenPressed(new CG_ManualRaiseElevator());
+		manualRaiseElevator.whenReleased(new C_MotorDriveTestInterrupt());
 		
-		movePos2 = new JoystickButton(buttonController, 6);
-		movePos2.whenPressed(new CG_MoveToPos2());
-		movePos2.whenReleased(new C_MotorDriveTestInterrupt());
-		
-		movePos3 = new JoystickButton(buttonController, 4);
-		movePos3.whenPressed(new CG_MovePos3());
-		movePos3.whenReleased(new C_MotorDriveTestInterrupt());
-		
-		forkIn = new JoystickButton(buttonController, 7);
-		forkIn.whenPressed(new CG_ForkIn());
-		forkIn.whenReleased(new C_MotorDriveTestInterrupt());
+		manualForkIn = new JoystickButton(buttonController, 6);
+		manualForkIn.whenPressed(new CG_ForkIn());
+		manualForkIn.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		//----------------
 		elevMoveToPos = new JoystickButton(testStick, 7);

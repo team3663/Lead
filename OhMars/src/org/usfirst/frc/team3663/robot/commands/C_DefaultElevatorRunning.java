@@ -1,74 +1,56 @@
 package org.usfirst.frc.team3663.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team3663.robot.Robot;
 
 /**
  *
  */
-public class C_ForkOut extends Command {
+public class C_DefaultElevatorRunning extends Command {
 
-	double endTime;
-	double currTime;
-	double time;
-	double speed;
-	boolean goOut;
-	boolean finished;
+	double lastAxis, currAxis;
 	
-    public C_ForkOut(boolean pGoOut, double timeToRun) {
+    public C_DefaultElevatorRunning(int pTicks) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.ssElevator);
-        goOut = pGoOut;
-        time = timeToRun;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
-    	endTime = Timer.getFPGATimestamp()+time;
-    	if (goOut)
-    	{
-    		speed = 1.0;
-    	}
-    	else
-    	{
-    		speed = -1.0;
-    	}
+    	lastAxis = Robot.oi.buttonController.getRawAxis(2);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	currTime = Timer.getFPGATimestamp();
-    	if (currTime < endTime)
+    	currAxis = Robot.oi.buttonController.getRawAxis(2);
+    	if (Robot.ssElevator.winchEncoder.get() < -13 || (currAxis < 0.1 && lastAxis > 0.1))
     	{
-    		Robot.ssElevator.moveInAndOut(speed);
-    		finished = false;
+    		currAxis = 0;
+    		Robot.ssElevator.stopElevator();
     	}
-    	else
+    	else if (currAxis >= 0.1)
     	{
-    		finished = true;
+    		if (lastAxis < 0.1)
+    		{
+    			Robot.ssElevator.prepForMove(-13);
+    		}
+    		Robot.ssElevator.moveToPos(-13, currAxis);
     	}
+    	Robot.ssElevator.moveInAndOut(Robot.oi.buttonController.getRawAxis(3));
+    	lastAxis = currAxis;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand || !Robot.runCG)
-		{
-        	return true;
-		}
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ssElevator.moveInAndOut(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
