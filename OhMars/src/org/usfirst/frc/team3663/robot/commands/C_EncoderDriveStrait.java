@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class C_EncoderDriveStrait extends Command {
 	int inches;
     public C_EncoderDriveStrait(int pInches) {
-    	inches = pInches
+    	inches = pInches;
         // Use requires() here to declare subsystem dependencies
     }
 
