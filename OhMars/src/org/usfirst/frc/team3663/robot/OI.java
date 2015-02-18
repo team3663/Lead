@@ -7,6 +7,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team3663.robot.commands.*;
 
 public class OI {
+	public boolean driveControllerOn = false;
+	//public boolean buttonControllerOn = false;
+	public JoystickButton driveControllerSafetyEnable;
+	//public Joystick buttonControllerSafetyEnable;
+	
 	public Joystick driveController = new Joystick(0);
 	public Joystick buttonController = new Joystick(1);
 	public Joystick logitech = new Joystick(2);
@@ -61,6 +66,9 @@ public class OI {
 		
 		roberta = new JoystickButton(bobStick, 4);
 		roberta.whenPressed(new C_Roberta());
+		
+		driveControllerSafetyEnable = new JoystickButton(driveController, 7);
+		driveControllerSafetyEnable.whenPressed(new C_DriveControllerSafetyOff());
 		
 		//----------------
 		pickUp = new JoystickButton(buttonController, 1);
@@ -130,7 +138,7 @@ public class OI {
 		
 		testEncoderDrive = new JoystickButton(buttonStick, 1);
 		testEncoderDrive.whenPressed(new C_EncoderDriveStrait());
-
+/*
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(true));
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
@@ -138,7 +146,13 @@ public class OI {
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenClose(false));
 		armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
-
+*/
+		armOpenCloseToggle = new JoystickButton(driveController, 5);
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(true));
+		
+		armOpenCloseToggle = new JoystickButton(driveController, 6);
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(false));
+		
 		armIntakeToggleOn = new JoystickButton(driveController, 3);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1));
 		

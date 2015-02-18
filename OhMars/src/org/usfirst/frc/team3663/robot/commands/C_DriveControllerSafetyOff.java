@@ -9,23 +9,17 @@ import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
- **********CURRENTLY NOT IN USE***********
+ *
  */
-public class C_ArmsOpenClose extends Command {
+public class C_DriveControllerSafetyOff extends Command {
 	
-	boolean leftSide;
-	
-    public C_ArmsOpenClose(boolean pLeftSide) {
-        leftSide = pLeftSide;
+    public C_DriveControllerSafetyOff() {
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(leftSide)
-    		Robot.ssArms.toggleArmLOpenClose();
-    	else
-    		Robot.ssArms.toggleArmROpenClose();
+    	Robot.oi.driveControllerOn = true;
     }
 
     // Called repeatedly when this Command is scheduled to run

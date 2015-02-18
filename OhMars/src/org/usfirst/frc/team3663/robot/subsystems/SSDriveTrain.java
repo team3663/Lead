@@ -23,7 +23,7 @@ public class SSDriveTrain extends Subsystem {
 	RobotDrive chassis;
 	
 	
-	public int finalTicksL, finalTicksR, timeRunningR = 0, timeRunningL = 0;
+	public int finalTicksL, finalTicksR, timeRunningR = 0, timeRunningL = 0, diffrenceR = 0, diffrenceL = 0;
 	public double speedR, speedL;
 	public boolean encoderDriving = false;
 
@@ -35,11 +35,13 @@ public class SSDriveTrain extends Subsystem {
     public SSDriveTrain()
     {
     	driveMotorL1 = new CANTalon(10);
+    	/*11 and 21 are not connected*/
     	driveMotorL2 = new CANTalon(11);
     	driveMotorR1 = new CANTalon(20);
     	driveMotorR2 = new CANTalon(21);
     	
-    	chassis = new RobotDrive(driveMotorL1, driveMotorL2, driveMotorR1, driveMotorR2);
+    	//chassis = new RobotDrive(driveMotorL1, driveMotorL2, driveMotorR1, driveMotorR2);
+    	chassis = new RobotDrive(driveMotorL1, driveMotorR1);
     	
     	leftEncoder = new Encoder(3,4);
     	rightEncoder = new Encoder(5,6);
@@ -52,20 +54,20 @@ public class SSDriveTrain extends Subsystem {
     	chassis.arcadeDrive(yDirection, xDirection);;
     }
     
-    public void motor1Set(double speed)
+    /*public void motor1Set(double speed)
     {
     	driveMotorL1.set(speed);
-    }
+    }*/
     
     public void motor2Set(double speed)
     {
     	driveMotorL2.set(speed);
     }
 
-    public void motor3Set(double speed)
+    /*public void motor3Set(double speed)
     {
     	driveMotorR1.set(speed);
-    }
+    }*/
 
     public void motor4Set(double speed)
     {
@@ -124,9 +126,9 @@ public class SSDriveTrain extends Subsystem {
     }
     
     public void breakmodeDriveMotors(boolean pBreak){
-    	driveMotorL1.enableBrakeMode(pBreak);
+    	//driveMotorL1.enableBrakeMode(pBreak);
     	driveMotorL2.enableBrakeMode(pBreak);
-    	driveMotorR1.enableBrakeMode(pBreak);
+    	// driveMotorR1.enableBrakeMode(pBreak);
     	driveMotorR2.enableBrakeMode(pBreak);
     }
     
@@ -134,8 +136,8 @@ public class SSDriveTrain extends Subsystem {
     	/*NOTES
     	 *RT = D */
     	speedR = highspeed;
-    	float time = (float)(finalTicksR/speedR);
-    	speedL = finalTicksL/time;
+    	float time = (float)(diffrenceR/speedR);
+    	speedL = diffrenceL/time;
     	//speedL = .4;
     	
     }
@@ -158,6 +160,11 @@ public class SSDriveTrain extends Subsystem {
         	return (rightEncoder.get() <= finalTicksR);   
     	}
     	return false;
+    }
+    
+    public void diffrance(){
+    	diffrenceR = rightEncoder.get() - finalTicksR;
+    	diffrenceL = leftEncoder.get() - finalTicksL;
     }
 }
 

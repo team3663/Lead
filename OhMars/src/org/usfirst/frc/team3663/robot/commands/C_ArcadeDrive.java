@@ -15,13 +15,22 @@ public class C_ArcadeDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ssDriveTrain.breakmodeDriveMotors(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double Speed = Robot.oi.driveController.getRawAxis(2) - Robot.oi.driveController.getRawAxis(3);
-    	Robot.ssDriveTrain.arcadeDrive(Speed, Robot.oi.driveController.getRawAxis(0));
-    	//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveController.getRawAxis(0), Speed);
+		if(Robot.oi.driveControllerOn){
+	    	double Speed;
+	    	if(Robot.oi.driveController.getRawButton(4) == false){
+	    		Speed = Robot.oi.driveController.getRawAxis(3) - Robot.oi.driveController.getRawAxis(2);
+	    		Robot.ssDriveTrain.arcadeDrive(Speed, -Robot.oi.driveController.getRawAxis(0));
+	    	}
+	    	else{
+	    		Robot.ssDriveTrain.arcadeDrive((Robot.oi.driveController.getRawAxis(1)/2), (-Robot.oi.driveController.getRawAxis(0)/2));
+	    		//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveController.getRawAxis(0), Speed);
+	    	}
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
