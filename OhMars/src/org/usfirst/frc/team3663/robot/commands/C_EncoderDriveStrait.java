@@ -9,15 +9,16 @@ import edu.wpi.first.wpilibj.command.Command;
  
  */
 public class C_EncoderDriveStrait extends Command {
-
-    public C_EncoderDriveStrait() {
+	int inches;
+    public C_EncoderDriveStrait(int pInches) {
+    	inches = pInches
         // Use requires() here to declare subsystem dependencies
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.setFinalLeft(6);
+    	Robot.ssDriveTrain.setFinalLeft(inches);
     }
 
     // Called repeatedly when this Command is scheduled to run
