@@ -23,7 +23,7 @@ public class C_ToggleBrake extends Command {
     	else
     	{
     		Robot.ssElevator.bikeBrakeTriggerClose();
-    		Robot.ssElevator.enableBrakeMotors(true);
+    		//Robot.ssElevator.enableBrakeMotors(true);
     	}
     }
 

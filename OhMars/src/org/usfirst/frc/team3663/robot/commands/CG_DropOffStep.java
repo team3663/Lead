@@ -14,9 +14,9 @@ public class CG_DropOffStep extends CommandGroup {
     public  CG_DropOffStep() {
     	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-15));
-    	addSequential(new C_ForkOut(true, 8));
+    	addSequential(new C_ForkOut(true, 7));
     	addSequential(new C_ElevMoveToPos(-5));
-    	addSequential(new C_ForkOut(false, 8));
+    	addSequential(new C_ForkOut(false, 7));
     	addSequential(new C_ElevMoveToPos(-20));
         // Add Commands here:
         // e.g. addSequential(new Command1());

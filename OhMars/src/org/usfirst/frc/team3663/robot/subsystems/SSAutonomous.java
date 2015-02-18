@@ -14,7 +14,6 @@ public class SSAutonomous extends Subsystem {
     public DigitalInput topAutoSwitch, bottomAutoSwitch;
     
 	protected void initDefaultCommand() {
-		setDefaultCommand(new C_AutonomousMasterChoosing());
 	}
     public SSAutonomous(){
         topAutoSwitch = new DigitalInput(10);
@@ -27,7 +26,7 @@ public class SSAutonomous extends Subsystem {
     }
     
     public boolean getBottomSwitch(){
-    //	SmartDashboard.putBoolean("BottomAuto", getBottomSwitch());
+//    	SmartDashboard.putBoolean("BottomAuto", getBottomSwitch());
     	return bottomAutoSwitch.get();
     }
     public int getAutonomousRoutine(){

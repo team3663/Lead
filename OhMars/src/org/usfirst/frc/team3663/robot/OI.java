@@ -135,7 +135,7 @@ public class OI {
 		elevMoveToPos0 = new JoystickButton(testStick, 10);
 		elevMoveToPos0.whenPressed(new C_ElevMoveToPos(-49));
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
-				
+		
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(true));
 		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
@@ -143,13 +143,13 @@ public class OI {
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(false));
 		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
-		
+		/*
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(true));
 		
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(false));
-		
+		*/
 		armIntakeToggleOn = new JoystickButton(driveController, 3);
 		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1.0,1.0));
 		

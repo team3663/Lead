@@ -19,10 +19,12 @@ import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
 public class SSElevator extends Subsystem {
     
 	CANTalon elevMotor1, elevMotor2;
-	Talon elevInAndOut;
+	public Talon elevInAndOut;
 	DoubleSolenoid bikeBreak;
 	public Encoder winchEncoder;
 	public DigitalInput elevLimitSwitch, toteSensor;
+	
+	public int i = 0;
 	
 	public boolean brakeOn;
 	boolean startZeroState;
@@ -48,8 +50,8 @@ public class SSElevator extends Subsystem {
     	winchEncoder = new Encoder(1,2);
     	elevLimitSwitch = new DigitalInput(0);
     	
-    	elevMotor1.enableBrakeMode(true);
-    	elevMotor2.enableBrakeMode(true);
+    	elevMotor1.enableBrakeMode(false);
+    	elevMotor2.enableBrakeMode(false);
     	
     	bikeBrakeTriggerClose();
     }
@@ -67,6 +69,8 @@ public class SSElevator extends Subsystem {
     }
     public void moveInAndOut(double speed){
     	elevInAndOut.set(speed);
+    	Robot.ssDashBoard.putDashInt("testing window motor counter: ", i++);
+    	Robot.ssDashBoard.putDashDouble("ElevatorInAndOut SpeedInput: ", speed);
     }
     public void bikeBrakeTriggerOpen()
     {
@@ -200,8 +204,8 @@ public class SSElevator extends Subsystem {
     {
     	if (enable)
     	{
-	    	elevMotor1.enableBrakeMode(true);
-	    	elevMotor2.enableBrakeMode(true);
+	    	//elevMotor1.enableBrakeMode(true);
+	    	//elevMotor2.enableBrakeMode(true);
     	}
     	else
     	{

@@ -27,7 +27,7 @@ public class C_ArcadeDrive extends Command {
 	    		Robot.ssDriveTrain.arcadeDrive(Speed, -Robot.oi.driveController.getRawAxis(0));
 	    	}
 	    	else{
-	    		Robot.ssDriveTrain.arcadeDrive((Robot.oi.driveController.getRawAxis(1)/2), (-Robot.oi.driveController.getRawAxis(0)/2));
+	    		Robot.ssDriveTrain.arcadeDrive((-Robot.oi.driveController.getRawAxis(1)/2), (-Robot.oi.driveController.getRawAxis(0)/2));
 	    		//Robot.ssDriveTrain.arcadeDrive(Robot.oi.driveController.getRawAxis(0), Speed);
 	    	}
 		}
