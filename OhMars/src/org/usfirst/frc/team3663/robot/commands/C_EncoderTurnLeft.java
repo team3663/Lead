@@ -19,7 +19,7 @@ public class C_EncoderTurnLeft extends Command {
     protected void initialize() {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
-    	Robot.ssDriveTrain.eDistanceArk(9, 45);
+    	Robot.ssDriveTrain.eDistanceArk(20, 45);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +28,7 @@ public class C_EncoderTurnLeft extends Command {
     	Robot.ssDriveTrain.setTheSpeedsLeft(.2);
     	if(r == false){
         	Robot.ssDriveTrain.timeRunningR++;
-    		Robot.ssDriveTrain.motorRightSet(Robot.ssDriveTrain.speedR);
+    		Robot.ssDriveTrain.motorRightSet(.5/*Robot.ssDriveTrain.speedR*/);
     	}
     	if(l == false){
         	Robot.ssDriveTrain.timeRunningL++;
