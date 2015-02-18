@@ -26,16 +26,16 @@ public class C_ArmsUpDown extends Command {
     	///if(Robot.oi.driveController.getRawButton(7)){
 	    	axisValue = -Robot.oi.driveController.getRawAxis(5);
 	    	if(Math.abs(axisValue) < 0.2){
+	    		Robot.ssArms.armUpDownRSet(0);
+	    		Robot.ssArms.armUpDownLSet(0);
 	    		axisValue = 0;
 	    	}
-	    	//SmartDashboard.putNumber("yAxis", axisValue);
+	    	
 	    	Robot.ssArms.armUpDownRSet(axisValue);
 	    	if(!Robot.oi.driveController.getRawButton(8)){
 	    		Robot.ssArms.armUpDownLSet(axisValue);
-	    	}else{
-	    		Robot.ssArms.armUpDownRSet(0);
-	    		Robot.ssArms.armUpDownLSet(0);
 	    	}
+	    	//SmartDashboard.putNumber("yAxis", axisValue);
     	///}else{
 	    	///Robot.ssArms.armUpDownRSet(0);
     		///Robot.ssArms.armUpDownLSet(0);

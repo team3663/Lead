@@ -13,6 +13,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
+import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
@@ -66,8 +67,8 @@ public class Robot extends IterativeRobot {
     	ssArms = new SSArms();
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
-		Auto = new C_EncoderTurn(0,90, true);
-		
+		//Auto = new C_EncoderTurn(0,90, true);
+		Auto = new C_AutonomousMasterChoosing();
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();

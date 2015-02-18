@@ -11,7 +11,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 public class CG_PickUp extends CommandGroup {
     
     public  CG_PickUp() {
-    	addSequential(new C_ResetRuns());
+    	//addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-1));
     	addSequential(new C_ElevMoveToPos(-25));
         // Add Commands here:

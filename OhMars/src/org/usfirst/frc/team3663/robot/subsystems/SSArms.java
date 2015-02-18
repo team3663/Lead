@@ -87,28 +87,28 @@ public class SSArms extends Subsystem {
     	SmartDashboard.putNumber("RightArmPos", rArmUpDownPos);
     }
     public void armLClose(){
-    	if(!lArmClose){
+    	//if(!lArmClose){
     		armOpenCloseL.set(DoubleSolenoid.Value.kForward);
     		lArmClose = true;
-    	}
+    	//}
     }
 	public void armLOpen(){
-		if(lArmClose){
+		//if(lArmClose){
     		armOpenCloseL.set(DoubleSolenoid.Value.kReverse);
     		lArmClose = false;
-    	}
+    	//}
     }
     public void armRClose(){
-    	if(!rArmClose){
+    	//if(!rArmClose){
     		armOpenCloseR.set(DoubleSolenoid.Value.kForward);
     		rArmClose = true;
-    	}
+    	//}
     }
 	public void armROpen(){
-		if(rArmClose){
+		//if(rArmClose){
     		armOpenCloseR.set(DoubleSolenoid.Value.kReverse);
     		rArmClose = false;
-    	}
+    	//}
     }
     public void toggleArmLOpenClose(){
     	if(lArmClose){
