@@ -22,15 +22,15 @@ public class C_AutonomousMasterChoosing extends Command {
     	CommandGroup theOneToRun;
     	int choice = Robot.ssAutonomous.getAutonomousRoutine();
     	switch(choice){
-    		case 1: 
+    		case 0: 
     			theOneToRun = new CG_Autonomous3Totes();
     			theOneToRun.start();
+    			break;
+    		case 1:
     			break;
     		case 2:
     			break;
     		case 3:
-    			break;
-    		case 4:
     			break;
     	}
     }

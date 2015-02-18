@@ -27,7 +27,7 @@ public class CG_Autonomous3Totes extends CommandGroup {
     	addSequential(new C_EncoderTurnLeft(0,90));
     	addSequential(new C_EncoderDriveStrait(108));
     	addSequential(new C_ElevMoveToPos(-1));
-    	addSequential(new C_EncoderDriveStrait(-24));
+    	//addSequential(new C_EncoderDriveStrait(-24)); commented out b/c can't drive backwards...
     	//addSequential(new C_ElevMoveToPos(-20));
         
     }

@@ -49,6 +49,7 @@ public class SSAutonomous extends Subsystem {
     	 * 3 = top TRUE , bottom TRUE
     	 *****************************/
     	/*****************************
+    	 * IN ENGLISH
     	 * 0 = top DOWN, bottom DOWN
     	 * 1 = top DOWN, bottom UP
     	 * 2 = top UP  , bottom DOWN
