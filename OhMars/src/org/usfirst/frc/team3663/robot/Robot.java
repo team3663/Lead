@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
     	ssElevator = new SSElevator();
     	ssArms = new SSArms();
 		oi = new OI();
-		Auto = new C_EncoderTurnLeft();
+		Auto = new C_EncoderTurnLeft(0,90);
 		
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
