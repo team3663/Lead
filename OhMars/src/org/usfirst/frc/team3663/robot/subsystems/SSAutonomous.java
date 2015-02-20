@@ -21,7 +21,7 @@ public class SSAutonomous extends Subsystem {
     }
 	
     public boolean getTopSwitch(){
-//    	SmartDashboard.putBoolean("TopAuto", getTopSwitch());
+   // 	SmartDashboard.putBoolean("TopAuto", getTopSwitch());
     	return topAutoSwitch.get();
     }
     
