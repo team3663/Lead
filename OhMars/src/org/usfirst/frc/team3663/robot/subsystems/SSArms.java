@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class SSArms extends Subsystem {
-    public boolean lArmClose = false;
-    public boolean rArmClose = false;
+    public boolean armLIsClosed = false;
+    public boolean armRIsClosed = false;
     public double lArmIntakeSpeed = 0.0;
     public double rArmIntakeSpeed = 0.0;
 
@@ -89,41 +89,25 @@ public class SSArms extends Subsystem {
     public void armLClose(){
     	//if(!lArmClose){
     		armOpenCloseL.set(DoubleSolenoid.Value.kForward);
-    		lArmClose = true;
+    		armLIsClosed = true;
     	//}
     }
 	public void armLOpen(){
 		//if(lArmClose){
     		armOpenCloseL.set(DoubleSolenoid.Value.kReverse);
-    		lArmClose = false;
+    		armLIsClosed = false;
     	//}
     }
     public void armRClose(){
     	//if(!rArmClose){
     		armOpenCloseR.set(DoubleSolenoid.Value.kForward);
-    		rArmClose = true;
+    		armRIsClosed = true;
     	//}
     }
 	public void armROpen(){
 		//if(rArmClose){
     		armOpenCloseR.set(DoubleSolenoid.Value.kReverse);
-    		rArmClose = false;
+    		armRIsClosed = false;
     	//}
-    }
-    public void toggleArmLOpenClose(){
-    	if(lArmClose){
-    		armLOpen();
-    	}
-    	else{
-    		armLClose();
-    	}
-    }
-    public void toggleArmROpenClose(){
-    	if(rArmClose){
-    		armROpen();
-    	}
-    	else{
-    		armRClose();
-    	}
     }
 }

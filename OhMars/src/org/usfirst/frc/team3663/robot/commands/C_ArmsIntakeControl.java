@@ -24,6 +24,7 @@ public class C_ArmsIntakeControl extends Command {
     protected void execute() {
     	if(Robot.ssElevator.getToteSwitch())
     		Robot.ssArms.intakeMotorsSet(Robot.oi.driveController.getRawAxis(5));
+    	else Robot.ssArms.intakeMotorsSet(0.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
