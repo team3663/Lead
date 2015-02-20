@@ -2,6 +2,7 @@
 package org.usfirst.frc.team3663.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,7 +15,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStrait;
+import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStraight;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
 import org.usfirst.frc.team3663.robot.subsystems.SSAutonomous;
@@ -93,6 +94,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 1);
         arcadeDrive.start();
 		armExecutables.start();
 		defaultElevator.start();

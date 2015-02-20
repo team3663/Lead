@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3663.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc.team3663.robot.Robot;
 
 /**

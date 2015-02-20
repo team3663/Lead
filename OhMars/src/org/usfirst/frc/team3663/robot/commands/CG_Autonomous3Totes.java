@@ -17,16 +17,16 @@ public class CG_Autonomous3Totes extends CommandGroup {
     	
     	addSequential(new CG_ArmGrabbingSequence());
     	addParallel(new CG_PickUp());
-    	addSequential(new C_EncoderDriveStrait(81, .7));
+    	addSequential(new C_EncoderDriveStraight(81, .7));
     	
     	addSequential(new CG_ArmGrabbingSequence());
     	addParallel(new CG_PickUp());
-    	addSequential(new C_EncoderDriveStrait(81, .7));
+    	addSequential(new C_EncoderDriveStraight(81, .7));
     	
     	addSequential(new C_EncoderTurn(0,90, true));
-    	addSequential(new C_EncoderDriveStrait(108, .7));
+    	addSequential(new C_EncoderDriveStraight(108, .7));
     	addSequential(new C_ElevMoveToPos(-1));
-    	addSequential(new C_EncoderDriveStrait(-24, .7));
+    	addSequential(new C_EncoderDriveStraight(-24, .7));
     	//addSequential(new C_ElevMoveToPos(-20));
         
     }

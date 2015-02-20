@@ -21,20 +21,20 @@ public class A_Log extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDashBoard.putDashInt("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
+    	Robot.ssDashBoard.putDashNumber("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
     	//**Driving
-    	Robot.ssDashBoard.putDashInt("Left Drive Encoder", Robot.ssDriveTrain.leftEncoder.get());
-    	Robot.ssDashBoard.putDashInt("Right Drive Encoder", Robot.ssDriveTrain.rightEncoder.get());
-    	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Left", Robot.ssDriveTrain.finalTicksL);
-    	Robot.ssDashBoard.putDashInt("Final Encoder Ticks Right", Robot.ssDriveTrain.finalTicksR);
+    	Robot.ssDashBoard.putDashNumber("Left Drive Encoder", Robot.ssDriveTrain.leftEncoder.get());
+    	Robot.ssDashBoard.putDashNumber("Right Drive Encoder", Robot.ssDriveTrain.rightEncoder.get());
+    	Robot.ssDashBoard.putDashNumber("Final Encoder Ticks Left", Robot.ssDriveTrain.finalTicksL);
+    	Robot.ssDashBoard.putDashNumber("Final Encoder Ticks Right", Robot.ssDriveTrain.finalTicksR);
     	Robot.ssDashBoard.putDashBool("Encoder Running", Robot.ssDriveTrain.encoderDriving);
-    	Robot.ssDashBoard.putDashDouble("Right Speed", Robot.ssDriveTrain.speedR);
-    	Robot.ssDashBoard.putDashDouble("Left Speed", Robot.ssDriveTrain.speedL);
-    	Robot.ssDashBoard.putDashInt("diffrence Right", Robot.ssDriveTrain.diffrenceR);
-    	Robot.ssDashBoard.putDashInt("diffrence Left", Robot.ssDriveTrain.diffrenceL);
-    	Robot.ssDashBoard.putDashInt("Time Running Right", Robot.ssDriveTrain.timeRunningR);
-    	Robot.ssDashBoard.putDashInt("Time Running Left", Robot.ssDriveTrain.timeRunningL);
-    	Robot.ssDashBoard.putDashDouble("elevIn/OutSpeed: ", Robot.ssElevator.elevInAndOut.get());
+    	Robot.ssDashBoard.putDashNumber("Right Speed", Robot.ssDriveTrain.speedR);
+    	Robot.ssDashBoard.putDashNumber("Left Speed", Robot.ssDriveTrain.speedL);
+    	Robot.ssDashBoard.putDashNumber("diffrence Right", Robot.ssDriveTrain.diffTicksR);
+    	Robot.ssDashBoard.putDashNumber("diffrence Left", Robot.ssDriveTrain.diffTicksL);
+    	Robot.ssDashBoard.putDashNumber("Time Running Right", Robot.ssDriveTrain.timeRunningR);
+    	Robot.ssDashBoard.putDashNumber("Time Running Left", Robot.ssDriveTrain.timeRunningL);
+    	Robot.ssDashBoard.putDashNumber("elevIn/OutSpeed: ", Robot.ssElevator.elevInAndOut.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()

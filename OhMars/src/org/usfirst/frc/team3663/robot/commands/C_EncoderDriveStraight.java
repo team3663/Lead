@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  
  */
-public class C_EncoderDriveStrait extends Command {
+public class C_EncoderDriveStraight extends Command {
 	int inches;
 	double speed;
-    public C_EncoderDriveStrait(int pInches, double pSpeed) {
+    public C_EncoderDriveStraight(int pInches, double pSpeed) {
     	inches = pInches;
     	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
@@ -42,6 +42,7 @@ public class C_EncoderDriveStrait extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ssDriveTrain.encoderDriving = false;
     	Robot.ssDriveTrain.motorLeftSet(0);
     	Robot.ssDriveTrain.motorRightSet(0);
     }

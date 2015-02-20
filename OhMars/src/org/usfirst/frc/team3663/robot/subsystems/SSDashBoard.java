@@ -18,19 +18,14 @@ public class SSDashBoard extends Subsystem {
         setDefaultCommand(new A_Log());
     }
 
-	@SuppressWarnings("deprecation")
-	public void putDashInt(String Title, int Number){
-		SmartDashboard.putInt(Title, Number);
+	public void putDashNumber(String Title, double Number){
+		SmartDashboard.putNumber(Title, Number);
 	}
 	public void putDashBool(String Title, boolean Bool){
 		SmartDashboard.putBoolean(Title, Bool);
 	}
 	public void putDashString(String Title, String lable){
 		SmartDashboard.putString(Title, lable);
-	}
-	@SuppressWarnings("deprecation")
-	public void putDashDouble(String Title, double Number){
-		SmartDashboard.putDouble(Title, Number);
 	}
 	
 	
@@ -42,13 +37,13 @@ public class SSDashBoard extends Subsystem {
  * 		that does not crash the code.) 
  */
 	@SuppressWarnings("deprecation")
-	public int getFromDashInt(String Title){
+	public double getFromDashNumber(String Title){
 		try{
-			return SmartDashboard.getInt(Title);
+			return SmartDashboard.getNumber(Title);
 		}
 		catch(Exception E){
 			putDashString("ERROR_INT", "Title" + Title);
-			putDashInt(Title, 0);
+			putDashNumber(Title, 0);
 			return 0;
 		}
 	}
@@ -70,17 +65,6 @@ public class SSDashBoard extends Subsystem {
 			putDashString("ERROR_STRING", "Title" + Title);
 			putDashString(Title, "ERROR");
 			return "ERROR";
-		}
-	}
-	@SuppressWarnings("deprecation")
-	public double getFromDashDouble(String Title){
-		try{
-			return SmartDashboard.getDouble(Title);
-		}
-		catch(Exception E){
-			putDashString("ERROR", "Title" + Title);
-			putDashDouble(Title, 0);
-			return 0;
 		}
 	}
 }
