@@ -69,8 +69,8 @@ public class SSElevator extends Subsystem {
     }
     public void moveInAndOut(double speed){
     	elevInAndOut.set(speed);
-    	Robot.ssDashBoard.putDashInt("testing window motor counter: ", i++);
-    	Robot.ssDashBoard.putDashDouble("ElevatorInAndOut SpeedInput: ", speed);
+    	Robot.ssDashBoard.putDashNumber("testing window motor counter: ", i++);
+    	Robot.ssDashBoard.putDashNumber("ElevatorInAndOut SpeedInput: ", speed);
     }
     public void bikeBrakeTriggerOpen()
     {
