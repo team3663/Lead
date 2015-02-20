@@ -10,6 +10,7 @@ public class CG_Bobs extends CommandGroup {
     public  CG_Bobs() {
     	addSequential(new C_Roberta());
     	addSequential(new C_Roberto());
+    	addSequential(new C_Robertus());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

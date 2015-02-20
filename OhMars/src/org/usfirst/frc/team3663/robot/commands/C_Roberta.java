@@ -8,29 +8,30 @@ import org.usfirst.frc.team3663.robot.Robot;
  */
 public class C_Roberta extends Command {
 
-	int i,j = 0;
+	int i,j;
 	
     public C_Roberta() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ssDriveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Roberta is here!!!!");
+    	i = j = 0;
+    	Robot.ssDashBoard.putDashString("Roberta: ", "Roberta is here!!!!");
     	//Robot.ssDashBoard.putDashString("RobertaInit: ", "Roberta is here!!!!!");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println(i++);
-    	System.out.println("Roberta is doing things! don't interfere!! -*-");
+    	Robot.ssDashBoard.putDashString("Roberta: ", "Roberta is doing things! don't interfere!! -*-");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	System.out.println(j++);
-    	System.out.println("Am I finished? why would you even ask that?");
+    	Robot.ssDashBoard.putDashInt("j: ", j++);
+    	Robot.ssDashBoard.putDashString("Roberta: ", "Am I finished? why would you even ask that?");
         if (i == 300)
     	{
         	return true;
@@ -40,12 +41,12 @@ public class C_Roberta extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Roberta is done.... do whatever you want now @-@");
+    	Robot.ssDashBoard.putDashString("Roberta: ", "Roberta is done.... do whatever you want now @-@");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	System.out.println("hey!!! don't do that! I'm not done yet!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GO LEAAAAVE");
+    	Robot.ssDashBoard.putDashString("Roberta: ", "hey!!! don't do that! I'm not done yet!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GO LEAAAAVE");
     }
 }

@@ -55,6 +55,9 @@ public class OI {
 	public JoystickButton bobs;
 	public JoystickButton roberto;
 	public JoystickButton roberta;
+	public JoystickButton robertus;
+	public JoystickButton chanceller;
+	public CG_Bobs cr;
 	
 	public OI(){
 		
@@ -66,6 +69,13 @@ public class OI {
 		
 		roberta = new JoystickButton(bobStick, 4);
 		roberta.whenPressed(new C_Roberta());
+		
+		robertus = new JoystickButton(bobStick, 2);
+		cr = new CG_Bobs();
+		robertus.whenPressed(cr);
+		
+		chanceller = new JoystickButton(bobStick, 8);
+		chanceller.whenPressed(new C_Chanceller());
 		
 		driveControllerSafetyEnable = new JoystickButton(driveController, 7);
 		driveControllerSafetyEnable.whenPressed(new C_DriveControllerSafetyOff());
