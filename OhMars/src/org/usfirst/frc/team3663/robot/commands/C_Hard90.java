@@ -10,8 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class C_Hard90 extends Command {
 	double speed;
 	boolean turnLeft;
-    public C_Hard90(double pSpeed, boolean turnLeft) {
+    public C_Hard90(double pSpeed, boolean pTurnLeft) {
     	speed = pSpeed;
+    	turnLeft = pTurnLeft;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,7 +22,7 @@ public class C_Hard90 extends Command {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
     	if(turnLeft){
-        	Robot.ssDriveTrain.setFinalLeft((int)(26*Math.PI/2));
+        	Robot.ssDriveTrain.setFinalLeft((int)(26*Math.PI/2));//26 is the length between wheels
     	}
     	else{
     		Robot.ssDriveTrain.setFinalRight((int)(26*Math.PI/2));
@@ -45,6 +46,7 @@ public class C_Hard90 extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ssDriveTrain.encoderDriving = false;
     	Robot.ssDriveTrain.motorLeftSet(0);
     	Robot.ssDriveTrain.motorRightSet(0);
     }
