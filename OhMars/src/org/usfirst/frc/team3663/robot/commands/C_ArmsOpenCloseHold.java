@@ -23,16 +23,23 @@ public class C_ArmsOpenCloseHold extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(leftSide){
-    		if(!Robot.ssArms.lArmClose){
-        		Robot.ssArms.armLClose();   			
-    		}else{
+    		if(!Robot.ssArms.armLIsClosed)
+    		{
+        		Robot.ssArms.armLClose();
+    		}
+    		else
+    		{
     			Robot.ssArms.armLOpen();
     		}
     	}
-    	else{
-    		if(!Robot.ssArms.rArmClose){
-        		Robot.ssArms.armRClose();   			
-    		}else{
+    	else
+    	{
+    		if(!Robot.ssArms.armRIsClosed)
+    		{
+        		Robot.ssArms.armRClose();
+    		}
+    		else
+    		{
     			Robot.ssArms.armROpen();
     		}
     	}

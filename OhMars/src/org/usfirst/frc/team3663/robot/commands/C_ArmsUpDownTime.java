@@ -17,7 +17,7 @@ public class C_ArmsUpDownTime extends Command {
 	double pSeconds;
 	boolean pDirectionIsUp;
 	int speedModifier;
-	double startTime;
+	double endTime;
     public C_ArmsUpDownTime(boolean directionIsUp, double seconds){
     	pSeconds = seconds;
     	pDirectionIsUp = directionIsUp;
@@ -31,7 +31,8 @@ public class C_ArmsUpDownTime extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ssArms.armUpDownRSet(0.9*speedModifier);
-    	startTime = Timer.getFPGATimestamp();
+    	Robot.ssArms.armUpDownLSet(0.9*speedModifier);
+    	endTime = Timer.getFPGATimestamp() + pSeconds;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,7 +42,7 @@ public class C_ArmsUpDownTime extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Timer.getFPGATimestamp() - startTime >= pSeconds;
+        return Timer.getFPGATimestamp() >= endTime;
     }
 
     // Called once after isFinished returns true
