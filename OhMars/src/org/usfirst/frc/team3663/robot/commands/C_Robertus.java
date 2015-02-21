@@ -24,7 +24,7 @@ public class C_Robertus extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDashBoard.putDashInt("x: ", i++);
+    	Robot.ssDashBoard.putDashNumber("x: ", i++);
     	Robot.ssDashBoard.putDashString("Robertus: ", "comoestas");
     }
 

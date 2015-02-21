@@ -5,17 +5,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
  *
  */
-public class C_ArmsOpenCloseHold extends Command {
+public class C_ArmsOpenCloseHold2 extends Command {
 	
 	boolean leftSide;
 	
-    public C_ArmsOpenCloseHold(boolean pLeftSide) {
+    public C_ArmsOpenCloseHold2(boolean pLeftSide) {
         leftSide = pLeftSide;
     	
     }
@@ -23,24 +22,24 @@ public class C_ArmsOpenCloseHold extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(leftSide){
-    		if(!Robot.ssArms.armLIsClosed)
+    		if(!Robot.ssArmsSolenoids.armLIsClosed)
     		{
-        		Robot.ssArms.armLClose();
+        		Robot.ssArmsSolenoids.armLClose();
     		}
     		else
     		{
-    			Robot.ssArms.armLOpen();
+    			Robot.ssArmsSolenoids.armLOpen();
     		}
     	}
     	else
     	{
-    		if(!Robot.ssArms.armRIsClosed)
+    		if(!Robot.ssArmsSolenoids.armRIsClosed)
     		{
-        		Robot.ssArms.armRClose();
+        		Robot.ssArmsSolenoids.armRClose();
     		}
     		else
     		{
-    			Robot.ssArms.armROpen();
+    			Robot.ssArmsSolenoids.armROpen();
     		}
     	}
     }

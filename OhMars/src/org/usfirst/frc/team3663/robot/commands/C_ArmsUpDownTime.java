@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
@@ -30,8 +29,8 @@ public class C_ArmsUpDownTime extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ssArms.armUpDownRSet(0.9*speedModifier);
-    	Robot.ssArms.armUpDownLSet(0.9*speedModifier);
+    	Robot.ssArmsUpDown.armUpDownRSet(0.9*speedModifier);
+    	Robot.ssArmsUpDown.armUpDownLSet(0.9*speedModifier);
     	endTime = Timer.getFPGATimestamp() + pSeconds;
     }
 

@@ -1,19 +1,15 @@
 package org.usfirst.frc.team3663.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
-import org.usfirst.frc.team3663.robot.OI;
-
 /**
- ************CURRENTLY NOT IN USE*********
+ *
  */
-public class C_ArmsIntakeControl extends Command {
-    public C_ArmsIntakeControl(){
-    	
+public class C_WaitForToteSensor extends Command {
+
+    public C_WaitForToteSensor() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -22,14 +18,11 @@ public class C_ArmsIntakeControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.ssElevator.getToteSwitch())
-    		Robot.ssArms.intakeMotorsSet(Robot.oi.driveController.getRawAxis(5));
-    	else Robot.ssArms.intakeMotorsSet(0.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.ssElevator.getToteSwitch();
     }
 
     // Called once after isFinished returns true

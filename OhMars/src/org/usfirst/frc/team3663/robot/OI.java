@@ -147,27 +147,10 @@ public class OI {
 		elevMoveToPos0.whenReleased(new C_MotorDriveTestInterrupt());
 		
 		armOpenCloseToggle = new JoystickButton(driveController, 5);
-		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(true));
-		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(true));
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold2(true));
 		
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
-		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold(false));
-		//armOpenCloseToggle.whenReleased(new C_ArmsOpenClose(false));
-		/*
-		armOpenCloseToggle = new JoystickButton(driveController, 5);
-		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(true));
-		
-		armOpenCloseToggle = new JoystickButton(driveController, 6);
-		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseTogether(false));
-		*/
-		armIntakeToggleOn = new JoystickButton(driveController, 3);
-		armIntakeToggleOn.whenPressed(new C_ArmsIntakeToggle(1.0,1.0));
-		
-		armIntakeToggleOff = new JoystickButton(driveController, 1);
-		armIntakeToggleOff.whenPressed(new C_ArmsIntakeToggle(0.0,0.0));
-		
-		armIntakeToggleReverse = new JoystickButton(driveController, 2);
-		armIntakeToggleReverse.whenPressed(new C_ArmsIntakeToggle(-1.0,-1.0));
+		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold2(false));
 		
 	}
     //// CREATING BUTTONS

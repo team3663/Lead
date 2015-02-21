@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
@@ -23,12 +22,12 @@ public class C_ArmsOpenCloseTogether extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(pOpen){
-    		Robot.ssArms.armLOpen();
-			Robot.ssArms.armROpen();
+    		Robot.ssArmsSolenoids.armLOpen();
+			Robot.ssArmsSolenoids.armROpen();
     	}
     	else{
-    		Robot.ssArms.armLClose();
-			Robot.ssArms.armRClose();
+    		Robot.ssArmsSolenoids.armLClose();
+			Robot.ssArmsSolenoids.armRClose();
     	}
     }
 

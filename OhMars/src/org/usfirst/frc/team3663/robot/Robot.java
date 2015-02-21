@@ -10,19 +10,20 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.commands.A_Log;
-import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStraight;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
+import org.usfirst.frc.team3663.robot.subsystems.SSArmsIntake;
+//import org.usfirst.frc.team3663.robot.subsystems.SSArmsIntake;
+import org.usfirst.frc.team3663.robot.subsystems.SSArmsSolenoids;
+import org.usfirst.frc.team3663.robot.subsystems.SSArmsUpDown;
 import org.usfirst.frc.team3663.robot.subsystems.SSAutonomous;
 import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 //import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
 import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.subsystems.SSElevator;
 import org.usfirst.frc.team3663.robot.commands.A_Log;
 import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
@@ -37,7 +38,12 @@ import org.usfirst.frc.team3663.robot.commands.CG_PickUpWithSensor;
  */
 public class Robot extends IterativeRobot {
 
-	public static SSArms ssArms;
+	//public static SSArms ssArms;
+	
+	public static SSArmsIntake ssArmsIntake;
+	public static SSArmsSolenoids ssArmsSolenoids;
+	public static SSArmsUpDown ssArmsUpDown;
+	
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
   	public static SSDashBoard ssDashBoard;
@@ -47,7 +53,7 @@ public class Robot extends IterativeRobot {
 	Command arcadeDrive;
 	Command ALog;
 	Command Auto;
-    CommandGroup armExecutables;
+    //CommandGroup armExecutables;
     Command defaultElevator;
     Command pickUpWithSensor;
     
@@ -65,7 +71,12 @@ public class Robot extends IterativeRobot {
     	ssDashBoard = new SSDashBoard();
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
-    	ssArms = new SSArms();
+    	//ssArms = new SSArms();
+    	
+    	ssArmsIntake = new SSArmsIntake();
+    	ssArmsSolenoids = new SSArmsSolenoids();
+    	ssArmsUpDown = new SSArmsUpDown();
+    	
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
 		//Auto = new C_EncoderTurn(0,90, true);
@@ -73,7 +84,7 @@ public class Robot extends IterativeRobot {
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
-		armExecutables = new CG_ArmsExecute();
+		//armExecutables = new CG_ArmsExecute();
 		defaultElevator = new C_DefaultElevatorRunning(0);
 		pickUpWithSensor = new CG_PickUpWithSensor();
     }
@@ -96,7 +107,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
 		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 1);
         arcadeDrive.start();
-		armExecutables.start();
+		//armExecutables.start();
 		defaultElevator.start();
 	//	pickUpWithSensor.start();
     }

@@ -30,7 +30,7 @@ public class C_Roberta extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	Robot.ssDashBoard.putDashInt("j: ", j++);
+    	Robot.ssDashBoard.putDashNumber("j: ", j++);
     	Robot.ssDashBoard.putDashString("Roberta: ", "Am I finished? why would you even ask that?");
         if (i == 300)
     	{

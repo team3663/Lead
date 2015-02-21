@@ -9,12 +9,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CG_ArmGrabbingSequence extends CommandGroup {
     public  CG_ArmGrabbingSequence() {
-    	addParallel(new C_ArmsIntakeToggle(1.0,1.0));
+    	addParallel(new C_ArmsIntakeSet(1.0,1.0));
     	addParallel(new C_ArmsOpenCloseTogether(false));
-    	if(Robot.ssElevator.getToteSwitch()){              //FIX THIS <------
-    		addParallel(new C_ArmsIntakeToggle(0.0,0.0));
-    		addParallel(new C_ArmsOpenCloseTogether(true));
-    	}
+    	addSequential(new C_WaitForToteSensor());
+		addParallel(new C_ArmsIntakeSet(0.0,0.0));
+		addParallel(new C_ArmsOpenCloseTogether(true));
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

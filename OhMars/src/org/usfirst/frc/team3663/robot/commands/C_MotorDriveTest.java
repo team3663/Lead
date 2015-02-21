@@ -64,13 +64,13 @@ public class C_MotorDriveTest extends Command {
 			Robot.ssElevator.moveInAndOut(speed);
 			break;
 		case 10:
-			Robot.ssArms.intakeMotorLSet(speed);
+			Robot.ssArmsIntake.intakeMotorLSet(speed);
 			break;
 		case 11:
-			Robot.ssArms.intakeMotorRSet(speed);
+			Robot.ssArmsIntake.intakeMotorRSet(speed);
 			break;
 		case 12:
-			Robot.ssArms.intakeMotorsSet(speed);
+			Robot.ssArmsIntake.intakeMotorsSet(speed);
 			break;
 		case 13:
 			finished = Robot.ssElevator.moveToPos(-50, 1.0);
