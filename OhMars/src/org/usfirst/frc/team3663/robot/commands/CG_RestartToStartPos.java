@@ -12,7 +12,6 @@ import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 public class CG_RestartToStartPos extends CommandGroup {
     
     public  CG_RestartToStartPos() {
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveAndSetZero());
     	addSequential(new C_ElevMoveToPos(-20));
         // Add Commands here:

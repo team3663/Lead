@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_PickUpWithSensor extends CommandGroup {
     
     public  CG_PickUpWithSensor() {
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_FindTote());
     	addSequential(new CG_PickUp());
         // Add Commands here:

@@ -1,23 +1,29 @@
 package org.usfirst.frc.team3663.robot.commands;
 
-import org.usfirst.frc.team3663.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3663.robot.Robot;
 
 /**
  *
  */
-public class C_ResetRuns extends Command {
+public class C_Interrupt extends Command {
 
-    public C_ResetRuns() {
+    public C_Interrupt() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ssElevator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
-    	Robot.runCG = true;
+    	Robot.oi.cForkIn.cancel();
+    	/*Robot.oi.cForkOut.cancel();
+    	 * 
+    	 */
+    	
+    	//test stick commands
+    	Robot.oi.cElevMoveToDashPos.cancel();
+    	Robot.oi.cMotorDriveTest.cancel();
+    	Robot.oi.cMoveAndSetZero.cancel();
     }
 
     // Called repeatedly when this Command is scheduled to run

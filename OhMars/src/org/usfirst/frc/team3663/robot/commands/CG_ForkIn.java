@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_ForkIn extends CommandGroup {
     
     public  CG_ForkIn() {
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ForkOut(false, 100));
         // Add Commands here:
         // e.g. addSequential(new Command1());

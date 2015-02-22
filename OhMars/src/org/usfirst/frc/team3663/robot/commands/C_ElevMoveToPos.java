@@ -21,7 +21,6 @@ public class C_ElevMoveToPos extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
     	ticks = getTicks();
     	Robot.ssElevator.prepForMove(ticks);
     }
@@ -33,7 +32,7 @@ public class C_ElevMoveToPos extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand || !Robot.runCG)
+        if (finished)
         {
         	return true;
         }
@@ -57,7 +56,7 @@ public class C_ElevMoveToPos extends Command {
     	{
     		if (origTicks == -49)
     		{
-    			origTicks = (int)(Robot.ssDashBoard.getFromDashInt("encoderPosition: "));
+    			origTicks = (int)(Robot.ssDashBoard.getFromDashNumber("encoderPosition: "));
     		}
     		switch(origTicks)
     		{

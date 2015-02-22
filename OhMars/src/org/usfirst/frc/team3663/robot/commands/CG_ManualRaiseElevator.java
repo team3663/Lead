@@ -3,12 +3,11 @@ package org.usfirst.frc.team3663.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ *MAY NOT NEED COMMAND GROUP. if not, then delete file
  */
 public class CG_ManualRaiseElevator extends CommandGroup {
     
     public  CG_ManualRaiseElevator() {
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-25));
         // Add Commands here:
         // e.g. addSequential(new Command1());

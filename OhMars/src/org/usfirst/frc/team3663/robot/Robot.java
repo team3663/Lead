@@ -9,26 +9,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3663.robot.commands.A_Log;
-import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
-//import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
-//import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
-import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
-import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStraight;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
-import org.usfirst.frc.team3663.robot.subsystems.SSAutonomous;
-import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
-//import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
-import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
-import org.usfirst.frc.team3663.robot.subsystems.SSElevator;
-import org.usfirst.frc.team3663.robot.commands.A_Log;
-import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
-import org.usfirst.frc.team3663.robot.commands.CG_PickUpWithSensor;
+import org.usfirst.frc.team3663.robot.commands.*;
+import org.usfirst.frc.team3663.robot.subsystems.*;
 
-/**
+	/**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
@@ -40,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static SSArms ssArms;
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
+	public static SSFork ssFork;
   	public static SSDashBoard ssDashBoard;
   	public static SSAutonomous ssAutonomous;
 	public static OI oi;
@@ -65,6 +50,7 @@ public class Robot extends IterativeRobot {
     	ssDashBoard = new SSDashBoard();
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
+    	ssFork = new SSFork();
     	ssArms = new SSArms();
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();

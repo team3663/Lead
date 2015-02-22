@@ -9,6 +9,7 @@ import org.usfirst.frc.team3663.robot.Robot;
 public class C_ElevMoveAndSetZero extends Command {
 
 	boolean finished;
+	boolean aboveZero;
 	
     public C_ElevMoveAndSetZero() {
         // Use requires() here to declare subsystem dependencies
@@ -17,18 +18,25 @@ public class C_ElevMoveAndSetZero extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
     	Robot.ssElevator.moveAndSetZeroInit();
+    	aboveZero = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	finished = Robot.ssElevator.moveAndSetZero();
+    	if (aboveZero)
+    	{
+    		aboveZero = Robot.ssElevator.moveDownToZero();
+    	}
+    	else
+    	{
+    		finished = Robot.ssElevator.moveAndSetZero();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (finished || !Robot.runCommand || !Robot.runCG)
+    	if (finished)
     	{
     		return true;
     	}
@@ -37,7 +45,7 @@ public class C_ElevMoveAndSetZero extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ssElevator.stopElevator();
+    	Robot.ssElevator.terminateMove();
     }
 
     // Called when another command which requires one or more of the same
