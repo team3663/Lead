@@ -3,48 +3,33 @@ package org.usfirst.frc.team3663.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
  *
  */
-public class C_ArmsUpDown extends Command {
-	double axisValue;
-    public C_ArmsUpDown(){
-    	
+public class C_ArmsIntakeSet extends Command {
+	double pLeftSpeed;
+	double pRightSpeed;
+    public C_ArmsIntakeSet(double leftSpeed, double rightSpeed){
+    	pLeftSpeed = leftSpeed;
+    	pRightSpeed = rightSpeed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+		Robot.ssArmsIntake.intakeMotorLSet(pLeftSpeed);
+		Robot.ssArmsIntake.intakeMotorRSet(pRightSpeed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	///if(Robot.oi.driveController.getRawButton(7)){
-	    	axisValue = -Robot.oi.driveController.getRawAxis(5);
-	    	if(Math.abs(axisValue) < 0.2){
-	    		Robot.ssArms.armUpDownRSet(0);
-	    		Robot.ssArms.armUpDownLSet(0);
-	    		axisValue = 0;
-	    	}
-	    	
-	    	Robot.ssArms.armUpDownRSet(axisValue);
-	    	if(!Robot.oi.driveController.getRawButton(8)){
-	    		Robot.ssArms.armUpDownLSet(axisValue);
-	    	}
-	    	//SmartDashboard.putNumber("yAxis", axisValue);
-    	///}else{
-	    	///Robot.ssArms.armUpDownRSet(0);
-    		///Robot.ssArms.armUpDownLSet(0);
-    	///}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

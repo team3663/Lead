@@ -21,7 +21,12 @@ import org.usfirst.frc.team3663.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 
-	public static SSArms ssArms;
+	//public static SSArms ssArms;
+	
+	public static SSArmsIntake ssArmsIntake;
+	public static SSArmsSolenoids ssArmsSolenoids;
+	public static SSArmsUpDown ssArmsUpDown;
+	
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
 	public static SSFork ssFork;
@@ -32,7 +37,7 @@ public class Robot extends IterativeRobot {
 	Command arcadeDrive;
 	Command ALog;
 	Command Auto;
-    CommandGroup armExecutables;
+    //CommandGroup armExecutables;
     Command defaultElevator;
     Command pickUpWithSensor;
     
@@ -51,7 +56,12 @@ public class Robot extends IterativeRobot {
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
     	ssFork = new SSFork();
-    	ssArms = new SSArms();
+    	//ssArms = new SSArms();
+    	
+    	ssArmsIntake = new SSArmsIntake();
+    	ssArmsSolenoids = new SSArmsSolenoids();
+    	ssArmsUpDown = new SSArmsUpDown();
+    	
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
 		//Auto = new C_EncoderTurn(0,90, true);
@@ -59,7 +69,7 @@ public class Robot extends IterativeRobot {
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
-		armExecutables = new CG_ArmsExecute();
+		//armExecutables = new CG_ArmsExecute();
 		defaultElevator = new C_DefaultElevatorRunning(0);
 		pickUpWithSensor = new CG_PickUpWithSensor();
     }
@@ -82,7 +92,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
 		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 1);
         arcadeDrive.start();
-		armExecutables.start();
+		//armExecutables.start();
 		defaultElevator.start();
 	//	pickUpWithSensor.start();
     }
