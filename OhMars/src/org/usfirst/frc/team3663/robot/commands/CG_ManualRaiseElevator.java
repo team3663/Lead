@@ -4,13 +4,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ *MAY NOT NEED COMMAND GROUP. if not, then delete file
  */
 public class CG_ManualRaiseElevator extends CommandGroup {
     
     public  CG_ManualRaiseElevator() {
     	SmartDashboard.putString("ssElevatorCG", "CG_ManualRaiseElevator start");
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-25));
     	SmartDashboard.putString("ssElevatorCG", "CG_ManualRaiseElevator end");
         // Add Commands here:

@@ -10,7 +10,6 @@ public class CG_PickUpWithSensor extends CommandGroup {
     
     public  CG_PickUpWithSensor() {
     	SmartDashboard.putString("ssElevatorCG", "CG_PickUpWithSensor start");
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_FindTote());
     	addSequential(new CG_PickUp());
     	SmartDashboard.putString("ssElevatorCG", "CG_PickUpWithSensor end");

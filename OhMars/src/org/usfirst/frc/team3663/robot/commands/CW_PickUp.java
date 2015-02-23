@@ -15,12 +15,11 @@ public class CW_PickUp extends Command {
 
     public CW_PickUp() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ssElevator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
     	C_ElevMoveToPos movePos1 = new C_ElevMoveToPos(-1);
     	move1 = movePos1;
     	C_ElevMoveToPos movePos2 = new C_ElevMoveToPos(-25);
@@ -47,7 +46,7 @@ public class CW_PickUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || Robot.runCommand)
+        if (finished)
         {
         	return true;
         }

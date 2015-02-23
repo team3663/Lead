@@ -15,7 +15,6 @@ public class CG_RestartToStartPos extends CommandGroup {
     
     public  CG_RestartToStartPos() {
     	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos start");
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveAndSetZero());
     	addSequential(new C_ElevMoveToPos(-20));
     	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos end");

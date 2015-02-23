@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 
 /**
  *
@@ -15,7 +14,6 @@ public class CG_DropOffStep extends CommandGroup {
     
     public  CG_DropOffStep() {
     	SmartDashboard.putString("ssElevatorCG", "CG_DropOffStep start");
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-15));
     	addSequential(new C_ForkOut(true, 7));
     	addSequential(new C_ElevMoveToPos(-5));

@@ -10,7 +10,6 @@ public class CG_MoveToPos1 extends CommandGroup {
     
     public  CG_MoveToPos1() {
     	SmartDashboard.putString("ssElevatorCG", "CG_MoveToPos1 start");
-    	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-1));
     	SmartDashboard.putString("ssElevatorCG", "CG_MoveToPos1 end");
         // Add Commands here:

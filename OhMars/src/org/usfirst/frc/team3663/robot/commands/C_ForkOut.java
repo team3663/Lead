@@ -20,7 +20,7 @@ public class C_ForkOut extends Command {
 	
     public C_ForkOut(boolean pGoOut, double timeToRun) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssElevator);
+        requires(Robot.ssFork);
         goOut = pGoOut;
         time = timeToRun;
     }
@@ -45,7 +45,7 @@ public class C_ForkOut extends Command {
     	currTime = Timer.getFPGATimestamp();
     	if (currTime < endTime)
     	{
-    		Robot.ssElevator.moveInAndOut(speed);
+    		Robot.ssFork.set(speed);
     		finished = false;
     	}
     	else
@@ -56,7 +56,7 @@ public class C_ForkOut extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand || !Robot.runCG)
+        if (finished)
 		{
         	return true;
 		}
@@ -65,14 +65,14 @@ public class C_ForkOut extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ssElevator.moveInAndOut(0);
-    	SmartDashboard.putString("ssElevator", "C_ForkOut end");
+    	Robot.ssFork.set(0);
+    	SmartDashboard.putString("ssFork", "C_ForkOut end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
-    	SmartDashboard.putString("ssElevator", "C_ForkOut interrupted");
+    	SmartDashboard.putString("ssFork", "C_ForkOut interrupted");
     }
 }

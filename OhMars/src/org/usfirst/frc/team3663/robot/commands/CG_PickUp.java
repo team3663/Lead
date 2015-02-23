@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
-
 /**
  *
  */
@@ -14,7 +11,6 @@ public class CG_PickUp extends CommandGroup {
     
     public  CG_PickUp() {
     	SmartDashboard.putString("ssElevatorCG", "CG_PickUp start");
-    	//addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveToPos(-1));
     	addSequential(new C_ElevMoveToPos(-25));
     	SmartDashboard.putString("ssElevatorCG", "CG_PickUp end");

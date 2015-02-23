@@ -21,7 +21,6 @@ public class C_ElevMoveToPos extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
     	ticks = getTicks();
     	Robot.ssElevator.prepForMove(ticks);
     	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose initialize");
@@ -34,7 +33,7 @@ public class C_ElevMoveToPos extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand || !Robot.runCG)
+        if (finished)
         {
         	return true;
         }

@@ -9,10 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CG_ForkIn extends CommandGroup {
     
     public  CG_ForkIn() {
-    	SmartDashboard.putString("ssElevatorCG", "CG_ForkIn start");
-    	addSequential(new C_ResetRuns());
+    	SmartDashboard.putString("ssForkCG", "CG_ForkIn start");
     	addSequential(new C_ForkOut(false, 100));
-    	SmartDashboard.putString("ssElevatorCG", "CG_ForkIn end");
+    	SmartDashboard.putString("ssForkCG", "CG_ForkIn end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
