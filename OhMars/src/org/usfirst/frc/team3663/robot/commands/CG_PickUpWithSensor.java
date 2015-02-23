@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -8,9 +9,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_PickUpWithSensor extends CommandGroup {
     
     public  CG_PickUpWithSensor() {
+    	SmartDashboard.putString("ssElevatorCG", "CG_PickUpWithSensor start");
     	addSequential(new C_ResetRuns());
     	addSequential(new C_FindTote());
     	addSequential(new CG_PickUp());
+    	SmartDashboard.putString("ssElevatorCG", "CG_PickUpWithSensor end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

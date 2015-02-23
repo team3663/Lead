@@ -42,6 +42,7 @@ public class C_ArmsOpenCloseHold2 extends Command {
     			Robot.ssArmsSolenoids.armROpen();
     		}
     	}
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseHold2 initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -56,10 +57,12 @@ public class C_ArmsOpenCloseHold2 extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseHold2 end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseHold2 interrupted");
     }
 }

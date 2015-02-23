@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.Robot;
 
 /**
@@ -19,6 +21,7 @@ public class C_ElevMoveAndSetZero extends Command {
     protected void initialize() {
     	Robot.runCommand = true;
     	Robot.ssElevator.moveAndSetZeroInit();
+    	SmartDashboard.putString("ssElevator", "C_ElevMoveAndSetZero initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,11 +41,13 @@ public class C_ElevMoveAndSetZero extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.ssElevator.stopElevator();
+    	SmartDashboard.putString("ssElevator", "C_ElevMoveAndSetZero end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    	SmartDashboard.putString("ssElevator", "C_ElevMoveAndSetZero interrupted");
     }
 }

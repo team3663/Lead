@@ -11,8 +11,8 @@ import org.usfirst.frc.team3663.robot.OI;
 /**
  *
  */
-public class C_AutonomousMasterChoosing extends Command {
-    public C_AutonomousMasterChoosing(){
+public class C_AutonomousChooser extends Command {
+    public C_AutonomousChooser(){
     	
     }
 
@@ -32,6 +32,7 @@ public class C_AutonomousMasterChoosing extends Command {
     		case 3:
     			break;
     	}
+    	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,10 +46,12 @@ public class C_AutonomousMasterChoosing extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    }
+    	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser interrupted");
+	}
 }

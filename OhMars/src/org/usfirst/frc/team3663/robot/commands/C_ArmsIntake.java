@@ -17,6 +17,7 @@ public class C_ArmsIntake extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putString("ssArmIntake", "C_ArmsIntake initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,7 +39,7 @@ public class C_ArmsIntake extends Command {
     		 *if(Robot.oi.driveController.getPOV() == 180)
     		 *	Robot.ssArmsIntake.intakeMotorLSet(-0.8);
     		 *else if(Robot.oi.driveController.getPOV() == 270)
-    		 */	Robot.ssArmsIntake.intakeMotorRSet(-0.8);
+    		 */	//Robot.ssArmsIntake.intakeMotorRSet(-0.8);
     	}
     	else
     	{
@@ -53,10 +54,12 @@ public class C_ArmsIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssArmIntake", "C_ArmsIntake end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssArmIntake", "C_ArmsIntake interrupted");
     }
 }

@@ -153,6 +153,23 @@ public class OI {
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold2(false));
 		
 	}
+	public void updateStatus(){
+		SmartDashboard.putNumber("driveController:LeftX", driveController.getRawAxis(0));
+		SmartDashboard.putNumber("driveController:LeftY", driveController.getRawAxis(1));
+		SmartDashboard.putNumber("driveController:RightY", driveController.getRawAxis(5));
+		SmartDashboard.putNumber("driveController:Accel", driveController.getRawAxis(3));
+		SmartDashboard.putNumber("driveController:Decel", driveController.getRawAxis(2));
+		if(driveController.getRawButton(4)){
+			SmartDashboard.putString("driveSafeMode", "on");
+		}else{
+			SmartDashboard.putString("driveSafeMode", "off");
+		}
+		if(driveControllerOn){
+			SmartDashboard.putString("driveControl", "on");
+		}else{
+			SmartDashboard.putString("driveControl","off");
+		}
+	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button

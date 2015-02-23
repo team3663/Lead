@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
@@ -12,9 +14,11 @@ import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 public class CG_RestartToStartPos extends CommandGroup {
     
     public  CG_RestartToStartPos() {
+    	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos start");
     	addSequential(new C_ResetRuns());
     	addSequential(new C_ElevMoveAndSetZero());
     	addSequential(new C_ElevMoveToPos(-20));
+    	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

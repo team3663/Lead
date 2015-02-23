@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.Robot;
 
 /**
@@ -19,6 +21,7 @@ public class C_DefaultElevatorRunning extends Command {
     protected void initialize() {
     	lastAxis2 = Robot.oi.buttonController.getRawAxis(2);
     	lastAxis3 = Robot.oi.buttonController.getRawAxis(3);
+    	SmartDashboard.putString("ssElevator", "C_DefaultElevatorRunning initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -57,10 +60,12 @@ public class C_DefaultElevatorRunning extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssElevator", "C_DefaultElevatorRunning end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssElevator", "C_DefaultElevatorRunning interrupted");
     }
 }

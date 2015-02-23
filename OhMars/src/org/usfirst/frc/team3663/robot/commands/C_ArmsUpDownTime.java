@@ -13,14 +13,15 @@ import org.usfirst.frc.team3663.robot.OI;
  */
 public class C_ArmsUpDownTime extends Command {
 	double axisValue;
-	double pSeconds;
-	boolean pDirectionIsUp;
+	double seconds;
+	boolean directionIsUp;
 	int speedModifier;
 	double endTime;
-    public C_ArmsUpDownTime(boolean directionIsUp, double seconds){
-    	pSeconds = seconds;
-    	pDirectionIsUp = directionIsUp;
-    	if(pDirectionIsUp){
+    public C_ArmsUpDownTime(boolean pDirectionIsUp, double pSeconds){
+    	requires(Robot.ssArmsUpDown);
+    	seconds = pSeconds;
+    	directionIsUp = pDirectionIsUp;
+    	if(directionIsUp){
         	speedModifier = 1;
     	}else{
     		speedModifier = -1;
@@ -31,7 +32,8 @@ public class C_ArmsUpDownTime extends Command {
     protected void initialize() {
     	Robot.ssArmsUpDown.armUpDownRSet(0.9*speedModifier);
     	Robot.ssArmsUpDown.armUpDownLSet(0.9*speedModifier);
-    	endTime = Timer.getFPGATimestamp() + pSeconds;
+    	endTime = Timer.getFPGATimestamp() + seconds;
+    	SmartDashboard.putString("ssArmsUpDown", "C_ArmsUpDownTime initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -46,10 +48,12 @@ public class C_ArmsUpDownTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssArmsUpDown", "C_ArmsUpDownTime end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssArmsUpDown", "C_ArmsUpDownTime interrupted");
     }
 }

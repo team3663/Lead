@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -13,7 +14,7 @@ import org.usfirst.frc.team3663.robot.commands.A_Log;
 //import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
 //import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
-import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
+import org.usfirst.frc.team3663.robot.commands.C_AutonomousChooser;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStraight;
 import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
 import org.usfirst.frc.team3663.robot.subsystems.SSArmsIntake;
@@ -64,7 +65,9 @@ public class Robot extends IterativeRobot {
 	static String testMotorName;
 	public static boolean runCommand = true;
 	public static boolean runCG = true;
-
+	
+	double updateStatusNextRefresh;
+	final double UPDATESTATUSREFRESHINTERVAL = 0.25;
 
 	
     public void robotInit() {
@@ -80,7 +83,7 @@ public class Robot extends IterativeRobot {
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
 		//Auto = new C_EncoderTurn(0,90, true);
-		Auto = new C_AutonomousMasterChoosing();
+		Auto = new C_AutonomousChooser();
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
@@ -220,5 +223,21 @@ public class Robot extends IterativeRobot {
 			break;
     	}
     	SmartDashboard.putString("testMotor: ", testMotorName);
+    }
+    public void updateStatus()
+    {
+        double currentTime = Timer.getFPGATimestamp();
+        if (currentTime >= updateStatusNextRefresh)
+        {
+            updateStatusNextRefresh += UPDATESTATUSREFRESHINTERVAL;
+            if (currentTime > updateStatusNextRefresh)
+                updateStatusNextRefresh = currentTime + UPDATESTATUSREFRESHINTERVAL;
+            ssArmsIntake.updateStatus();
+            ssArmsSolenoids.updateStatus();
+            ssArmsUpDown.updateStatus();
+            ssAutonomous.updateStatus();
+            ssDriveTrain.updateStatus();
+            ssElevator.updateStatus();
+        }
     }
 }

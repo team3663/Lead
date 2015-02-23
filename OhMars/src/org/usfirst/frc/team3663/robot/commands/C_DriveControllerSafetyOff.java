@@ -19,6 +19,7 @@ public class C_DriveControllerSafetyOff extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.oi.driveControllerOn = true;
+    	SmartDashboard.putString("ssDriveTrain","C_DriveControllerSafetyOff initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,10 +34,12 @@ public class C_DriveControllerSafetyOff extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssDriveTrain","C_DriveControllerSafetyOff end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssDriveTrain","C_DriveControllerSafetyOff interrupted");
     }
 }

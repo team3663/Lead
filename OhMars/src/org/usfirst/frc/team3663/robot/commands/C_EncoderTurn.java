@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot.commands;
 import org.usfirst.frc.team3663.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,6 +23,7 @@ public class C_EncoderTurn extends Command {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
     	Robot.ssDriveTrain.eDistanceArc(radius, angle, true);
+    	SmartDashboard.putString("ssDriveTrain","C_EncoderTurn initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -61,6 +63,7 @@ public class C_EncoderTurn extends Command {
     	Robot.ssDriveTrain.motorLeftSet(0);
     	Robot.ssDriveTrain.motorRightSet(0);
     	Robot.ssDriveTrain.breakmodeDriveMotors(false);
+    	SmartDashboard.putString("ssDriveTrain","C_EncoderTurn end");
     }
     
 
@@ -68,5 +71,6 @@ public class C_EncoderTurn extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    	SmartDashboard.putString("ssDriveTrain","C_EncoderTurn interrupted");
     }
 }

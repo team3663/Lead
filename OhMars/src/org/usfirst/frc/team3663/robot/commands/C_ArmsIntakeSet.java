@@ -7,20 +7,22 @@ import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
- *
+ *FOR AUTONOMOUS ONLY*
  */
 public class C_ArmsIntakeSet extends Command {
-	double pLeftSpeed;
-	double pRightSpeed;
-    public C_ArmsIntakeSet(double leftSpeed, double rightSpeed){
-    	pLeftSpeed = leftSpeed;
-    	pRightSpeed = rightSpeed;
+	double leftSpeed;
+	double rightSpeed;
+    public C_ArmsIntakeSet(double pLeftSpeed, double pRightSpeed){
+    	requires(Robot.ssArmsIntake);
+    	leftSpeed = pLeftSpeed;
+    	rightSpeed = pRightSpeed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		Robot.ssArmsIntake.intakeMotorLSet(pLeftSpeed);
-		Robot.ssArmsIntake.intakeMotorRSet(pRightSpeed);
+		Robot.ssArmsIntake.intakeMotorLSet(leftSpeed);
+		Robot.ssArmsIntake.intakeMotorRSet(rightSpeed);
+    	SmartDashboard.putString("ssArmIntake", "C_ArmsIntakeSet initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,10 +36,12 @@ public class C_ArmsIntakeSet extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssArmIntake", "C_ArmsIntakeSet end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssArmIntake", "C_ArmsIntakeSet interrupted");
     }
 }

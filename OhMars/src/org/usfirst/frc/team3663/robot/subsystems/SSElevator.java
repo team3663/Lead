@@ -213,4 +213,19 @@ public class SSElevator extends Subsystem {
     		elevMotor2.enableBrakeMode(false);
     	}
     }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("ElevEncoder", Robot.ssElevator.winchEncoder.get());
+    	SmartDashboard.putNumber("ElevMotor1", Robot.ssElevator.elevMotor1.get());
+    	SmartDashboard.putNumber("ElevMotor2", Robot.ssElevator.elevMotor2.get());
+    	if(Robot.ssElevator.toteSensor.get()){
+    		SmartDashboard.putString("ElevToteSensor", "toteIn");
+    	}else{
+    		SmartDashboard.putString("ElevToteSensor", "noTote");
+    	}
+    	if(Robot.ssElevator.brakeOn){
+    		SmartDashboard.putString("ElevBrake", "on");
+    	}else{
+    		SmartDashboard.putString("ElevBrake", "off");
+    	}
+    }
 }
