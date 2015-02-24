@@ -33,7 +33,6 @@ public class C_AutonomousChooser extends Command {
     		case 2:
     			theOneToRun_C = new C_EncoderTurn(26, 30, true, .2);
     			theOneToRun_C.start();
-    			
     			break;
     		case 3:
     			break;
