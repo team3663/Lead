@@ -185,6 +185,65 @@ public class SSDriveTrain extends Subsystem {
     public void difference(){
     	diffTicksR = rightEncoder.get() - finalTicksR;
     	diffTicksL = leftEncoder.get() - finalTicksL;
+    }  
+    
+    public int lastDistanceR = leftEncoder.get(), lastDistanceL = rightEncoder.get();
+    
+    public boolean rampDown(double numberMultiplied)
+    {
+    	int currentDistanceR = rightEncoder.get(), currentDistanceL = leftEncoder.get(); 
+    	if(!(lastDistanceR < 10 && lastDistanceR > 10) && diffTicksR > diffTicksL)
+    	{
+    		if(speedR > 0 && ((currentDistanceR - lastDistanceR)*numberMultiplied >= diffTicksR))
+    		{
+    			setTheSpeeds(speedR - .1);
+    			//speedR -= .1;
+    		}
+    		else if(speedR < 0 && ((currentDistanceR - lastDistanceR)*numberMultiplied <= diffTicksR))
+    		{
+    			setTheSpeeds(speedR + .1);
+    			//speedR += .1;
+    		}
+    		lastDistanceR = currentDistanceR;
+    		lastDistanceL = currentDistanceL;
+    		return false;
+    	}
+    	else if(!(lastDistanceL < 10 && lastDistanceL > 10) && diffTicksR < diffTicksL)
+    	{
+    		if(speedL > 0 && ((currentDistanceL - lastDistanceL)*numberMultiplied >= diffTicksL))
+    		{
+    			setTheSpeeds(speedR - .1);
+    			//speedL -= .1;
+    		}
+    		else if(speedL < 0 && ((currentDistanceL - lastDistanceL)*numberMultiplied <= diffTicksL))
+    		{
+    			setTheSpeeds(speedR + .1);
+    			//speedL += .1;
+    		}
+    		lastDistanceR = currentDistanceR;
+    		lastDistanceL = currentDistanceL;
+    		return false;
+    	}
+		lastDistanceR = currentDistanceR;
+		lastDistanceL = currentDistanceL;
+    	return true;
+    }
+    
+    public void rampUp(double rampUpSpeed, double topSpeed)
+    {
+    	if(!rampDown(4) && (speedL < topSpeed || speedR < topSpeed))
+    	{
+    		if(diffTicksR > diffTicksL)
+    		{
+    			speedR += rampUpSpeed;
+    			setTheSpeeds(speedR);    			
+    		}
+    		else 
+    		{
+    			speedL += rampUpSpeed;
+    			setTheSpeeds(speedL);    	
+    		}
+    	}
     }
     public void updateStatus(){
     	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());
