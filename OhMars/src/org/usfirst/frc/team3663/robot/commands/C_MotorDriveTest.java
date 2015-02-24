@@ -34,21 +34,21 @@ public class C_MotorDriveTest extends Command {
 	    	//Robot.ssDriveTrain.motor1Set(speed);
     		break;
 		case 1:
-			Robot.ssDriveTrain.motor2Set(speed);
+			//Robot.ssDriveTrain.motor2Set(speed);
 			break;
 		case 2:
 			//Robot.ssDriveTrain.motor3Set(speed);
 			break;
 		case 3:
-			Robot.ssDriveTrain.motor4Set(speed);
+			//Robot.ssDriveTrain.motor4Set(speed);
 			break;
 		case 4:
 	    	//Robot.ssDriveTrain.motor1Set(speed);
-	    	Robot.ssDriveTrain.motor2Set(speed);
+	    	//Robot.ssDriveTrain.motor2Set(speed);
 			break;
 		case 5:
 	    	//Robot.ssDriveTrain.motor3Set(speed);
-	    	Robot.ssDriveTrain.motor4Set(speed);
+	    	//Robot.ssDriveTrain.motor4Set(speed);
 			break;
 		case 6:
 			Robot.ssElevator.motor1Set(speed);

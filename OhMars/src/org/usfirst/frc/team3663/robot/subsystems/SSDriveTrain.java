@@ -62,28 +62,22 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorL1.set(speed);
     }
     
-    public void motor2Set(double speed)
-    {
-    	driveMotorL2.set(speed);
-    }
+    
 
     public void motor3Set(double speed)
     {
     	driveMotorR1.set(speed);
     }
 
-    public void motor4Set(double speed)
-    {
-    	driveMotorR2.set(speed);
-    }
+    
     
     public void motorRightSet(double speed){
-    	driveMotorR2.set(-speed);
+    	//driveMotorR2.set(-speed);
     	driveMotorR1.set(-speed);
     }
     
     public void motorLeftSet(double speed){
-    	driveMotorL2.set(speed);
+    	//driveMotorL2.set(speed);
     	driveMotorL1.set(speed);
     }
     
@@ -192,12 +186,6 @@ public class SSDriveTrain extends Subsystem {
     	diffTicksL = leftEncoder.get() - finalTicksL;
     }  
     
-<<<<<<< HEAD
-=======
-    public int lastDistanceR = leftEncoder.get();
-    public int lastDistanceL = rightEncoder.get();
-    
->>>>>>> b573c9901527294d618f13911a5f84d461f99b2f
     public boolean rampDown(double numberMultiplied)
     {
     	int currentDistanceR = rightEncoder.get(), currentDistanceL = leftEncoder.get(); 
