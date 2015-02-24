@@ -187,7 +187,8 @@ public class SSDriveTrain extends Subsystem {
     	diffTicksL = leftEncoder.get() - finalTicksL;
     }  
     
-    public int lastDistanceR = leftEncoder.get(), lastDistanceL = rightEncoder.get();
+    public int lastDistanceR = leftEncoder.get();
+    public int lastDistanceL = rightEncoder.get();
     
     public boolean rampDown(double numberMultiplied)
     {

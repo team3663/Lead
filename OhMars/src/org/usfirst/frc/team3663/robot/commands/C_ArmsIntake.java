@@ -28,7 +28,7 @@ public class C_ArmsIntake extends Command {
     	 * and not being able to operate the arm wheels if need be. Say, a fleck of
     	 * something is stuck to the light sensor and then the arms are useless
     	 */
-    	if(!Robot.ssElevator.getToteSwitch()){
+    	if(Robot.ssElevator.getToteSwitch()){
     		if(Robot.oi.driveController.getRawButton(1))
     			Robot.ssArmsIntake.intakeMotorsSet(0.0);
     		if(Robot.oi.driveController.getRawButton(2))

@@ -92,7 +92,6 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 1);
         arcadeDrive.start();
 		//armExecutables.start();
 		defaultElevator.start();
