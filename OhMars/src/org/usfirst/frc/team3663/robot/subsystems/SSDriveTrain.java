@@ -233,7 +233,16 @@ public class SSDriveTrain extends Subsystem {
     {
     	if(!rampDown(4) && (speedL < topSpeed || speedR < topSpeed))
     	{
-    		
+    		if(diffTicksR > diffTicksL)
+    		{
+    			speedR += rampUpSpeed;
+    			setTheSpeeds(speedR);    			
+    		}
+    		else 
+    		{
+    			speedL += rampUpSpeed;
+    			setTheSpeeds(speedL);    	
+    		}
     	}
     }
     public void updateStatus(){
