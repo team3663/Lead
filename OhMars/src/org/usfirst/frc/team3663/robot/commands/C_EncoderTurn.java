@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class C_EncoderTurn extends Command {
 	int angle, radius;
+	double speed;
 	boolean r = false,l = false;
-    public C_EncoderTurn(int pRadius, int pAngle, boolean turn) {
+    public C_EncoderTurn(int pRadius, int pAngle, boolean turn, double pSpeed) {
     	angle = pAngle;
     	radius = pRadius;
+    	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -29,7 +31,7 @@ public class C_EncoderTurn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.ssDriveTrain.difference();
-    	Robot.ssDriveTrain.setTheSpeeds(.2);
+    	Robot.ssDriveTrain.setTheSpeeds(speed);
     	if(r == false){
         	Robot.ssDriveTrain.timeRunningR++;
     		Robot.ssDriveTrain.motorRightSet(Robot.ssDriveTrain.speedR);
