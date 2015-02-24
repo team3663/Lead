@@ -10,7 +10,7 @@ public class C_FindTote extends Command {
 
     public C_FindTote() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssElevator);
+        //requires(Robot.ssElevator);
     }
 
     // Called just before this Command runs the first time
@@ -24,11 +24,7 @@ public class C_FindTote extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (!Robot.ssElevator.getToteSwitch() || !Robot.runCommand)
-    	{
-    		return true;
-    	}
-        return false;
+    	return !Robot.ssElevator.getToteSwitch();
     }
 
     // Called once after isFinished returns true

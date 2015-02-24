@@ -26,9 +26,12 @@ public class SSElevator extends Subsystem {
 	public boolean brakeOn;
 	boolean startZeroState;
 	double speed;
-	final double maxSpeedP = 1.0;
+	double lastSpeed = 0;
+	final double absMaxSpeed = 1.0;
+	final double absMinSpeed = 0.2;
 	double maxSpeed;
 	double delta, manualDelta;
+	final double elevDelta = 0.05;
 	int dir, manualDir;
 //	double currTime, lastTime;
 	//int lastTicks, startTicks;
@@ -101,50 +104,48 @@ public class SSElevator extends Subsystem {
 		{
     		dir = -1;
 		}
-		delta = dir*Robot.elevDelta;
+		delta = dir*elevDelta;
 		SmartDashboard.putNumber("ticksEntered: ", ticks);
-		speed = 0;
+		speed = lastSpeed = 0;
     }
     
-    public boolean moveToPos(int ticks, double pMaxSpeed)
-    {
-    	if (pMaxSpeed > maxSpeedP)
+    //questions: are we there yet? are we going up? are we accelerating?
+    public boolean moveToPos(int pTicks, double pMaxSpeed)
+    {//find place to init speed
+    	Robot.ssDashBoard.putDashString("testing moveToPos Start: ", "beginning moveToPos");
+    	int acceleration = 1;
+    	int dir = 1;
+    	int currTicks = winchEncoder.get();
+    	int tickDelta = Math.abs(currTicks-pTicks);
+		if (tickDelta < 5 || (pMaxSpeed < absMinSpeed && lastSpeed <= absMinSpeed))
+		{
+			terminateMove();
+			lastSpeed = 0;
+			return true;
+		}
+    	if (currTicks > pTicks)
     	{
-    		pMaxSpeed = maxSpeedP;
+    		dir = -1;
     	}
-    	maxSpeed = dir*pMaxSpeed;
-    	int encoderVal = winchEncoder.get();
-    	if (dir == 1)
-    	{
-    		if (encoderVal > ticks)
-    		{
-    			return true;
-    		}
-    		else if (encoderVal > ticks-15)
-    		{
-    			maxSpeed = 0.4;
-    			delta = -delta;
-    		}
-    	}
-    	else
-    	{
-    		int diff = encoderVal - ticks;
-    		if (diff <= 0)
-    		{
-    			return true;
-    		}
-    		else if (diff < 60)
-    		{
-    			maxSpeed = -0.5;
-    			delta = -delta;
-    		}
-    	}
-    	speed+=delta;
-    	if (Math.abs(speed) > Math.abs(maxSpeed))
-    	{
-    		speed = maxSpeed;
-    	}
-    	motorsSet(speed);
+		if (tickDelta < 50)
+		{
+			acceleration = -1;
+		}
+		speed = Math.abs(lastSpeed) + acceleration*delta;
+		if (speed >  maxSpeed)
+		{
+			speed = maxSpeed;
+		}
+		if (speed > absMaxSpeed)
+		{
+			speed = absMaxSpeed;
+		}
+		if (speed < absMinSpeed)
+		{
+			speed = absMinSpeed;
+		}
+		lastSpeed = dir*speed;
+    	motorsSet(lastSpeed);
     	return false;
     }
     

@@ -41,7 +41,6 @@ public class Robot extends IterativeRobot {
     Command defaultElevator;
     Command pickUpWithSensor;
     
-    public final static double elevDelta = 0.05;
 	public static double motorTestSpeed = 0;
 	public static int testMotor = 0;
 	public final static int encoderZeroAdjust = -92;

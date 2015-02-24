@@ -2,8 +2,10 @@ package org.usfirst.frc.team3663.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
+
 import org.usfirst.frc.team3663.robot.commands.*;
 
 public class OI {
@@ -47,11 +49,19 @@ public class OI {
 	public JoystickButton resetToStart;
 	public JoystickButton manualRaiseElevator;
 	public JoystickButton manualForkIn;
+	public JoystickButton manualForkOut;
 	
-	public C_ForkOut cForkIn;
-	public C_ElevMoveToPos cElevMoveToDashPos;
-	public C_MotorDriveTest cMotorDriveTest;
-	public C_ElevMoveAndSetZero cMoveAndSetZero;
+	Command cgPickUpWithSensor;
+	Command cgScoringPlatform;
+	Command cgStep;
+	Command cgResetToStart;
+	Command cgManualRaiseElevator;
+	Command cForkIn;
+	Command cForkOut;
+	
+	Command cElevMoveToDashPos;
+	Command cMotorDriveTest;
+	Command cMoveAndSetZero;
 	//-------------
 	//-0-0-0-0-0-0    BOB STUFF
 	public JoystickButton bobs;
@@ -84,47 +94,51 @@ public class OI {
 		
 		//----------------
 		pickUp = new JoystickButton(buttonController, 1);
-		pickUp.whenPressed(new CG_PickUpWithSensor());
-		pickUp.whenReleased(new C_Interrupt());
+		cgPickUpWithSensor = new CG_PickUpWithSensor();
+		pickUp.whenPressed(cgPickUpWithSensor);
+		pickUp.whenReleased(new C_Interrupt(cgPickUpWithSensor));
 		
 		dropOnSP = new JoystickButton(buttonController, 3);
-		dropOnSP.whenPressed(new CG_DropOffSP());
-		dropOnSP.whenReleased(new C_Interrupt());
+		cgScoringPlatform = new CG_DropOffSP();
+		dropOnSP.whenPressed(cgScoringPlatform);
+		dropOnSP.whenReleased(new C_Interrupt(cgScoringPlatform));
 		
 		dropOnStep = new JoystickButton(buttonController, 2);
-		dropOnStep.whenPressed(new CG_DropOffStep());
-		dropOnStep.whenReleased(new C_Interrupt());
+		cgStep = new CG_DropOffStep();
+		dropOnStep.whenPressed(cgStep);
+		dropOnStep.whenReleased(new C_Interrupt(cgStep));
 		
 		resetToStart = new JoystickButton(buttonController, 8);
-		resetToStart.whenPressed(new CG_RestartToStartPos());
-		resetToStart.whenReleased(new C_Interrupt());
+		cgResetToStart = new CG_RestartToStartPos();
+		resetToStart.whenPressed(cgResetToStart);
+		resetToStart.whenReleased(new C_Interrupt(cgResetToStart));
 		
-		manualRaiseElevator = new JoystickButton(buttonController, 5);//would be replaced by fork out
-		manualRaiseElevator.whenPressed(new CG_ManualRaiseElevator());
-		manualRaiseElevator.whenReleased(new C_Interrupt());
-		//if replacing with forkOut, delete CG_ManualRaiseElevator;
-		manualForkIn = new JoystickButton(buttonController, 6);
+	/*	manualRaiseElevator = new JoystickButton(buttonController, 5);//would be replaced by fork out
+		cgManualRaiseElevator = new CG_ManualRaiseElevator();
+		manualRaiseElevator.whenPressed(cgManualRaiseElevator);
+		manualRaiseElevator.whenReleased(new C_Interrupt(cgManualRaiseElevator));
+	*/	//if replacing with forkOut, delete CG_ManualRaiseElevator;
+		manualForkIn = new JoystickButton(buttonController, 5);//left Bumper
 		cForkIn = new C_ForkOut(false, 100);
 		manualForkIn.whenPressed(cForkIn);
-		manualForkIn.whenReleased(new C_Interrupt());
-
-		/*manualForkIn = new JoystickButton(buttonController, 5;//left Bumper
-		 * manualForkOut = new JoystickButton(buttonController, 6);//right Bumper
-		 * cForkOut = new C_ForkOut(true, 100);
-		 * manualForkOut.whenPressed(cForkOut);
-		 * manualForkOut.whenReleased(new C_Interrupt());
-		 */
+		manualForkIn.whenReleased(new C_Interrupt(cForkIn));
+		
+		manualForkOut = new JoystickButton(buttonController, 6);//right Bumper
+		cForkOut = new C_ForkOut(true, 100);
+		manualForkOut.whenPressed(cForkOut);
+		manualForkOut.whenReleased(new C_Interrupt(cForkOut));
+		
 		
 		//----------------
 		elevMoveToPos = new JoystickButton(testStick, 7);
 		cElevMoveToDashPos = new C_ElevMoveToPos(-50);
 		elevMoveToPos.whenPressed(cElevMoveToDashPos);
-		elevMoveToPos.whenReleased(new C_Interrupt());
+		elevMoveToPos.whenReleased(new C_Interrupt(cElevMoveToDashPos));
 		
 		motorDriveTest = new JoystickButton(testStick, 1);
 		cMotorDriveTest = new C_MotorDriveTest();
 		motorDriveTest.whenPressed(cMotorDriveTest);
-		motorDriveTest.whenReleased(new C_Interrupt());
+		motorDriveTest.whenReleased(new C_Interrupt(cMotorDriveTest));
 		
 		incrementSpeed = new JoystickButton(testStick, 5);
 		incrementSpeed.whenPressed(new C_IncrementMotorSpeed());
@@ -147,7 +161,7 @@ public class OI {
 		elevMoveAndSetZero = new JoystickButton(testStick, 11);
 		cMoveAndSetZero = new C_ElevMoveAndSetZero();
 		elevMoveAndSetZero.whenPressed(cMoveAndSetZero);
-		elevMoveAndSetZero.whenReleased(new C_Interrupt());
+		elevMoveAndSetZero.whenReleased(new C_Interrupt(cMoveAndSetZero));
 		
 		incrementElevEncoderTicks = new JoystickButton(testStick, 8);
 		incrementElevEncoderTicks.whenPressed(new C_IncrementElevEncoderTicks());

@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CG_Autonomous3Totes extends CommandGroup {
     public  CG_Autonomous3Totes() {
-    	addSequential(new C_ResetRuns());//don't need this?
     	addSequential(new C_ElevMoveAndSetZero());
     	
     	addSequential(new CG_ArmGrabbingSequence());

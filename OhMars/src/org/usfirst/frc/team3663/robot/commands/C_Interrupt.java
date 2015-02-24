@@ -8,22 +8,17 @@ import org.usfirst.frc.team3663.robot.Robot;
  */
 public class C_Interrupt extends Command {
 
-    public C_Interrupt() {
+	Command command;
+	
+    public C_Interrupt(Command pCommand) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.ssElevator);
+        command = pCommand;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.oi.cForkIn.cancel();
-    	/*Robot.oi.cForkOut.cancel();
-    	 * 
-    	 */
-    	
-    	//test stick commands
-    	Robot.oi.cElevMoveToDashPos.cancel();
-    	Robot.oi.cMotorDriveTest.cancel();
-    	Robot.oi.cMoveAndSetZero.cancel();
+    	command.cancel();
     }
 
     // Called repeatedly when this Command is scheduled to run
