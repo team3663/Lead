@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CG_Autonomous3Totes extends CommandGroup {
     public  CG_Autonomous3Totes() {
     	SmartDashboard.putString("ssAutonomousCG", "start");
-    	addSequential(new C_ResetRuns());//don't need this?
     	addSequential(new C_ElevMoveAndSetZero());
     	
     	addSequential(new CG_ArmGrabbingSequence());

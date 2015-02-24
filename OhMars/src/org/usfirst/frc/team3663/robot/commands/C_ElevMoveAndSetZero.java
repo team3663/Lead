@@ -21,11 +21,8 @@ public class C_ElevMoveAndSetZero extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ssElevator.moveAndSetZeroInit();
-<<<<<<< HEAD
     	SmartDashboard.putString("ssElevator", "C_ElevMoveAndSetZero initialize");
-=======
     	aboveZero = true;
->>>>>>> a5a53b767fcb86f55007e01959e30ebb5dff273c
     }
 
     // Called repeatedly when this Command is scheduled to run

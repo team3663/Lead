@@ -34,7 +34,6 @@ public class A_Log extends Command {
     	Robot.ssDashBoard.putDashNumber("diffrence Left", Robot.ssDriveTrain.diffTicksL);
     	Robot.ssDashBoard.putDashNumber("Time Running Right", Robot.ssDriveTrain.timeRunningR);
     	Robot.ssDashBoard.putDashNumber("Time Running Left", Robot.ssDriveTrain.timeRunningL);
-    	Robot.ssDashBoard.putDashNumber("elevIn/OutSpeed: ", Robot.ssElevator.elevInAndOut.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()

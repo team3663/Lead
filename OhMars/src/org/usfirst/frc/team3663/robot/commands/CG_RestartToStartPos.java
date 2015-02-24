@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
 import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
 
 /**
  *

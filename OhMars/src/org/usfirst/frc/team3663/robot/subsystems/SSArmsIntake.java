@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SSArmsIntake extends Subsystem {
     
-	Talon intakeMotorL, intakeMotorR;
+	public Talon intakeMotorL, intakeMotorR;
     public void initDefaultCommand() {
     	setDefaultCommand(new C_ArmsIntake());
     }
