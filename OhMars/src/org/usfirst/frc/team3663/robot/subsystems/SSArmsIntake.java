@@ -1,18 +1,18 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
+import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsIntake;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class SSArmsIntake extends Subsystem {
-    public double lArmIntakeSpeed = 0.0;
-    public double rArmIntakeSpeed = 0.0;
     
-	Talon intakeMotorL, intakeMotorR;
+	public Talon intakeMotorL, intakeMotorR;
     public void initDefaultCommand() {
     	setDefaultCommand(new C_ArmsIntake());
     }
@@ -22,20 +22,20 @@ public class SSArmsIntake extends Subsystem {
     }
     
     public void intakeMotorsSet(double speed){
-    	intakeMotorL.set(-speed);
-    	intakeMotorR.set(speed);
-        lArmIntakeSpeed = -speed;
-        rArmIntakeSpeed = speed;
+    	intakeMotorLSet(speed);
+    	intakeMotorRSet(speed);
     }
     public void intakeMotorLSet(double speed)
     {
     	intakeMotorL.set(-speed);
-        lArmIntakeSpeed = -speed;
     }
     public void intakeMotorRSet(double speed)
     {
     	intakeMotorR.set(speed);
-        rArmIntakeSpeed = speed;
+    }
+    public void updateStatus(){
+        SmartDashboard.putNumber("ArmIntakeL", Robot.ssArmsIntake.intakeMotorL.get());
+        SmartDashboard.putNumber("ArmIntakeR", Robot.ssArmsIntake.intakeMotorR.get());
     }
     
 }

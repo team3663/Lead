@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot.commands;
 import org.usfirst.frc.team3663.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,6 +16,7 @@ public class C_EncoderDriveStraight extends Command {
     	inches = pInches;
     	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
+    	requires(Robot.ssDriveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -25,6 +27,8 @@ public class C_EncoderDriveStraight extends Command {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
     	Robot.ssDriveTrain.setFinalLeft(inches);
+    	Robot.ssDriveTrain.setFinalRight(inches);
+    	SmartDashboard.putString("ssDriveTrain","C_EncoderDriveStraight initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,11 +49,13 @@ public class C_EncoderDriveStraight extends Command {
     	Robot.ssDriveTrain.encoderDriving = false;
     	Robot.ssDriveTrain.motorLeftSet(0);
     	Robot.ssDriveTrain.motorRightSet(0);
+    	SmartDashboard.putString("ssDriveTrain","C_EncoderDriveStraight end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    	SmartDashboard.putString("ssDriveTrain","C_EncoderDriveStraight interrupted");
     }
 }

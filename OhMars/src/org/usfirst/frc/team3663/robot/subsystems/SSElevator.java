@@ -2,15 +2,18 @@ package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
 
+
 //test
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DigitalInput;
+
 import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
 
 /**
@@ -195,6 +198,8 @@ public class SSElevator extends Subsystem {
     }
     
     public boolean getToteSwitch(){
+    	if(toteSensor.get())
+    		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 500);
     	return toteSensor.get();
     }
     
@@ -209,6 +214,21 @@ public class SSElevator extends Subsystem {
     	{
     		elevMotor1.enableBrakeMode(false);
     		elevMotor2.enableBrakeMode(false);
+    	}
+    }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("ElevEncoder", Robot.ssElevator.winchEncoder.get());
+    	SmartDashboard.putNumber("ElevMotor1", Robot.ssElevator.elevMotor1.get());
+    	SmartDashboard.putNumber("ElevMotor2", Robot.ssElevator.elevMotor2.get());
+    	if(Robot.ssElevator.toteSensor.get()){
+    		SmartDashboard.putString("ElevToteSensor", "toteIn");
+    	}else{
+    		SmartDashboard.putString("ElevToteSensor", "noTote");
+    	}
+    	if(Robot.ssElevator.brakeOn){
+    		SmartDashboard.putString("ElevBrake", "on");
+    	}else{
+    		SmartDashboard.putString("ElevBrake", "off");
     	}
     }
 }

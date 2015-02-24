@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
+import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ArmsUpDown2;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -39,7 +40,7 @@ public class SSArmsUpDown extends Subsystem {
     	lastSpeedLArmUD = speed;
     	armsUpAndDownMotorL.set(speed);
     	
-    	SmartDashboard.putNumber("LeftArmPos", lArmUpDownPos);
+    	//SmartDashboard.putNumber("LeftArmPos", lArmUpDownPos);
     }
     public void armUpDownRSet(double speed){
     	double currentTime = Timer.getFPGATimestamp();
@@ -53,6 +54,10 @@ public class SSArmsUpDown extends Subsystem {
     	lastSpeedRArmUD = speed;
     	armsUpAndDownMotorR.set(speed);
 
-    	SmartDashboard.putNumber("RightArmPos", rArmUpDownPos);
+    	//SmartDashboard.putNumber("RightArmPos", rArmUpDownPos);
+    }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("ArmUpDownL", Robot.ssArmsUpDown.armsUpAndDownMotorR.get());
+    	SmartDashboard.putNumber("ArmUpDownR", Robot.ssArmsUpDown.armsUpAndDownMotorR.get());
     }
 }

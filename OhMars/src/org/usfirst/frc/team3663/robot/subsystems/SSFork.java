@@ -1,6 +1,9 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
+import org.usfirst.frc.team3663.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Talon;
 
 /**
@@ -23,6 +26,9 @@ public class SSFork extends Subsystem {
     public void set(double speed)
     {
     	fork.set(speed);
+    }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("ForkSpeed", Robot.ssFork.fork.get());
     }
 }
 

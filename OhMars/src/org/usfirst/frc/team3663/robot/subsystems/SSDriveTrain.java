@@ -24,8 +24,11 @@ public class SSDriveTrain extends Subsystem {
 	
 	
 	public int finalTicksR, finalTicksL, timeRunningR = 0, timeRunningL = 0, diffTicksR = 0, diffTicksL = 0;
-	public double speedR, speedL;//												change these to diff 
+	public double speedR, speedL;
 	public boolean encoderDriving = false;
+    public int lastDistanceR;
+    public int lastDistanceL;
+    
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -45,6 +48,8 @@ public class SSDriveTrain extends Subsystem {
     	
     	leftEncoder = new Encoder(3,4);
     	rightEncoder = new Encoder(5,6);
+    	lastDistanceL = rightEncoder.get();
+    	lastDistanceR = leftEncoder.get();
     }
     
     public void arcadeDrive(double yDirection, double xDirection)
@@ -57,28 +62,22 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorL1.set(speed);
     }
     
-    public void motor2Set(double speed)
-    {
-    	driveMotorL2.set(speed);
-    }
+    
 
     public void motor3Set(double speed)
     {
     	driveMotorR1.set(speed);
     }
 
-    public void motor4Set(double speed)
-    {
-    	driveMotorR2.set(speed);
-    }
+    
     
     public void motorRightSet(double speed){
-    	driveMotorR2.set(-speed);
+    	//driveMotorR2.set(-speed);
     	driveMotorR1.set(-speed);
     }
     
     public void motorLeftSet(double speed){
-    	driveMotorL2.set(speed);
+    	//driveMotorL2.set(speed);
     	driveMotorL1.set(speed);
     }
     
@@ -106,28 +105,28 @@ public class SSDriveTrain extends Subsystem {
     }
     
     /*NOTES FOR DISTANCE
-    /* cicumfrance of the wheel is 12.56inch
+    /* circumference of the wheel is 12.56inch
     /* one revolution of the wheels is 250ticks
-    /* this makes it so that there is aproximently 19 ticks per inch
+    /* this makes it so that there is approximately 19 ticks per inch
     /* distance between the wheels 26 inches
      */
     public void setFinalLeft(int pDistance)// this is in inches
     {
     	finalTicksL = ((int)(/*250/(4*Math.PI) = */19 * pDistance) + leftEncoder.get());
-    	//250 are ticks per revolution the wheels are 4" diamater
+    	//250 are ticks per revolution the wheels are 4" diameter
     }
     
     public void setFinalRight(int pDistance)// this is in inches
     {
     	finalTicksR = ((int)(/*250/(4*Math.PI) = */19 * pDistance) + rightEncoder.get());
-    	//250 are ticks per revolution the wheels are 4" diamater
+    	//250 are ticks per revolution the wheels are 4" diameter
     }
     
     public void eDistanceArc(int pRadius, int pAngle, boolean turnLeft){
     	/*NOTES ON THIS METHOD: 
     	 * (Length = (angle/360)*(2piR))
     	 * (Angle = (360*Length)/(2piR))
-    	 * these numbers are multiplyed by ten to make sure there are no doubles in this numbers*/
+    	 * these numbers are multiplied by ten to make sure there are no doubles in this numbers*/
     	if(turnLeft){
 	    	setFinalLeft((int)((pAngle*10/360)*(2*Math.PI*(pRadius - 13))/10));
 	    	setFinalRight((int)((pAngle*10/360)*(2*Math.PI*(pRadius + 13))/10));
@@ -139,10 +138,10 @@ public class SSDriveTrain extends Subsystem {
     }
        
     public void breakmodeDriveMotors(boolean pBreak){
-    	//driveMotorL1.enableBrakeMode(pBreak);
-    	driveMotorL2.enableBrakeMode(pBreak);
-    	// driveMotorR1.enableBrakeMode(pBreak);
-    	driveMotorR2.enableBrakeMode(pBreak);
+    	driveMotorL1.enableBrakeMode(pBreak);
+    	//driveMotorL2.enableBrakeMode(pBreak);
+    	driveMotorR1.enableBrakeMode(pBreak);
+    	//driveMotorR2.enableBrakeMode(pBreak);
     }
     
     public void setTheSpeeds(double highspeed){
@@ -164,20 +163,20 @@ public class SSDriveTrain extends Subsystem {
     
     public boolean checkIfLeftDone(){
     	if(speedL > 0){
-        	return (leftEncoder.get() >= finalTicksL);    	
+        	return (leftEncoder.get() >= finalTicksL);
     	}
     	else if(speedL < 0){
-        	return (leftEncoder.get() <= finalTicksL);   
+        	return (leftEncoder.get() <= finalTicksL);
     	}
     	return false;
     }
 
     public boolean checkIfRightDone(){
     	if(speedR > 0){
-        	return (rightEncoder.get() >= finalTicksR);    	
+        	return (rightEncoder.get() >= finalTicksR);
     	}
     	else if(speedR < 0){
-        	return (rightEncoder.get() <= finalTicksR);   
+        	return (rightEncoder.get() <= finalTicksR);
     	}
     	return false;
     }
@@ -185,7 +184,69 @@ public class SSDriveTrain extends Subsystem {
     public void difference(){
     	diffTicksR = rightEncoder.get() - finalTicksR;
     	diffTicksL = leftEncoder.get() - finalTicksL;
+    }  
+    
+    public boolean rampDown(double numberMultiplied)
+    {
+    	int currentDistanceR = rightEncoder.get(), currentDistanceL = leftEncoder.get(); 
+    	if(!(lastDistanceR < 10 && lastDistanceR > 10) && diffTicksR > diffTicksL)
+    	{
+    		if(speedR > 0 && ((currentDistanceR - lastDistanceR)*numberMultiplied >= diffTicksR))
+    		{
+    			setTheSpeeds(speedR - .1);
+    			//speedR -= .1;
+    		}
+    		else if(speedR < 0 && ((currentDistanceR - lastDistanceR)*numberMultiplied <= diffTicksR))
+    		{
+    			setTheSpeeds(speedR + .1);
+    			//speedR += .1;
+    		}
+    		lastDistanceR = currentDistanceR;
+    		lastDistanceL = currentDistanceL;
+    		return false;
+    	}
+    	else if(!(lastDistanceL < 10 && lastDistanceL > 10) && diffTicksR < diffTicksL)
+    	{
+    		if(speedL > 0 && ((currentDistanceL - lastDistanceL)*numberMultiplied >= diffTicksL))
+    		{
+    			setTheSpeeds(speedR - .1);
+    			//speedL -= .1;
+    		}
+    		else if(speedL < 0 && ((currentDistanceL - lastDistanceL)*numberMultiplied <= diffTicksL))
+    		{
+    			setTheSpeeds(speedR + .1);
+    			//speedL += .1;
+    		}
+    		lastDistanceR = currentDistanceR;
+    		lastDistanceL = currentDistanceL;
+    		return false;
+    	}
+		lastDistanceR = currentDistanceR;
+		lastDistanceL = currentDistanceL;
+    	return true;
+    }
+    
+    public void rampUp(double rampUpSpeed, double topSpeed)
+    {
+    	if(!rampDown(4) && (speedL < topSpeed || speedR < topSpeed))
+    	{
+    		if(diffTicksR > diffTicksL)
+    		{
+    			speedR += rampUpSpeed;
+    			setTheSpeeds(speedR);    			
+    		}
+    		else 
+    		{
+    			speedL += rampUpSpeed;
+    			setTheSpeeds(speedL);    	
+    		}
+    	}
+    }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());
+    	SmartDashboard.putNumber("DriveMotorR1", Robot.ssDriveTrain.driveMotorR1.get());
+    	SmartDashboard.putNumber("DriveEncoderL", Robot.ssDriveTrain.leftEncoder.get());
+    	SmartDashboard.putNumber("DriveEncoderR", Robot.ssDriveTrain.rightEncoder.get());
     }
 }
-
 

@@ -2,6 +2,7 @@ package org.usfirst.frc.team3663.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -44,5 +45,17 @@ public class SSArmsSolenoids extends Subsystem {
     		armOpenCloseR.set(DoubleSolenoid.Value.kReverse);
     		armRIsClosed = false;
     	//}
+    }
+    public void updateStatus(){
+    	if(armRIsClosed){
+        	SmartDashboard.putString("ArmSolenoidR", "close");
+    	}else{
+    		SmartDashboard.putString("ArmSolenoidR", "open");
+    	}
+    	if(armLIsClosed){
+        	SmartDashboard.putString("ArmSolenoidL", "close");
+    	}else{
+    		SmartDashboard.putString("ArmSolenoidL", "open");
+    	}
     }
 }

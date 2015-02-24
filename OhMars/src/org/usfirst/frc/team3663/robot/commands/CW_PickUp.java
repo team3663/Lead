@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.Robot;
 
 /**
@@ -23,6 +25,7 @@ public class CW_PickUp extends Command {
     	C_ElevMoveToPos movePos2 = new C_ElevMoveToPos(-25);
     	move2 = movePos2;
     	System.out.println("hello, testing initializing stuff to see on rioLog :)");
+    	SmartDashboard.putString("ssElevator","CW_PickUp initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -52,10 +55,12 @@ public class CW_PickUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssElevator","CW_PickUp end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssElevator","CW_PickUp interrupted");
     }
 }

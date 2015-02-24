@@ -2,6 +2,7 @@ package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
 
@@ -36,6 +37,7 @@ public class C_ForkOut extends Command {
     	{
     		speed = -1.0;
     	}
+    	SmartDashboard.putString("ssElevator", "C_ForkOut initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -64,11 +66,13 @@ public class C_ForkOut extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.ssFork.set(0);
+    	SmartDashboard.putString("ssFork", "C_ForkOut end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    	SmartDashboard.putString("ssFork", "C_ForkOut interrupted");
     }
 }

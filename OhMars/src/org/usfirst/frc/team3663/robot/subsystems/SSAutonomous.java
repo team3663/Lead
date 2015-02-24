@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 
-import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
+import org.usfirst.frc.team3663.robot.commands.C_AutonomousChooser;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -54,6 +54,9 @@ public class SSAutonomous extends Subsystem {
     	 * 2 = top UP  , bottom DOWN
     	 * 3 = top UP  , bottom UP
     	 *****************************/
+    }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("AutonomousRoutine:", getAutonomousRoutine());
     }
 }
 

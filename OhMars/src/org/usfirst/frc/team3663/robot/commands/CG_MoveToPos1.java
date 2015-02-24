@@ -3,23 +3,15 @@ package org.usfirst.frc.team3663.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ForkOut;
-
 /**
  *
  */
-public class CG_DropOffStep extends CommandGroup {
+public class CG_MoveToPos1 extends CommandGroup {
     
-    public  CG_DropOffStep() {
-    	SmartDashboard.putString("ssElevatorCG", "CG_DropOffStep start");
-    	addSequential(new C_ElevMoveToPos(-15));
-    	addSequential(new C_ForkOut(true, 7));
-    	addSequential(new C_ElevMoveToPos(-5));
-    	addSequential(new C_ForkOut(false, 7));
-    	addSequential(new C_ElevMoveToPos(-20));
-    	SmartDashboard.putString("ssElevatorCG", "CG_DropOffStep end");
+    public  CG_MoveToPos1() {
+    	SmartDashboard.putString("ssElevatorCG", "CG_MoveToPos1 start");
+    	addSequential(new C_ElevMoveToPos(-1));
+    	SmartDashboard.putString("ssElevatorCG", "CG_MoveToPos1 end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
