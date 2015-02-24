@@ -85,10 +85,12 @@ public class Robot extends IterativeRobot {
     }
 
     /**
-     * This function is called periodically during autonomous
+     * This function is called periodically duri
+     * ng autonomous
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        updateStatus();
     }
 
     public void teleopInit() {
@@ -111,6 +113,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        updateStatus();
     }
     
     /**
