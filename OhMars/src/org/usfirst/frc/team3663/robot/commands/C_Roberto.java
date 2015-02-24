@@ -23,7 +23,7 @@ public class C_Roberto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDashBoard.putDashInt("i: ", i++);
+    	Robot.ssDashBoard.putDashNumber("i: ", i++);
     	Robot.ssDashBoard.putDashString("Roberto: ", "...Leave me alone....I'm working");
     }
 

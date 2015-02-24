@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -8,8 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_MoveToPos2 extends CommandGroup {
     
     public  CG_MoveToPos2() {
-    	addSequential(new C_ResetRuns());
+    	SmartDashboard.putString("ssElevatorCG", "CG_MoveToPos2 start");
     	addSequential(new C_ElevMoveToPos(-5));
+    	SmartDashboard.putString("ssElevatorCG", "CG_MoveToPos2 end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

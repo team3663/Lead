@@ -21,9 +21,9 @@ public class C_ElevMoveToPos extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.runCommand = true;
     	ticks = getTicks();
     	Robot.ssElevator.prepForMove(ticks);
+    	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +33,7 @@ public class C_ElevMoveToPos extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand || !Robot.runCG)
+        if (finished)
         {
         	return true;
         }
@@ -43,12 +43,14 @@ public class C_ElevMoveToPos extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.ssElevator.terminateMove();
+    	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose interrupted");
     }
     
     int getTicks()
@@ -57,7 +59,7 @@ public class C_ElevMoveToPos extends Command {
     	{
     		if (origTicks == -49)
     		{
-    			origTicks = (int)(Robot.ssDashBoard.getFromDashInt("encoderPosition: "));
+    			origTicks = (int)(Robot.ssDashBoard.getFromDashNumber("encoderPosition: "));
     		}
     		switch(origTicks)
     		{

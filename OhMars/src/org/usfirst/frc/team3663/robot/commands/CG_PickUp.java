@@ -1,19 +1,19 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ResetRuns;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3663.robot.Robot;
 /**
  *
  */
 public class CG_PickUp extends CommandGroup {
     
     public  CG_PickUp() {
-    	//addSequential(new C_ResetRuns());
+    	SmartDashboard.putString("ssElevatorCG", "CG_PickUp start");
     	addSequential(new C_ElevMoveToPos(-1));
     	addSequential(new C_ElevMoveToPos(-25));
+    	SmartDashboard.putString("ssElevatorCG", "CG_PickUp end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

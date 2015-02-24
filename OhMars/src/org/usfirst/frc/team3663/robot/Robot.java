@@ -3,32 +3,16 @@ package org.usfirst.frc.team3663.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3663.robot.commands.*;
+import org.usfirst.frc.team3663.robot.subsystems.*;
 
-import org.usfirst.frc.team3663.robot.commands.A_Log;
-import org.usfirst.frc.team3663.robot.commands.CG_ArmsExecute;
-//import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
-//import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
-import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
-import org.usfirst.frc.team3663.robot.commands.C_AutonomousMasterChoosing;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderDriveStraight;
-import org.usfirst.frc.team3663.robot.commands.C_ArmsIntakeControl;
-import org.usfirst.frc.team3663.robot.commands.C_EncoderTurn;
-import org.usfirst.frc.team3663.robot.subsystems.SSAutonomous;
-import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
-//import org.usfirst.frc.team3663.robot.subsystems.SSDashBoard;
-import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
-import org.usfirst.frc.team3663.robot.subsystems.SSElevator;
-import org.usfirst.frc.team3663.robot.commands.A_Log;
-import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
-import org.usfirst.frc.team3663.robot.commands.CG_PickUpWithSensor;
-
-/**
+	/**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
@@ -37,9 +21,15 @@ import org.usfirst.frc.team3663.robot.commands.CG_PickUpWithSensor;
  */
 public class Robot extends IterativeRobot {
 
-	public static SSArms ssArms;
+	//public static SSArms ssArms;
+	
+	public static SSArmsIntake ssArmsIntake;
+	public static SSArmsSolenoids ssArmsSolenoids;
+	public static SSArmsUpDown ssArmsUpDown;
+	
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
+	public static SSFork ssFork;
   	public static SSDashBoard ssDashBoard;
   	public static SSAutonomous ssAutonomous;
 	public static OI oi;
@@ -47,7 +37,7 @@ public class Robot extends IterativeRobot {
 	Command arcadeDrive;
 	Command ALog;
 	Command Auto;
-    CommandGroup armExecutables;
+    //CommandGroup armExecutables;
     Command defaultElevator;
     Command pickUpWithSensor;
     
@@ -58,22 +48,30 @@ public class Robot extends IterativeRobot {
 	static String testMotorName;
 	public static boolean runCommand = true;
 	public static boolean runCG = true;
-
+	
+	double updateStatusNextRefresh;
+	final double UPDATESTATUSREFRESHINTERVAL = 0.25;
 
 	
     public void robotInit() {
     	ssDashBoard = new SSDashBoard();
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
-    	ssArms = new SSArms();
+    	ssFork = new SSFork();
+    	//ssArms = new SSArms();
+    	
+    	ssArmsIntake = new SSArmsIntake();
+    	ssArmsSolenoids = new SSArmsSolenoids();
+    	ssArmsUpDown = new SSArmsUpDown();
+    	
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();
 		//Auto = new C_EncoderTurn(0,90, true);
-		Auto = new C_AutonomousMasterChoosing();
+		Auto = new C_AutonomousChooser();
 		arcadeDrive = new C_ArcadeDrive();
 		ALog = new A_Log();
 		ALog.start();
-		armExecutables = new CG_ArmsExecute();
+		//armExecutables = new CG_ArmsExecute();
 		defaultElevator = new C_DefaultElevatorRunning(0);
 		pickUpWithSensor = new CG_PickUpWithSensor();
     }
@@ -96,7 +94,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
 		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 1);
         arcadeDrive.start();
-		armExecutables.start();
+		//armExecutables.start();
 		defaultElevator.start();
 	//	pickUpWithSensor.start();
     }
@@ -209,5 +207,22 @@ public class Robot extends IterativeRobot {
 			break;
     	}
     	SmartDashboard.putString("testMotor: ", testMotorName);
+    }
+    public void updateStatus()
+    {
+        double currentTime = Timer.getFPGATimestamp();
+        if (currentTime >= updateStatusNextRefresh)
+        {
+            updateStatusNextRefresh += UPDATESTATUSREFRESHINTERVAL;
+            if (currentTime > updateStatusNextRefresh)
+                updateStatusNextRefresh = currentTime + UPDATESTATUSREFRESHINTERVAL;
+            ssArmsIntake.updateStatus();
+            ssArmsSolenoids.updateStatus();
+            ssArmsUpDown.updateStatus();
+            ssAutonomous.updateStatus();
+            ssDriveTrain.updateStatus();
+            ssElevator.updateStatus();
+            ssFork.updateStatus();
+        }
     }
 }

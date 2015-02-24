@@ -5,31 +5,32 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
- *********CURRENTLY NOT IN USE***********
+ *
  */
 public class C_ArmsOpenCloseTogether extends Command {
 	
-	boolean pOpen;
+	boolean open;
 	
-    public C_ArmsOpenCloseTogether(boolean open) {
-        pOpen = open;
+    public C_ArmsOpenCloseTogether(boolean pOpen) {
+    	requires(Robot.ssArmsSolenoids);
+        open= pOpen;
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(pOpen){
-    		Robot.ssArms.armLOpen();
-			Robot.ssArms.armROpen();
+    	if(open){
+    		Robot.ssArmsSolenoids.armLOpen();
+			Robot.ssArmsSolenoids.armROpen();
     	}
     	else{
-    		Robot.ssArms.armLClose();
-			Robot.ssArms.armRClose();
+    		Robot.ssArmsSolenoids.armLClose();
+			Robot.ssArmsSolenoids.armRClose();
     	}
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseHoldTogether initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -44,10 +45,12 @@ public class C_ArmsOpenCloseTogether extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseHoldTogether end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseHoldTogether interrupted");
     }
 }

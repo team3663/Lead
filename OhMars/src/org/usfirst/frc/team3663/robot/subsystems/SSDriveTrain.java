@@ -24,7 +24,7 @@ public class SSDriveTrain extends Subsystem {
 	
 	
 	public int finalTicksR, finalTicksL, timeRunningR = 0, timeRunningL = 0, diffTicksR = 0, diffTicksL = 0;
-	public double speedR, speedL;//												change these to diff 
+	public double speedR, speedL;
 	public boolean encoderDriving = false;
 
     public void initDefaultCommand() {
@@ -106,28 +106,28 @@ public class SSDriveTrain extends Subsystem {
     }
     
     /*NOTES FOR DISTANCE
-    /* cicumfrance of the wheel is 12.56inch
+    /* circumference of the wheel is 12.56inch
     /* one revolution of the wheels is 250ticks
-    /* this makes it so that there is aproximently 19 ticks per inch
+    /* this makes it so that there is approximately 19 ticks per inch
     /* distance between the wheels 26 inches
      */
     public void setFinalLeft(int pDistance)// this is in inches
     {
     	finalTicksL = ((int)(/*250/(4*Math.PI) = */19 * pDistance) + leftEncoder.get());
-    	//250 are ticks per revolution the wheels are 4" diamater
+    	//250 are ticks per revolution the wheels are 4" diameter
     }
     
     public void setFinalRight(int pDistance)// this is in inches
     {
     	finalTicksR = ((int)(/*250/(4*Math.PI) = */19 * pDistance) + rightEncoder.get());
-    	//250 are ticks per revolution the wheels are 4" diamater
+    	//250 are ticks per revolution the wheels are 4" diameter
     }
     
     public void eDistanceArc(int pRadius, int pAngle, boolean turnLeft){
     	/*NOTES ON THIS METHOD: 
     	 * (Length = (angle/360)*(2piR))
     	 * (Angle = (360*Length)/(2piR))
-    	 * these numbers are multiplyed by ten to make sure there are no doubles in this numbers*/
+    	 * these numbers are multiplied by ten to make sure there are no doubles in this numbers*/
     	if(turnLeft){
 	    	setFinalLeft((int)((pAngle*10/360)*(2*Math.PI*(pRadius - 13))/10));
 	    	setFinalRight((int)((pAngle*10/360)*(2*Math.PI*(pRadius + 13))/10));
@@ -164,20 +164,20 @@ public class SSDriveTrain extends Subsystem {
     
     public boolean checkIfLeftDone(){
     	if(speedL > 0){
-        	return (leftEncoder.get() >= finalTicksL);    	
+        	return (leftEncoder.get() >= finalTicksL);
     	}
     	else if(speedL < 0){
-        	return (leftEncoder.get() <= finalTicksL);   
+        	return (leftEncoder.get() <= finalTicksL);
     	}
     	return false;
     }
 
     public boolean checkIfRightDone(){
     	if(speedR > 0){
-        	return (rightEncoder.get() >= finalTicksR);    	
+        	return (rightEncoder.get() >= finalTicksR);
     	}
     	else if(speedR < 0){
-        	return (rightEncoder.get() <= finalTicksR);   
+        	return (rightEncoder.get() <= finalTicksR);
     	}
     	return false;
     }
@@ -236,6 +236,11 @@ public class SSDriveTrain extends Subsystem {
     		
     	}
     }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());
+    	SmartDashboard.putNumber("DriveMotorR1", Robot.ssDriveTrain.driveMotorR1.get());
+    	SmartDashboard.putNumber("DriveEncoderL", Robot.ssDriveTrain.leftEncoder.get());
+    	SmartDashboard.putNumber("DriveEncoderR", Robot.ssDriveTrain.rightEncoder.get());
+    }
 }
-
 

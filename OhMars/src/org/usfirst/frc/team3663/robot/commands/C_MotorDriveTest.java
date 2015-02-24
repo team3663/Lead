@@ -13,7 +13,7 @@ public class C_MotorDriveTest extends Command {
 	
     public C_MotorDriveTest() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+       // requires(Robot.ssElevator);
     }
 
     // Called just before this Command runs the first time
@@ -61,16 +61,16 @@ public class C_MotorDriveTest extends Command {
 			Robot.ssElevator.motor2Set(speed);
 			break;
 		case 9:
-			Robot.ssElevator.moveInAndOut(speed);
+			Robot.ssFork.set(speed);
 			break;
 		case 10:
-			Robot.ssArms.intakeMotorLSet(speed);
+			Robot.ssArmsIntake.intakeMotorLSet(speed);
 			break;
 		case 11:
-			Robot.ssArms.intakeMotorRSet(speed);
+			Robot.ssArmsIntake.intakeMotorRSet(speed);
 			break;
 		case 12:
-			Robot.ssArms.intakeMotorsSet(speed);
+			Robot.ssArmsIntake.intakeMotorsSet(speed);
 			break;
 		case 13:
 			finished = Robot.ssElevator.moveToPos(-50, 1.0);
@@ -84,7 +84,7 @@ public class C_MotorDriveTest extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished || !Robot.runCommand)
+        if (finished)
     	{
         	return true;
     	}

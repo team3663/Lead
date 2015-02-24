@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.subsystems.SSArms;
 import org.usfirst.frc.team3663.robot.OI;
 
 /**
@@ -14,14 +13,15 @@ import org.usfirst.frc.team3663.robot.OI;
  */
 public class C_ArmsUpDownTime extends Command {
 	double axisValue;
-	double pSeconds;
-	boolean pDirectionIsUp;
+	double seconds;
+	boolean directionIsUp;
 	int speedModifier;
-	double startTime;
-    public C_ArmsUpDownTime(boolean directionIsUp, double seconds){
-    	pSeconds = seconds;
-    	pDirectionIsUp = directionIsUp;
-    	if(pDirectionIsUp){
+	double endTime;
+    public C_ArmsUpDownTime(boolean pDirectionIsUp, double pSeconds){
+    	requires(Robot.ssArmsUpDown);
+    	seconds = pSeconds;
+    	directionIsUp = pDirectionIsUp;
+    	if(directionIsUp){
         	speedModifier = 1;
     	}else{
     		speedModifier = -1;
@@ -30,8 +30,10 @@ public class C_ArmsUpDownTime extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ssArms.armUpDownRSet(0.9*speedModifier);
-    	startTime = Timer.getFPGATimestamp();
+    	Robot.ssArmsUpDown.armUpDownRSet(0.9*speedModifier);
+    	Robot.ssArmsUpDown.armUpDownLSet(0.9*speedModifier);
+    	endTime = Timer.getFPGATimestamp() + seconds;
+    	SmartDashboard.putString("ssArmsUpDown", "C_ArmsUpDownTime initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,15 +43,17 @@ public class C_ArmsUpDownTime extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Timer.getFPGATimestamp() - startTime >= pSeconds;
+        return Timer.getFPGATimestamp() >= endTime;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putString("ssArmsUpDown", "C_ArmsUpDownTime end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	SmartDashboard.putString("ssArmsUpDown", "C_ArmsUpDownTime interrupted");
     }
 }

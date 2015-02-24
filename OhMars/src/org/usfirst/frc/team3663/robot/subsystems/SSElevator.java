@@ -19,12 +19,9 @@ import org.usfirst.frc.team3663.robot.commands.C_DefaultElevatorRunning;
 public class SSElevator extends Subsystem {
     
 	CANTalon elevMotor1, elevMotor2;
-	public Talon elevInAndOut;
 	DoubleSolenoid bikeBreak;
 	public Encoder winchEncoder;
 	public DigitalInput elevLimitSwitch, toteSensor;
-	
-	public int i = 0;
 	
 	public boolean brakeOn;
 	boolean startZeroState;
@@ -33,18 +30,18 @@ public class SSElevator extends Subsystem {
 	double maxSpeed;
 	double delta, manualDelta;
 	int dir, manualDir;
-	double currTime, lastTime;
-	int lastTicks, startTicks;
-	double ticksPerSec;
+//	double currTime, lastTime;
+	//int lastTicks, startTicks;
+	//double ticksPerSec;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
     }
     
-    public SSElevator(){
+    public SSElevator()
+    {
     	toteSensor = new DigitalInput(7);
     	bikeBreak = new DoubleSolenoid(2,3);
-    	elevInAndOut = new Talon(4);
     	elevMotor1 = new CANTalon(15);
     	elevMotor2 = new CANTalon(25);
     	winchEncoder = new Encoder(1,2);
@@ -67,18 +64,14 @@ public class SSElevator extends Subsystem {
     public void motor2Set(double speed){
     	elevMotor2.set(speed);
     }
-    public void moveInAndOut(double speed){
-    	elevInAndOut.set(speed);
-    	Robot.ssDashBoard.putDashInt("testing window motor counter: ", i++);
-    	Robot.ssDashBoard.putDashDouble("ElevatorInAndOut SpeedInput: ", speed);
-    }
+    
     public void bikeBrakeTriggerOpen()
     {
     	if (brakeOn)
     	{
 	    	bikeBreak.set(DoubleSolenoid.Value.kForward);
 	    	brakeOn = false;
-	    	SmartDashboard.putBoolean("brakeOn: ", brakeOn);
+	    	Robot.ssDashBoard.putDashBool("brakeOn: ", brakeOn);
     	}
     }
     public void bikeBrakeTriggerClose(){
@@ -86,11 +79,9 @@ public class SSElevator extends Subsystem {
     	{
 	    	bikeBreak.set(DoubleSolenoid.Value.kReverse);
 	    	brakeOn = true;
-	    	SmartDashboard.putBoolean("brakeOn: ", brakeOn);
+	    	Robot.ssDashBoard.putDashBool("brakeOn: ", brakeOn);
     	}
     }
-    
-    
     
     public void terminateMove()
     {
@@ -160,22 +151,29 @@ public class SSElevator extends Subsystem {
     public void moveAndSetZeroInit()
     {
 		bikeBrakeTriggerOpen();
-    	startZeroState = elevLimitSwitch.get();
-    	if (startZeroState)
-    	{
-    		dir = -1;
-    	}
-    	else
-    	{
-    		dir = 1;
-    	}
-		delta = dir*Robot.elevDelta;
-		maxSpeed = dir*maxSpeedP;
+		delta = 0.05;
     	speed = 0;
+    	maxSpeed = 1.0;
+    }
+    public boolean moveDownToZero()
+    {
+    	if (!elevLimitSwitch.get())
+    	{
+    		terminateMove();
+        	maxSpeed = 0.2;
+    		return false;
+    	}
+    	speed-=delta;
+    	if (Math.abs(speed) > Math.abs(maxSpeed))
+    	{
+    		speed = -maxSpeed;
+    	}
+    	motorsSet(speed);
+    	return true;//if using limitswitch.get, then no !
     }
     public boolean moveAndSetZero()
     {
-		if (elevLimitSwitch.get() != startZeroState)
+		if (elevLimitSwitch.get())
 		{
     		winchEncoder.reset();
     		stopElevator();
@@ -192,8 +190,7 @@ public class SSElevator extends Subsystem {
     
     public void stopElevator()
     {
-		bikeBrakeTriggerClose();
-		motorsSet(0);
+		terminateMove();
     }
     
     public boolean getToteSwitch(){
@@ -211,6 +208,21 @@ public class SSElevator extends Subsystem {
     	{
     		elevMotor1.enableBrakeMode(false);
     		elevMotor2.enableBrakeMode(false);
+    	}
+    }
+    public void updateStatus(){
+    	SmartDashboard.putNumber("ElevEncoder", Robot.ssElevator.winchEncoder.get());
+    	SmartDashboard.putNumber("ElevMotor1", Robot.ssElevator.elevMotor1.get());
+    	SmartDashboard.putNumber("ElevMotor2", Robot.ssElevator.elevMotor2.get());
+    	if(Robot.ssElevator.toteSensor.get()){
+    		SmartDashboard.putString("ElevToteSensor", "toteIn");
+    	}else{
+    		SmartDashboard.putString("ElevToteSensor", "noTote");
+    	}
+    	if(Robot.ssElevator.brakeOn){
+    		SmartDashboard.putString("ElevBrake", "on");
+    	}else{
+    		SmartDashboard.putString("ElevBrake", "off");
     	}
     }
 }
