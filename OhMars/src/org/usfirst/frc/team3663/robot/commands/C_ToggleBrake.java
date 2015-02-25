@@ -12,7 +12,7 @@ public class C_ToggleBrake extends Command {
 
     public C_ToggleBrake() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ssElevator);
     }
 
     // Called just before this Command runs the first time

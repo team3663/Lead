@@ -25,28 +25,30 @@ public class SSElevator extends Subsystem {
 	DoubleSolenoid bikeBreak;
 	public Encoder winchEncoder;
 	public DigitalInput elevLimitSwitch, toteSensor;
-	
-	public boolean brakeOn;
-	boolean startZeroState;
-	boolean setZero;
-	double speed;
-	double lastSpeed;
+
+	final double elevDelta = 0.05;
 	final double absMaxSpeed = 1.0;
 	final double absMinSpeed = 0.2;
-	double maxSpeed;
-	double delta, manualDelta;
-	final double elevDelta = 0.05;
-	int dir, manualDir;
-//	double currTime, lastTime;
-	//int lastTicks, startTicks;
-	//double ticksPerSec;
 	
-	public int lowestPos = -15;
-	public int lowStepPos = 50;
-	public int onScoringPlatformPos = 275;
-	public int onStepPos = 525;
-	public int noTotePos = 600;
-	public int highestPos = 1075;
+	boolean startZeroState;
+	boolean elevZeroed;
+	double speed;
+	double lastSpeed;
+	double minSpeedAdjust = 0;
+	double maxSpeed;
+	double manualDelta;
+	double delta = elevDelta;
+	int dir, manualDir;
+	int lastTicks = 0;
+	int counter = 0;
+
+	public boolean brakeOn;
+	public final int lowestPos = -15;
+	public final int lowStepPos = 50;
+	public final int onScoringPlatformPos = 275;
+	public final int onStepPos = 525;
+	public final int noTotePos = 600;
+	public final int highestPos = 1075;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
@@ -67,7 +69,7 @@ public class SSElevator extends Subsystem {
     	bikeBrakeTriggerClose();
 
     	lastSpeed = 0;
-    	setZero = false;
+    	elevZeroed = false;
     }
     
     public void motorsSet(double speed)
@@ -109,56 +111,67 @@ public class SSElevator extends Subsystem {
     
     //questions: are we there yet? are we going up? are we accelerating?
     public boolean moveToPos(int pTicks, double pMaxSpeed)
-    {//find place to init speed
-    	if (setZero)
+    {
+    	maxSpeed = Math.abs(pMaxSpeed);
+    	int acceleration = 1;//default to accelerating
+    	int dir = 1;//default to going up
+    	int currTicks = winchEncoder.get();
+    	int tickDelta = Math.abs(currTicks-pTicks);//distance to goal
+    	//stop if reached destination or if ramped down enough to stop or if elevator not zeroed
+		if (tickDelta < 5 || (maxSpeed < absMinSpeed && Math.abs(lastSpeed) <= absMinSpeed)
+				|| !elevZeroed)
+		{
+			terminateMove();
+			minSpeedAdjust = 0;
+			return true;
+		}
+    	if (currTicks > pTicks)
     	{
-	    	Robot.ssDashBoard.putDashString("testing moveToPos Start: ", "beginning moveToPos");
-	    	int acceleration = 1;
-	    	int dir = 1;
-	    	int currTicks = winchEncoder.get();
-	    	int tickDelta = Math.abs(currTicks-pTicks);
-			if (tickDelta < 5 || (pMaxSpeed < absMinSpeed && lastSpeed <= absMinSpeed))
-			{
-				terminateMove();
-				lastSpeed = 0;
-				return true;
-			}
-	    	if (currTicks > pTicks)
-	    	{
-	    		dir = -1;
-	    	}
-			if (tickDelta < 50)
-			{
-				acceleration = -1;
-			}
-			speed = Math.abs(lastSpeed) + acceleration*delta;
-			if (speed >  maxSpeed)
-			{
-				speed = maxSpeed;
-			}
-			if (speed > absMaxSpeed)
-			{
-				speed = absMaxSpeed;
-			}
-			if (speed < absMinSpeed)
-			{
-				speed = absMinSpeed;
-			}
-			lastSpeed = dir*speed;
-	    	if (lastSpeed != 0)
-	    	{
-	    		bikeBrakeTriggerOpen();
-	    	}
-	    	motorsSet(lastSpeed);
+    		dir = -1;//heading down
     	}
+		if (tickDelta < 50)
+		{
+			acceleration = -1;//decelerating
+		}
+		//adjust speed a delta amount
+		speed = Math.abs(lastSpeed) + acceleration*delta;
+		if (speed >  maxSpeed)
+		{
+			speed = maxSpeed;
+		}
+		if (speed > absMaxSpeed)
+		{
+			speed = absMaxSpeed;
+		}
+		if ((speed < absMinSpeed+minSpeedAdjust) && speed != 0)
+		{
+			//if stalled then increase minSpeed
+			if (lastTicks == currTicks)
+			{
+				minSpeedAdjust+=delta;
+			}
+			speed = absMinSpeed+minSpeedAdjust;
+		}
+		lastSpeed = dir*speed;
+    	if (lastSpeed != 0)
+    	{
+    		bikeBrakeTriggerOpen();
+    	}
+    	motorsSet(lastSpeed);
+    	Robot.ssDashBoard.putDashNumber("Elevator: MoveToPos pMaxSpeed: ", pMaxSpeed);
+    	Robot.ssDashBoard.putDashNumber("Elevator: MoveToPos pTicks: ", pTicks);
+    	Robot.ssDashBoard.putDashNumber("Elevator: MoveToPos lastSpeed: ", lastSpeed);
+    	Robot.ssDashBoard.putDashNumber("Elevator: MoveToPos counter: ", counter++);
+    	Robot.ssDashBoard.putDashNumber("Elevator: MoveToPos minSpeedAdjust: ", minSpeedAdjust);
+    	lastTicks = currTicks;
+    	
     	return false;
     }
     
     public void moveAndSetZeroInit()
     {
 		bikeBrakeTriggerOpen();
-		delta = 0.05;
-    	speed = 0;
+    	speed = -absMinSpeed;
     	maxSpeed = 1.0;
     }
     public boolean moveDownToZero()
@@ -166,12 +179,11 @@ public class SSElevator extends Subsystem {
     	if (!elevLimitSwitch.get())
     	{
     		terminateMove();
-        	maxSpeed = 0.2;
-        	speed = 0;
+        	speed = absMinSpeed;
     		return false;
     	}
-    	speed-=delta;
-    	if (Math.abs(speed) > Math.abs(maxSpeed))
+    	speed-=elevDelta;
+    	if (speed < -maxSpeed)
     	{
     		speed = -maxSpeed;
     	}
@@ -184,13 +196,8 @@ public class SSElevator extends Subsystem {
 		{
     		winchEncoder.reset();
     		terminateMove();
-    		setZero = true;
+    		elevZeroed = true;
     		return true;
-		}
-		speed+=delta;
-		if (Math.abs(speed) > Math.abs(maxSpeed))
-		{
-			speed = maxSpeed;
 		}
 		motorsSet(speed);
     	return false;
