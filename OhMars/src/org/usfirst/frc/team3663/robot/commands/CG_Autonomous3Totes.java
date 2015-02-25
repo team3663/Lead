@@ -24,7 +24,7 @@ public class CG_Autonomous3Totes extends CommandGroup {
     	addParallel(new CG_PickUp());
     	addSequential(new C_EncoderDriveStraight(81, .7));
     	
-    	addSequential(new C_EncoderTurn(0,90, true));
+    	addSequential(new C_EncoderTurn(0,90, true, .7));
     	addSequential(new C_EncoderDriveStraight(108, .7));
     	addSequential(new C_ElevMoveToPos(-1));
     	addSequential(new C_EncoderDriveStraight(-24, .7));

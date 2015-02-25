@@ -18,16 +18,21 @@ public class C_AutonomousChooser extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	CommandGroup theOneToRun;
+    	CommandGroup theOneToRun_CG;
+    	Command theOneToRun_C;
     	int choice = Robot.ssAutonomous.getAutonomousRoutine();
     	switch(choice){
     		case 0: 
-    			theOneToRun = new CG_Autonomous3Totes();
-    			theOneToRun.start();
+    			theOneToRun_CG = new CG_Autonomous3Totes();
+    			theOneToRun_CG.start();
     			break;
     		case 1:
+    			theOneToRun_C = new C_EncoderDriveStraight(10, .2);
+    			theOneToRun_C.start();
     			break;
     		case 2:
+    			theOneToRun_C = new C_EncoderTurn(26, 30, true, .2);
+    			theOneToRun_C.start();
     			break;
     		case 3:
     			break;

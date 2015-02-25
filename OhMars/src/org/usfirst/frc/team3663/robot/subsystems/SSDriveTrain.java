@@ -26,6 +26,9 @@ public class SSDriveTrain extends Subsystem {
 	public int finalTicksR, finalTicksL, timeRunningR = 0, timeRunningL = 0, diffTicksR = 0, diffTicksL = 0;
 	public double speedR, speedL;
 	public boolean encoderDriving = false;
+    public int lastDistanceR;
+    public int lastDistanceL;
+    
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -45,6 +48,8 @@ public class SSDriveTrain extends Subsystem {
     	
     	leftEncoder = new Encoder(3,4);
     	rightEncoder = new Encoder(5,6);
+    	lastDistanceL = rightEncoder.get();
+    	lastDistanceR = leftEncoder.get();
     }
     
     public void arcadeDrive(double yDirection, double xDirection)
@@ -57,28 +62,22 @@ public class SSDriveTrain extends Subsystem {
     	driveMotorL1.set(speed);
     }
     
-    public void motor2Set(double speed)
-    {
-    	driveMotorL2.set(speed);
-    }
+    
 
     public void motor3Set(double speed)
     {
     	driveMotorR1.set(speed);
     }
 
-    public void motor4Set(double speed)
-    {
-    	driveMotorR2.set(speed);
-    }
+    
     
     public void motorRightSet(double speed){
-    	driveMotorR2.set(-speed);
+    	//driveMotorR2.set(-speed);
     	driveMotorR1.set(-speed);
     }
     
     public void motorLeftSet(double speed){
-    	driveMotorL2.set(speed);
+    	//driveMotorL2.set(speed);
     	driveMotorL1.set(speed);
     }
     
@@ -139,10 +138,10 @@ public class SSDriveTrain extends Subsystem {
     }
        
     public void breakmodeDriveMotors(boolean pBreak){
-    	//driveMotorL1.enableBrakeMode(pBreak);
-    	driveMotorL2.enableBrakeMode(pBreak);
-    	// driveMotorR1.enableBrakeMode(pBreak);
-    	driveMotorR2.enableBrakeMode(pBreak);
+    	driveMotorL1.enableBrakeMode(pBreak);
+    	//driveMotorL2.enableBrakeMode(pBreak);
+    	driveMotorR1.enableBrakeMode(pBreak);
+    	//driveMotorR2.enableBrakeMode(pBreak);
     }
     
     public void setTheSpeeds(double highspeed){
@@ -186,9 +185,6 @@ public class SSDriveTrain extends Subsystem {
     	diffTicksR = rightEncoder.get() - finalTicksR;
     	diffTicksL = leftEncoder.get() - finalTicksL;
     }  
-    
-    public int lastDistanceR = leftEncoder.get();
-    public int lastDistanceL = rightEncoder.get();
     
     public boolean rampDown(double numberMultiplied)
     {

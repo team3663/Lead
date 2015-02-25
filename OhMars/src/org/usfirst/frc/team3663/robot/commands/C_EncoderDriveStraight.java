@@ -16,6 +16,7 @@ public class C_EncoderDriveStraight extends Command {
     	inches = pInches;
     	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
+    	requires(Robot.ssDriveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -26,6 +27,7 @@ public class C_EncoderDriveStraight extends Command {
     	Robot.ssDriveTrain.breakmodeDriveMotors(true);
     	Robot.ssDriveTrain.encoderDriving = true;
     	Robot.ssDriveTrain.setFinalLeft(inches);
+    	Robot.ssDriveTrain.setFinalRight(inches);
     	SmartDashboard.putString("ssDriveTrain","C_EncoderDriveStraight initialize");
     }
 
