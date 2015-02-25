@@ -10,8 +10,9 @@ import org.usfirst.frc.team3663.robot.Robot;
  */
 public class C_DefaultElevatorRunning extends Command {
 
-	double lastAxis2, currAxis2, lastAxis3, currAxis3;
+	double lastAxis2, currAxis2, lastAxis3, currAxis3, lastAxis, currAxis;
 	int currTicks;
+	int destination;
 	
     public C_DefaultElevatorRunning(int pTicks) {
         // Use requires() here to declare subsystem dependencies
@@ -20,53 +21,27 @@ public class C_DefaultElevatorRunning extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	lastAxis2 = Robot.oi.buttonController.getRawAxis(2);
-    	lastAxis3 = Robot.oi.buttonController.getRawAxis(3);
-    	SmartDashboard.putString("ssElevator", "C_DefaultElevatorRunning initialize");
+    	lastAxis2 = 0;
+    	lastAxis3 = 0;
+    	lastAxis = 0;
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	currTicks = Robot.ssElevator.winchEncoder.get();
-    	currAxis2 = Robot.oi.buttonController.getRawAxis(2);
-    	currAxis3 = Robot.oi.buttonController.getRawAxis(3);
-    	if (currTicks < -13 || (currAxis2 < 0.1 && lastAxis2 > 0.1))
+    	currAxis = Robot.oi.buttonController.getRawAxis(2)-Robot.oi.buttonController.getRawAxis(3);
+    	
+    	if (currAxis >= 0.1)
     	{
-    		currAxis2 = 0;
-    		Robot.ssElevator.stopElevator();
+    		destination = 1075;
     	}
-    	else if (currAxis2 >= 0.1)
+    	else if (currAxis <= -0.1)
     	{
-    		if (lastAxis2 < 0.1)
-    		{
-    			Robot.ssElevator.prepForMove(-13);
-    		}
-    		Robot.ssElevator.moveToPos(-13, currAxis2);
+    		destination = -13;
     	}
-    	/*if (currTicks > 1075 || (currAxis3 < 0.1 && lastAxis3 > 0.1))
-    	 * {
-    	 *     currAxis3 = 0;
-    	 *     Robot.ssElevator.stopElevator();
-    	 * }
-    	 * else if (currAxis3 >=0.1)
-    	 * {
-    	 *     if (lastAxis3 < 0.1)
-    	 *     {
-    	 *         Robot.ssElevator.prepForMove(1075);
-    	 *     }
-    	 *     Robot.ssElevator.moveToPos(1075, currAxis3);
-    	 *     //have all else if or two if else statements?
-    	 */
-    	if (currAxis3 > 0.1)
-    	{
-        	Robot.ssFork.set(Robot.oi.buttonController.getRawAxis(3));
-    	}
-    	else if (currAxis3 < 0.1 && lastAxis3 > 0.1)
-    	{
-    		Robot.ssFork.set(0);
-    	}
+    	Robot.ssElevator.moveToPos(destination, currAxis);
     	lastAxis2 = currAxis2;
     	lastAxis3 = currAxis3;
+    	lastAxis = currAxis;
     }
 
     // Make this return true when this Command no longer needs to run execute()

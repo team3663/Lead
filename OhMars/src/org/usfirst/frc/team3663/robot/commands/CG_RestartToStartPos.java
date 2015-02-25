@@ -15,7 +15,7 @@ public class CG_RestartToStartPos extends CommandGroup {
     public  CG_RestartToStartPos() {
     	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos start");
     	addSequential(new C_ElevMoveAndSetZero());
-    	addSequential(new C_ElevMoveToPos(-20));
+    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.noTotePos));
     	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos end");
         // Add Commands here:
         // e.g. addSequential(new Command1());
