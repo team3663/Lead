@@ -20,9 +20,9 @@ public class CW_PickUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	C_ElevMoveToPos movePos1 = new C_ElevMoveToPos(-1);
+    	C_ElevMoveToPos movePos1 = new C_ElevMoveToPos(Robot.ssElevator.lowestPos);
     	move1 = movePos1;
-    	C_ElevMoveToPos movePos2 = new C_ElevMoveToPos(-25);
+    	C_ElevMoveToPos movePos2 = new C_ElevMoveToPos(Robot.ssElevator.highestPos);
     	move2 = movePos2;
     	System.out.println("hello, testing initializing stuff to see on rioLog :)");
     	SmartDashboard.putString("ssElevator","CW_PickUp initialize");
@@ -46,11 +46,7 @@ public class CW_PickUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished)
-        {
-        	return true;
-        }
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true

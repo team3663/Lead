@@ -14,7 +14,7 @@ public class C_Interrupt extends Command {
 	
     public C_Interrupt(Command pCommand) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ssElevator);
+        //requires(Robot.ssElevator);
         command = pCommand;
     }
 

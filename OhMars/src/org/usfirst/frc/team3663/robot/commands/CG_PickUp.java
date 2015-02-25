@@ -11,8 +11,8 @@ public class CG_PickUp extends CommandGroup {
     
     public  CG_PickUp() {
     	SmartDashboard.putString("ssElevatorCG", "CG_PickUp start");
-    	addSequential(new C_ElevMoveToPos(-1));
-    	addSequential(new C_ElevMoveToPos(-25));
+    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.lowestPos));
+    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.highestPos));
     	SmartDashboard.putString("ssElevatorCG", "CG_PickUp end");
         // Add Commands here:
         // e.g. addSequential(new Command1());

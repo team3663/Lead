@@ -113,11 +113,6 @@ public class OI {
 		resetToStart.whenPressed(cgResetToStart);
 		resetToStart.whenReleased(new C_Interrupt(cgResetToStart));
 		
-	/*	manualRaiseElevator = new JoystickButton(buttonController, 5);//would be replaced by fork out
-		cgManualRaiseElevator = new CG_ManualRaiseElevator();
-		manualRaiseElevator.whenPressed(cgManualRaiseElevator);
-		manualRaiseElevator.whenReleased(new C_Interrupt(cgManualRaiseElevator));
-	*/	//if replacing with forkOut, delete CG_ManualRaiseElevator;
 		manualForkIn = new JoystickButton(buttonController, 5);//left Bumper
 		cForkIn = new C_ForkOut(false, 100);
 		manualForkIn.whenPressed(cForkIn);
@@ -130,11 +125,6 @@ public class OI {
 		
 		
 		//----------------
-		elevMoveToPos = new JoystickButton(testStick, 7);
-		cElevMoveToDashPos = new C_ElevMoveToPos(-50);
-		elevMoveToPos.whenPressed(cElevMoveToDashPos);
-		elevMoveToPos.whenReleased(new C_Interrupt(cElevMoveToDashPos));
-		
 		motorDriveTest = new JoystickButton(testStick, 1);
 		cMotorDriveTest = new C_MotorDriveTest();
 		motorDriveTest.whenPressed(cMotorDriveTest);

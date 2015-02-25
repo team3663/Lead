@@ -21,9 +21,8 @@ public class C_ElevMoveToPos extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	ticks = getTicks();
-    	Robot.ssElevator.prepForMove(ticks);
     	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose initialize");
+    	finished = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,16 +32,11 @@ public class C_ElevMoveToPos extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished)
-        {
-        	return true;
-        }
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ssElevator.terminateMove();
     	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose end");
     }
 
@@ -52,45 +46,4 @@ public class C_ElevMoveToPos extends Command {
     	end();
     	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose interrupted");
     }
-    
-    int getTicks()
-    {
-    	if (origTicks < 0)
-    	{
-    		if (origTicks == -49)
-    		{
-    			origTicks = (int)(Robot.ssDashBoard.getFromDashNumber("encoderPosition: "));
-    		}
-    		switch(origTicks)
-    		{
-    		case -1:
-    			ticks = -15;//lowest position we want
-    			break;
-    		case -5:
-    			ticks = 50;//pick up/lower drop off on step
-    			break;
-    		case -10:
-    			ticks = 275;//tote scoring platform
-    			break;
-    		case -15:
-    			ticks = 525;//tote step
-    			break;
-    		case -20:
-    			ticks = 600;//no tote in/beginning of match position
-    			break;
-    		case -25:
-    			ticks = 1075;//totes up & ready for next tote
-    			break;
-    		case -50:
-    			ticks = (int)(SmartDashboard.getNumber("encoderTicks: "));
-    			break;
-    		}
-    	}
-    	else 
-    	{
-    		ticks = origTicks;
-    	}
-    	return ticks;
-    }
-    
 }

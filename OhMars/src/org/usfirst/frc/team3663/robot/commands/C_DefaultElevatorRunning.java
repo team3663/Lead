@@ -28,17 +28,9 @@ public class C_DefaultElevatorRunning extends Command {
 
     protected void execute() {
     	currTicks = Robot.ssElevator.winchEncoder.get();
-    	currAxis2 = Robot.oi.buttonController.getRawAxis(2);
-    	currAxis3 = Robot.oi.buttonController.getRawAxis(3);
+    	currAxis = Robot.oi.buttonController.getRawAxis(2)-Robot.oi.buttonController.getRawAxis(3);
     	
-    	currAxis = currAxis3-currAxis2;
-    	
-    	if (currAxis == 0 && lastAxis == 0)
-    	{
-    		currAxis = 0;
-    		Robot.ssElevator.stopElevator();
-    	}
-    	else if (currAxis >= 0.1)
+    	if (currAxis >= 0.1)
     	{
     		destination = 1075;
     	}
