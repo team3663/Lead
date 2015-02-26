@@ -52,52 +52,53 @@ public class SSDriveTrain extends Subsystem {
     	lastDistanceR = leftEncoder.get();
     }
     
-    public void arcadeDrive(double yDirection, double xDirection)
+    public void arcadeDrive(double pYDirection, double pXDirection)
     {
-    	chassis.arcadeDrive(yDirection, xDirection);
+    	chassis.arcadeDrive(pYDirection, pXDirection);
     }
     
-    public void motor1Set(double speed)
+    public void motor1Set(double pSpeed)
     {
-    	driveMotorL1.set(speed);
+    	driveMotorL1.set(pSpeed);
     }
     
     
 
-    public void motor3Set(double speed)
+    public void motor3Set(double pSpeed)
     {
-    	driveMotorR1.set(speed);
+    	driveMotorR1.set(pSpeed);
     }
 
     
-    
-    public void motorRightSet(double speed){
+    //the speed of the motors are negative for the reason that
+    //the right reversed from 
+    public void motorRightSet(double pSpeed){
     	//driveMotorR2.set(-speed);
-    	driveMotorR1.set(-speed);
+    	driveMotorR1.set(-pSpeed);
     }
     
-    public void motorLeftSet(double speed){
+    public void motorLeftSet(double pSpeed){
     	//driveMotorL2.set(speed);
-    	driveMotorL1.set(speed);
+    	driveMotorL1.set(pSpeed);
     }
     
     /**all of the encoder driving stuff**/
-    public boolean driveForwardDistance(double speed)
+    public boolean driveForwardDistance(double pSpeed)
     {
-    	int le = leftEncoder.get(), re = rightEncoder.get();
-    	if(le >= finalTicksL && speed >= 0)
+    	int leftEncoderTicks = leftEncoder.get(), rightEncoderTicks = rightEncoder.get();
+    	if(leftEncoderTicks >= finalTicksL && pSpeed >= 0)
     	{
     		return true;
     	}
-    	else if(re >= finalTicksR && speed >= 0)
+    	else if(rightEncoderTicks >= finalTicksR && pSpeed >= 0)
     	{
     		return true;
     	}
-    	else if(le <= finalTicksL && speed <= 0)
+    	else if(leftEncoderTicks <= finalTicksL && pSpeed <= 0)
     	{
     		return true;
     	}
-    	else if(re <= finalTicksR && speed <= 0)
+    	else if(rightEncoderTicks <= finalTicksR && pSpeed <= 0)
     	{
     		return true;
     	}
@@ -144,17 +145,17 @@ public class SSDriveTrain extends Subsystem {
     	//driveMotorR2.enableBrakeMode(pBreak);
     }
     
-    public void setTheSpeeds(double highspeed){
+    public void setTheSpeeds(double pHighSpeed){
     	/*NOTES
     	 *RT = D */
     	if(diffTicksR > diffTicksL)
     	{
-        	speedR = highspeed;
+        	speedR = pHighSpeed;
         	float time = (float)(diffTicksR/speedR);
         	speedL = diffTicksL/time;
     	}
     	else{
-        	speedL = highspeed;
+        	speedL = pHighSpeed;
         	float time = (float)(diffTicksL/speedL);
         	speedR = diffTicksR/time;
     	}
@@ -186,17 +187,17 @@ public class SSDriveTrain extends Subsystem {
     	diffTicksL = leftEncoder.get() - finalTicksL;
     }  
     
-    public boolean rampDown(double numberMultiplied)
+    public boolean rampDown(double pNumberMultiplied)
     {
     	int currentDistanceR = rightEncoder.get(), currentDistanceL = leftEncoder.get(); 
     	if(!(lastDistanceR < 10 && lastDistanceR > 10) && diffTicksR > diffTicksL)
     	{
-    		if(speedR > 0 && ((currentDistanceR - lastDistanceR)*numberMultiplied >= diffTicksR))
+    		if(speedR > 0 && ((currentDistanceR - lastDistanceR)*pNumberMultiplied >= diffTicksR))
     		{
     			setTheSpeeds(speedR - .1);
     			//speedR -= .1;
     		}
-    		else if(speedR < 0 && ((currentDistanceR - lastDistanceR)*numberMultiplied <= diffTicksR))
+    		else if(speedR < 0 && ((currentDistanceR - lastDistanceR)*pNumberMultiplied <= diffTicksR))
     		{
     			setTheSpeeds(speedR + .1);
     			//speedR += .1;
@@ -207,12 +208,12 @@ public class SSDriveTrain extends Subsystem {
     	}
     	else if(!(lastDistanceL < 10 && lastDistanceL > 10) && diffTicksR < diffTicksL)
     	{
-    		if(speedL > 0 && ((currentDistanceL - lastDistanceL)*numberMultiplied >= diffTicksL))
+    		if(speedL > 0 && ((currentDistanceL - lastDistanceL)*pNumberMultiplied >= diffTicksL))
     		{
     			setTheSpeeds(speedR - .1);
     			//speedL -= .1;
     		}
-    		else if(speedL < 0 && ((currentDistanceL - lastDistanceL)*numberMultiplied <= diffTicksL))
+    		else if(speedL < 0 && ((currentDistanceL - lastDistanceL)*pNumberMultiplied <= diffTicksL))
     		{
     			setTheSpeeds(speedR + .1);
     			//speedL += .1;
@@ -226,18 +227,18 @@ public class SSDriveTrain extends Subsystem {
     	return true;
     }
     
-    public void rampUp(double rampUpSpeed, double topSpeed)
+    public void rampUp(double pRampUpSpeed, double pTopSpeed)
     {
-    	if(!rampDown(4) && (speedL < topSpeed || speedR < topSpeed))
+    	if(!rampDown(4) && (speedL < pTopSpeed || speedR < pTopSpeed))
     	{
     		if(diffTicksR > diffTicksL)
     		{
-    			speedR += rampUpSpeed;
+    			speedR += pRampUpSpeed;
     			setTheSpeeds(speedR);    			
     		}
     		else 
     		{
-    			speedL += rampUpSpeed;
+    			speedL += pRampUpSpeed;
     			setTheSpeeds(speedL);    	
     		}
     	}
