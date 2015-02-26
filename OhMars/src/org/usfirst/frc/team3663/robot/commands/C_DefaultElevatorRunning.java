@@ -28,7 +28,7 @@ public class C_DefaultElevatorRunning extends Command {
     protected void execute() {
     	button5Pressed = Robot.oi.buttonController.getRawButton(5);
     	currTicks = Robot.ssElevator.winchEncoder.get();
-    	currAxis = Robot.oi.buttonController.getRawAxis(2)-Robot.oi.buttonController.getRawAxis(3);
+    	currAxis = Robot.oi.buttonController.getRawAxis(3)-Robot.oi.buttonController.getRawAxis(2);
     	Robot.ssElevator.manualMoveElevator(currAxis);
     	lastAxis = currAxis;
     }

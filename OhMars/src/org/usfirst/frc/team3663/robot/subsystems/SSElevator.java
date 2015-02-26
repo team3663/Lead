@@ -112,40 +112,41 @@ public class SSElevator extends Subsystem {
     
     public boolean manualMoveElevator(double pSpeed)
     {
-    	speed = pSpeed;
+    	double newSpeed = lastSpeed;
     	int dir = 1;
-    	int acceleration = 1;
-    	if (speed < 0)
+    	if (pSpeed < 0)
     	{
     		dir = -1;
     	}
-    	if (Math.abs(lastSpeed) > Math.abs(speed))
+    	Robot.ssDashBoard.putDashNumber("Elevator: pSpeed: ", pSpeed);
+    	if (lastSpeed > Math.abs(pSpeed))
     	{
-    		acceleration = -1;
+    		newSpeed-=delta;
     	}
-    	int currTicks = winchEncoder.get();
+    	else if (lastSpeed < Math.abs(pSpeed))
+    	{
+    		newSpeed+=delta;
+    	}
+    //	int currTicks = winchEncoder.get();
     	//if near end or if manual is stopping, then terminate
-    	if (currTicks < lowestPos || currTicks > 1070//temp highest pos 
-    			|| (Math.abs(pSpeed) < 0.2 && Math.abs(lastSpeed) <= absMinSpeed
-    			|| !elevZeroed))
+    	if (newSpeed < 0.2 && lastSpeed >= 0.2)//currTicks < lowestPos || currTicks > 1070//temp highest pos 
+    			//|| (Math.abs(pSpeed) < 0.2 && Math.abs(lastSpeed) <= absMinSpeed
+    			//|| !elevZeroed))
+    			 
     	{
 			terminateMove();
 			return true;
     	}
-    	if (Math.abs(lastSpeed-speed) > delta)
-    	{
-    		speed = lastSpeed + acceleration*delta;
-    	}
-    	if (speed > absMaxSpeed)
-    	{
-    		speed = dir*absMaxSpeed;
-    	}
-    	if (speed != 0)
+    	if (newSpeed != 0)
     	{
     		bikeBrakeTriggerOpen();
     	}
-    	motorsSet(speed);
-    	lastSpeed = speed;
+		Robot.ssDashBoard.putDashNumber("Elevator: speed: ", newSpeed);
+    	Robot.ssDashBoard.putDashNumber("Elevator: counter", counter++);
+		//Robot.ssDashBoard.putDashNumber("encoderTicks: ", currTicks);
+    	
+    	motorsSet(dir*newSpeed);
+    	lastSpeed = newSpeed;
     	return false;
     }
     
@@ -265,7 +266,7 @@ public class SSElevator extends Subsystem {
     	if (!elevLimitSwitch.get())
     	{
     		terminateMove();
-        	speed = absMinSpeed;
+        	speed = absMinSpeed + 0.3;
     		return false;
     	}
     	speed-=elevDelta;
@@ -284,6 +285,11 @@ public class SSElevator extends Subsystem {
     		terminateMove();
     		elevZeroed = true;
     		return true;
+		}
+		Robot.ssDashBoard.putDashNumber("Elevator: setZero speed:", speed+((double)counter++/10000.0));
+		if (speed != 0)
+		{
+			bikeBrakeTriggerOpen();
 		}
 		motorsSet(speed);
     	return false;
