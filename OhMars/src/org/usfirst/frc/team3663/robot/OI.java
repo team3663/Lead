@@ -54,7 +54,7 @@ public class OI {
 	Command cgPickUpWithSensor;
 	Command cgScoringPlatform;
 	Command cgStep;
-	Command cgResetToStart;
+	Command cZeroElevator;
 	Command cgManualRaiseElevator;
 	Command cForkIn;
 	Command cForkOut;
@@ -109,9 +109,9 @@ public class OI {
 		dropOnStep.whenReleased(new C_Interrupt(cgStep));
 		
 		resetToStart = new JoystickButton(buttonController, 8);
-		cgResetToStart = new CG_RestartToStartPos();
-		resetToStart.whenPressed(cgResetToStart);
-		resetToStart.whenReleased(new C_Interrupt(cgResetToStart));
+		cZeroElevator = new C_ElevMoveAndSetZero();
+		resetToStart.whenPressed(cZeroElevator);
+		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
 		
 		manualForkIn = new JoystickButton(buttonController, 5);//left Bumper
 		cForkIn = new C_ForkOut(false, 100);

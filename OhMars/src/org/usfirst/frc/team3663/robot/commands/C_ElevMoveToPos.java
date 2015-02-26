@@ -43,7 +43,6 @@ public class C_ElevMoveToPos extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     	SmartDashboard.putString("ssElevator", "C_ElevMoveToPose interrupted");
     }
 }
