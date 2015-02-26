@@ -48,7 +48,8 @@ public class SSElevator extends Subsystem {
 	public final int onScoringPlatformPos = 275;
 	public final int onStepPos = 525;
 	public final int noTotePos = 600;
-	public final int highestPos = 1075;
+	public final int nextToteReadyPos = 1075;
+	public final int highestPos = 1165;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
@@ -109,8 +110,92 @@ public class SSElevator extends Subsystem {
 		motorsSet(speed);
     }
     
+    public boolean manualMoveElevator(double pSpeed)
+    {
+    	speed = pSpeed;
+    	int dir = 1;
+    	int acceleration = 1;
+    	if (speed < 0)
+    	{
+    		dir = -1;
+    	}
+    	if (Math.abs(lastSpeed) > Math.abs(speed))
+    	{
+    		acceleration = -1;
+    	}
+    	int currTicks = winchEncoder.get();
+    	//if near end or if manual is stopping, then terminate
+    	if (currTicks < lowestPos || currTicks > 1070//temp highest pos 
+    			|| (Math.abs(pSpeed) < 0.2 && Math.abs(lastSpeed) <= absMinSpeed
+    			|| !elevZeroed))
+    	{
+			terminateMove();
+			return true;
+    	}
+    	if (Math.abs(lastSpeed-speed) > delta)
+    	{
+    		speed = lastSpeed + acceleration*delta;
+    	}
+    	if (speed > absMaxSpeed)
+    	{
+    		speed = dir*absMaxSpeed;
+    	}
+    	if (speed != 0)
+    	{
+    		bikeBrakeTriggerOpen();
+    	}
+    	motorsSet(speed);
+    	lastSpeed = speed;
+    	return false;
+    }
+    
+    public boolean moveToSetPos(int pTicks, double pMaxSpeed)
+    {
+    	maxSpeed = Math.abs(pMaxSpeed);
+    	int acceleration = 1;//default to accelerating
+    	int dir = 1;//default to going up
+    	int currTicks = winchEncoder.get();
+    	int tickDelta = Math.abs(currTicks-pTicks);//distance to goal
+    	if (tickDelta < 5 || !elevZeroed)
+    	{
+    		terminateMove();
+    		minSpeedAdjust = 0;
+    		return true;
+    	}
+    	if (currTicks > pTicks)
+    	{
+    		dir = -1;
+    	}
+    	if (tickDelta < 50)
+    	{
+    		acceleration = -1;
+    	}
+    	speed = Math.abs(lastSpeed) + acceleration*delta;
+    	if (speed > maxSpeed)
+    	{
+    		speed = maxSpeed;
+    	}
+    	if (speed < absMinSpeed + minSpeedAdjust)
+    	{
+			//if stalled then increase minSpeed
+			if (lastTicks == currTicks)
+			{
+				minSpeedAdjust+=delta;
+			}
+    		speed = absMinSpeed + minSpeedAdjust;
+    	}
+		lastSpeed = dir*speed;
+    	if (lastSpeed != 0)
+    	{
+    		bikeBrakeTriggerOpen();
+    	}
+    	motorsSet(lastSpeed);
+    	lastTicks = currTicks;
+    	return false;
+    }
+    
     //questions: are we there yet? are we going up? are we accelerating?
-    public boolean moveToPos(int pTicks, double pMaxSpeed)
+    public boolean moveToPosEverything(int pTicks, double pMaxSpeed)
     {
     	maxSpeed = Math.abs(pMaxSpeed);
     	int acceleration = 1;//default to accelerating
@@ -130,6 +215,7 @@ public class SSElevator extends Subsystem {
     		dir = -1;//heading down
     	}
 		if (tickDelta < 50)
+			
 		{
 			acceleration = -1;//decelerating
 		}

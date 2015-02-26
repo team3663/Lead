@@ -29,14 +29,6 @@ public class C_ForkOut extends Command {
     protected void initialize() {
     	Robot.runCommand = true;
     	endTime = Timer.getFPGATimestamp()+time;
-    	if (goOut)
-    	{
-    		speed = 1.0;
-    	}
-    	else
-    	{
-    		speed = -1.0;
-    	}
     	SmartDashboard.putString("ssElevator", "C_ForkOut initialize");
     }
 
@@ -45,7 +37,7 @@ public class C_ForkOut extends Command {
     	currTime = Timer.getFPGATimestamp();
     	if (currTime < endTime)
     	{
-    		Robot.ssFork.set(speed);
+    		Robot.ssFork.moveOut(goOut);
     		finished = false;
     	}
     	else
@@ -56,11 +48,7 @@ public class C_ForkOut extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (finished)
-		{
-        	return true;
-		}
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true
