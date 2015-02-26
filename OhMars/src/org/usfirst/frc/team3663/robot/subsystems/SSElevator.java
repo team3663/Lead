@@ -319,9 +319,9 @@ public class SSElevator extends Subsystem {
     	SmartDashboard.putNumber("ElevMotor1", Robot.ssElevator.elevMotor1.get());
     	SmartDashboard.putNumber("ElevMotor2", Robot.ssElevator.elevMotor2.get());
     	if(Robot.ssElevator.toteSensor.get()){
-    		SmartDashboard.putString("ElevToteSensor", "toteIn");
-    	}else{
     		SmartDashboard.putString("ElevToteSensor", "noTote");
+    	}else{
+    		SmartDashboard.putString("ElevToteSensor", "toteIn");
     	}
     	if(Robot.ssElevator.brakeOn){
     		SmartDashboard.putString("ElevBrake", "on");

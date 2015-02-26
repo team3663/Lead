@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static SSArmsIntake ssArmsIntake;
 	public static SSArmsSolenoids ssArmsSolenoids;
 	public static SSArmsUpDown ssArmsUpDown;
-	
+	public static SSDoor ssDoor;
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
 	public static SSFork ssFork;
@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
     	ssElevator = new SSElevator();
     	ssFork = new SSFork();
     	//ssArms = new SSArms();
-    	
+    	ssDoor = new SSDoor();
     	ssArmsIntake = new SSArmsIntake();
     	ssArmsSolenoids = new SSArmsSolenoids();
     	ssArmsUpDown = new SSArmsUpDown();
@@ -84,10 +84,12 @@ public class Robot extends IterativeRobot {
     }
 
     /**
-     * This function is called periodically during autonomous
+     * This function is called periodically duri
+     * ng autonomous
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        updateStatus();
     }
 
     public void teleopInit() {
@@ -110,6 +112,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        updateStatus();
     }
     
     /**
@@ -221,6 +224,7 @@ public class Robot extends IterativeRobot {
             ssDriveTrain.updateStatus();
             ssElevator.updateStatus();
             ssFork.updateStatus();
+            ssDoor.updateStatus();
         }
     }
 }
