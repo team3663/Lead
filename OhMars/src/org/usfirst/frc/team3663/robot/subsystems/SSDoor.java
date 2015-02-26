@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SSDoor extends Subsystem {
 	public Talon hingeMotor;
-	public DigitalInput doorIsOpenSwitch;
-	public DigitalInput doorIsClosedSwitch;
+	//public DigitalInput doorIsOpenSwitch;
+	//public DigitalInput doorIsClosedSwitch;
 	public boolean doorIsClosed;
 	
 	public SSDoor(){
-		hingeMotor = new Talon(/*OVER*/9000);
-		doorIsOpenSwitch = new DigitalInput(/*OVER*/9000);
-		doorIsClosedSwitch = new DigitalInput(/*OVER*/9000);
+		hingeMotor = new Talon(11);
+		//doorIsOpenSwitch = new DigitalInput(8);
+		//doorIsClosedSwitch = new DigitalInput(9);
 		
 	}
     public void initDefaultCommand() {
@@ -33,7 +33,7 @@ public class SSDoor extends Subsystem {
     	return Robot.ssDoor.hingeMotor.get();
     }
     public boolean getIsOpenSwitch(){
-    	if(Robot.ssDoor.doorIsOpenSwitch.get()){
+    	if(true/*Robot.ssDoor.doorIsOpenSwitch.get()*/){
     		doorIsClosed = false;
     		return true;
     	}else{
@@ -42,7 +42,7 @@ public class SSDoor extends Subsystem {
     	}
     }
     public boolean getIsClosedSwitch(){
-    	if(Robot.ssDoor.doorIsClosedSwitch.get()){
+    	if(true/*Robot.ssDoor.doorIsClosedSwitch.get()*/){
     		doorIsClosed = true;
     		return true;
     	}else{
@@ -52,7 +52,7 @@ public class SSDoor extends Subsystem {
     }
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
-    	if(Robot.ssDoor.doorIsOpenSwitch.get())
+    	if(true/*Robot.ssDoor.doorIsOpenSwitch.get()*/)
     		SmartDashboard.putString("DoorLimitSwitch", "open?");
     	else
     		SmartDashboard.putString("DoorLimitSwitch", "closed?");
