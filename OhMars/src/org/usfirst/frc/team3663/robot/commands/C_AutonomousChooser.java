@@ -23,20 +23,19 @@ public class C_AutonomousChooser extends Command {
     	int choice = Robot.ssAutonomous.getAutonomousRoutine();
     	switch(choice){
     		case 0: 
-    			theOneToRun_CG = new CG_Autonomous3Totes();
-    			theOneToRun_CG.start();
+    	//		theOneToRun_CG = new CG_Autonomous3Totes();
+    		//	theOneToRun_CG.start();
     			break;
     		case 1:
     			//theOneToRun_CG = new CG_Auto1();
     			//theOneToRun_CG.start();
     			break;
     		case 2:
-    			theOneToRun_C = new C_EncoderTurn(26, 30, true, .2);
-    			theOneToRun_C.start();
+    			//theOneToRun_C = new C_EncoderTurn(26, 30, true, .2);
+    			//theOneToRun_C.start();
     			break;
     		case 3:
-    			theOneToRun_C = new C_Right90(.2);
-    			theOneToRun_C.start();
+    			//do nothing!!!!!!!!!!!!!!
     			break;
     	}
     	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser initialize");
