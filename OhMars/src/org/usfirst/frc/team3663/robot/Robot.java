@@ -96,6 +96,7 @@ public class Robot extends IterativeRobot {
 		//armExecutables.start();
 		defaultElevator.start();
 	//	pickUpWithSensor.start();
+		
     }
 
     /**
@@ -103,7 +104,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	ssArmsIntake.intakeMotorsSet(0.0);
     }
 
     /**

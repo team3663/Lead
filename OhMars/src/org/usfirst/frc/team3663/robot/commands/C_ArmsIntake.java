@@ -11,9 +11,8 @@ import org.usfirst.frc.team3663.robot.OI;
  *
  */
 public class C_ArmsIntake extends Command {
-	double leftSpeed, rightSpeed;
-	boolean canReverseR = true;
-	boolean canReverseL = true;
+	int pov;
+	boolean isPovActive = false;
     public C_ArmsIntake(){
     	requires(Robot.ssArmsIntake);
     }
@@ -33,24 +32,25 @@ public class C_ArmsIntake extends Command {
     	if(Robot.ssElevator.getToteSwitch()){
     		//For unknown reasons, ^this does not work. It does not make the motors turn off
     		//when the switch is tripped, nor does it prevent the motors from turning off.
-    		if(Robot.oi.driveController.getRawButton(1))
-    			Robot.ssArmsIntake.intakeMotorsSet(0.0);
-    		if(Robot.oi.driveController.getRawButton(2))
-    			Robot.ssArmsIntake.intakeMotorsSet(-1.0);
-    		if(Robot.oi.driveController.getRawButton(3))
-    			Robot.ssArmsIntake.intakeMotorsSet(1.0);
-
-    		leftSpeed = Robot.ssArmsIntake.intakeMotorL.get();
-    		rightSpeed = Robot.ssArmsIntake.intakeMotorR.get();
-    		
-    		//code below: if POV left, reverse current left motor speed. Vice versa for POV right
-    		//80% chance this code below works. Will not change back to original speeds after POV is lifted.
-    		//CONFIRMED however that the POV is responding to input though
-    		if(Robot.oi.buttonController.getPOV() == 90){
-    			Robot.ssArmsIntake.intakeMotorLSet(-1);
+    		pov = Robot.oi.buttonController.getPOV();
+    		if(pov > 0){
+    			isPovActive = true;
+    		}else{
+    			isPovActive = false;
     		}
-    		else if(Robot.oi.buttonController.getPOV() == 270)
-    			Robot.ssArmsIntake.intakeMotorRSet(-1);
+      		if(Robot.oi.driveController.getRawButton(1))
+    			Robot.ssArmsIntake.intakeMotorsSet(0.0);
+    		else if(Robot.oi.driveController.getRawButton(2))
+    			Robot.ssArmsIntake.intakeMotorsSet(-1.0);
+    		else if(Robot.oi.driveController.getRawButton(3))
+    			Robot.ssArmsIntake.intakeMotorsSet(1.0);
+    		else if(isPovActive){
+	    		if(pov == 270)
+	    			Robot.ssArmsIntake.intakeMotorRSet(-1.0);
+	    		else if(pov == 90){
+	    			Robot.ssArmsIntake.intakeMotorLSet(-1.0);
+	    		}
+    		}
     	}else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}

@@ -9,13 +9,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- ****THIS CODE HAS BEEN REMOVED FROM robot BECAUSE IT CRASHES ssAUTONOMOUS
+ *
  */
 public class SSDoor extends Subsystem {
 	public CANTalon hingeMotor;
 	public DigitalInput doorIsOpenSwitch;
 	public DigitalInput doorIsClosedSwitch;
-	public int increment = 0;
 	public SSDoor(){
 		hingeMotor = new CANTalon(11);
 		doorIsOpenSwitch = new DigitalInput(8);
@@ -56,7 +55,6 @@ public class SSDoor extends Subsystem {
     }
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
-    	SmartDashboard.putNumber("DoorCounter",increment++);
     	if(Robot.ssDoor.doorIsOpenSwitch.get())
     		SmartDashboard.putString("DoorOpenLimitSwitch", "true");
     	else
