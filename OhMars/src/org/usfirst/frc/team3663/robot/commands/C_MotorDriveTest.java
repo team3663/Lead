@@ -73,7 +73,7 @@ public class C_MotorDriveTest extends Command {
 			Robot.ssArmsIntake.intakeMotorsSet(speed);
 			break;
 		case 13:
-			finished = Robot.ssElevator.moveToPos(-50, 1.0);
+			finished = Robot.ssElevator.moveToSetPos(-50, 1.0);
 			SmartDashboard.putNumber("elevWinchEncoder: ", Robot.ssElevator.winchEncoder.get());
 			return finished;
 		default:

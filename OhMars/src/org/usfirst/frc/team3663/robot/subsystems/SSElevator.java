@@ -48,7 +48,8 @@ public class SSElevator extends Subsystem {
 	public final int onScoringPlatformPos = 275;
 	public final int onStepPos = 525;
 	public final int noTotePos = 600;
-	public final int highestPos = 1075;
+	public final int nextToteReadyPos = 1075;
+	public final int highestPos = 1165;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
@@ -109,8 +110,93 @@ public class SSElevator extends Subsystem {
 		motorsSet(speed);
     }
     
+    public boolean manualMoveElevator(double pSpeed)
+    {
+    	double newSpeed = lastSpeed;
+    	int dir = 1;
+    	if (pSpeed < 0)
+    	{
+    		dir = -1;
+    	}
+    	Robot.ssDashBoard.putDashNumber("Elevator: pSpeed: ", pSpeed);
+    	if (lastSpeed > Math.abs(pSpeed))
+    	{
+    		newSpeed-=delta;
+    	}
+    	else if (lastSpeed < Math.abs(pSpeed))
+    	{
+    		newSpeed+=delta;
+    	}
+    //	int currTicks = winchEncoder.get();
+    	//if near end or if manual is stopping, then terminate
+    	if (newSpeed < 0.2 && lastSpeed >= 0.2)//currTicks < lowestPos || currTicks > 1070//temp highest pos 
+    			//|| (Math.abs(pSpeed) < 0.2 && Math.abs(lastSpeed) <= absMinSpeed
+    			//|| !elevZeroed))
+    			 
+    	{
+			terminateMove();
+			return true;
+    	}
+    	if (newSpeed != 0)
+    	{
+    		bikeBrakeTriggerOpen();
+    	}
+		Robot.ssDashBoard.putDashNumber("Elevator: speed: ", newSpeed);
+    	Robot.ssDashBoard.putDashNumber("Elevator: counter", counter++);
+		//Robot.ssDashBoard.putDashNumber("encoderTicks: ", currTicks);
+    	
+    	motorsSet(dir*newSpeed);
+    	lastSpeed = newSpeed;
+    	return false;
+    }
+    
+    public boolean moveToSetPos(int pTicks, double pMaxSpeed)
+    {
+    	maxSpeed = Math.abs(pMaxSpeed);
+    	int acceleration = 1;//default to accelerating
+    	int dir = 1;//default to going up
+    	int currTicks = winchEncoder.get();
+    	int tickDelta = Math.abs(currTicks-pTicks);//distance to goal
+    	if (tickDelta < 5 || !elevZeroed)
+    	{
+    		terminateMove();
+    		minSpeedAdjust = 0;
+    		return true;
+    	}
+    	if (currTicks > pTicks)
+    	{
+    		dir = -1;
+    	}
+    	if (tickDelta < 50)
+    	{
+    		acceleration = -1;
+    	}
+    	speed = Math.abs(lastSpeed) + acceleration*delta;
+    	if (speed > maxSpeed)
+    	{
+    		speed = maxSpeed;
+    	}
+    	if (speed < absMinSpeed + minSpeedAdjust)
+    	{
+			//if stalled then increase minSpeed
+			if (lastTicks == currTicks)
+			{
+				minSpeedAdjust+=delta;
+			}
+    		speed = absMinSpeed + minSpeedAdjust;
+    	}
+		lastSpeed = dir*speed;
+    	if (lastSpeed != 0)
+    	{
+    		bikeBrakeTriggerOpen();
+    	}
+    	motorsSet(lastSpeed);
+    	lastTicks = currTicks;
+    	return false;
+    }
+    
     //questions: are we there yet? are we going up? are we accelerating?
-    public boolean moveToPos(int pTicks, double pMaxSpeed)
+    public boolean moveToPosEverything(int pTicks, double pMaxSpeed)
     {
     	maxSpeed = Math.abs(pMaxSpeed);
     	int acceleration = 1;//default to accelerating
@@ -130,6 +216,7 @@ public class SSElevator extends Subsystem {
     		dir = -1;//heading down
     	}
 		if (tickDelta < 50)
+			
 		{
 			acceleration = -1;//decelerating
 		}
@@ -179,7 +266,7 @@ public class SSElevator extends Subsystem {
     	if (!elevLimitSwitch.get())
     	{
     		terminateMove();
-        	speed = absMinSpeed;
+        	speed = absMinSpeed + 0.3;
     		return false;
     	}
     	speed-=elevDelta;
@@ -199,11 +286,21 @@ public class SSElevator extends Subsystem {
     		elevZeroed = true;
     		return true;
 		}
+		Robot.ssDashBoard.putDashNumber("Elevator: setZero speed:", speed+((double)counter++/10000.0));
+		if (speed != 0)
+		{
+			bikeBrakeTriggerOpen();
+		}
 		motorsSet(speed);
     	return false;
     }
     
     public boolean getToteSwitch(){
+    	/*if(toteSensor.get()){
+    		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 500);
+    	}else{
+    		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 0);
+    	}*/
     	return toteSensor.get();
     }
     

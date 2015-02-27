@@ -22,7 +22,7 @@ public class CW_PickUp extends Command {
     protected void initialize() {
     	C_ElevMoveToPos movePos1 = new C_ElevMoveToPos(Robot.ssElevator.lowestPos);
     	move1 = movePos1;
-    	C_ElevMoveToPos movePos2 = new C_ElevMoveToPos(Robot.ssElevator.highestPos);
+    	C_ElevMoveToPos movePos2 = new C_ElevMoveToPos(Robot.ssElevator.nextToteReadyPos);
     	move2 = movePos2;
     	System.out.println("hello, testing initializing stuff to see on rioLog :)");
     	SmartDashboard.putString("ssElevator","CW_PickUp initialize");
