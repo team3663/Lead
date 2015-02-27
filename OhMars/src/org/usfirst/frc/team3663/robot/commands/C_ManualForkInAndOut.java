@@ -25,6 +25,14 @@ public class C_ManualForkInAndOut extends Command {
     protected void execute() {
     	button6Pressed = Robot.oi.buttonController.getRawButton(6);
     	axis3 = Robot.oi.buttonController.getRawAxis(3);
+    	if (axis3 > 0.2)
+    	{
+    		Robot.ssFork.moveOut(false);
+    	}
+    	else if (button6Pressed)
+    	{
+    		Robot.ssFork.moveOut(true);	
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

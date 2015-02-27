@@ -11,8 +11,8 @@ import org.usfirst.frc.team3663.robot.Robot;
 public class C_DefaultElevatorRunning extends Command {
 
 	double lastAxis2, currAxis2, lastAxis3, currAxis3, lastAxis, currAxis;
+	//not using axis 3
 	boolean button5Pressed;
-	int currTicks;
 	int destination;
 	
     public C_DefaultElevatorRunning(int pTicks) {
@@ -22,15 +22,27 @@ public class C_DefaultElevatorRunning extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	lastAxis = 0;
+    	lastAxis2 = 0;
     }
 
     protected void execute() {
     	button5Pressed = Robot.oi.buttonController.getRawButton(5);
-    	currTicks = Robot.ssElevator.winchEncoder.get();
-    	currAxis = Robot.oi.buttonController.getRawAxis(3)-Robot.oi.buttonController.getRawAxis(2);
+    	currAxis2 = -Robot.oi.buttonController.getRawAxis(2);
+    	if (button5Pressed)
+    	{
+    		currAxis = 1.0;
+    	}
+    	else if (currAxis2 > 0.1)
+    	{
+    		currAxis = currAxis2;
+    	}
+    	else
+    	{
+    		currAxis = 0;
+    	}
+    	//currAxis = Robot.oi.buttonController.getRawAxis(3)-Robot.oi.buttonController.getRawAxis(2);
     	Robot.ssElevator.manualMoveElevator(currAxis);
-    	lastAxis = currAxis;
+    	lastAxis2 = currAxis2;
     }
 
     // Make this return true when this Command no longer needs to run execute()

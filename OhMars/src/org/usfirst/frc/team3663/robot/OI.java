@@ -112,7 +112,7 @@ public class OI {
 		cZeroElevator = new C_ElevMoveAndSetZero();
 		resetToStart.whenPressed(cZeroElevator);
 		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
-		
+	/*	
 		manualForkIn = new JoystickButton(buttonController, 5);//left Bumper
 		cForkIn = new C_ForkOut(false, 100);
 		manualForkIn.whenPressed(cForkIn);
@@ -122,7 +122,7 @@ public class OI {
 		cForkOut = new C_ForkOut(true, 100);
 		manualForkOut.whenPressed(cForkOut);
 		manualForkOut.whenReleased(new C_Interrupt(cForkOut));
-		
+	*/	
 		
 		//----------------
 		motorDriveTest = new JoystickButton(testStick, 1);
