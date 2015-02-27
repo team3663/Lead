@@ -48,8 +48,7 @@ public class OI {
 	public JoystickButton dropOnStep;
 	public JoystickButton resetToStart;
 	public JoystickButton manualRaiseElevator;
-	public JoystickButton manualForkIn;
-	public JoystickButton manualForkOut;
+	public JoystickButton releaseBrake;
 	//-------------
 	public JoystickButton openDoor;
 	public JoystickButton closeDoor;
@@ -65,6 +64,7 @@ public class OI {
 	Command cElevMoveToDashPos;
 	Command cMotorDriveTest;
 	Command cMoveAndSetZero;
+	Command cReleaseBrake;
 	
 	Command cOpenDoor;
 	Command cCloseDoor;
@@ -118,6 +118,11 @@ public class OI {
 		cZeroElevator = new C_ElevMoveAndSetZero();
 		resetToStart.whenPressed(cZeroElevator);
 		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
+		
+		releaseBrake = new JoystickButton(buttonController, 7);
+		cReleaseBrake = new C_ReleaseBrake();
+		releaseBrake.whileHeld(cReleaseBrake);
+		
 		//----------------
 		motorDriveTest = new JoystickButton(testStick, 1);
 		cMotorDriveTest = new C_MotorDriveTest();
