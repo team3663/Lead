@@ -145,7 +145,7 @@ public class SSElevator extends Subsystem {
     		stop = true;
         	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "slowed down");
     	}
-    	if ((dir == 1 && currTicks > 1070) || (dir == -1 && currTicks < lowestPos))
+    	if ((dir == 1 && currTicks > 1075) || (dir == -1 && currTicks < lowestPos))
     	{
     		stop = true;
         	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "reached limit");
