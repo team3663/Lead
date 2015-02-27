@@ -182,11 +182,12 @@ public class SSElevator extends Subsystem {
     	int acceleration = 1;//default to accelerating
     	int dir = 1;//default to going up
     	int currTicks = winchEncoder.get();
-    	int tickDelta = Math.abs(currTicks-pTicks);//distance to goal
+    	int tickDelta = Math.abs(pTicks-currTicks);//distance to goal
     	if (tickDelta < 5 || !elevZeroed)
     	{
     		terminateMove();
     		minSpeedAdjust = 0;
+    		Robot.ssDashBoard.putDashNumber("Elevator: terminate: ", terminateCounter++);
     		return true;
     	}
     	if (currTicks > pTicks)
@@ -232,7 +233,7 @@ public class SSElevator extends Subsystem {
     	if (!elevLimitSwitch.get())
     	{
     		terminateMove();
-        	speed = absMinSpeed + 0.3;
+        	speed = absMinSpeed + 0.2;
     		return false;
     	}
     	speed-=elevDelta;

@@ -224,6 +224,7 @@ public class Robot extends IterativeRobot {
             ssElevator.updateStatus();
             ssFork.updateStatus();
             ssDoor.updateStatus();
+            oi.updateStatus();
         }
     }
 }
