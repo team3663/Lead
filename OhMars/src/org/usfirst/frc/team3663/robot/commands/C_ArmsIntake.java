@@ -35,12 +35,15 @@ public class C_ArmsIntake extends Command {
     			Robot.ssArmsIntake.intakeMotorsSet(-1.0);
     		if(Robot.oi.driveController.getRawButton(3))
     			Robot.ssArmsIntake.intakeMotorsSet(1.0);
+
+    		leftSpeed = -Robot.ssArmsIntake.intakeMotorL.get();
+    		rightSpeed = -Robot.ssArmsIntake.intakeMotorR.get();
     		
     		//code below: if POV left, reverse current left motor speed. Vice versa for POV right
-    		if(Robot.oi.driveController.getPOV() == 90)
-    			Robot.ssArmsIntake.intakeMotorLSet(-Robot.ssArmsIntake.intakeMotorL.get());
+    		if(Robot.oi.buttonController.getPOV() == 90)
+    			Robot.ssArmsIntake.intakeMotorLSet(-leftSpeed);
     		else if(Robot.oi.driveController.getPOV() == 270)
-    			Robot.ssArmsIntake.intakeMotorRSet(-Robot.ssArmsIntake.intakeMotorR.get());
+    			Robot.ssArmsIntake.intakeMotorRSet(-rightSpeed);
     	}else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}

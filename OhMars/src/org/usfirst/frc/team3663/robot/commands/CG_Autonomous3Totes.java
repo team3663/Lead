@@ -26,9 +26,9 @@ public class CG_Autonomous3Totes extends CommandGroup {
     	
     	addSequential(new C_EncoderTurn(0,90, true, .7));
     	addSequential(new C_EncoderDriveStraight(108, .7));
-    	addSequential(new C_ElevMoveToPos(-1));
+    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.lowestPos));
     	addSequential(new C_EncoderDriveStraight(-24, .7));
-    	//addSequential(new C_ElevMoveToPos(-20));
+    	//addSequential(new C_ElevMoveToPos(Robot.ssElevator.noTotePos));
     	SmartDashboard.putString("ssAutonomousCG", "end");
         
     }
