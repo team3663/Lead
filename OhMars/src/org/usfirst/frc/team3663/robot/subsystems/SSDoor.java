@@ -15,7 +15,7 @@ public class SSDoor extends Subsystem {
 	public CANTalon hingeMotor;
 	public DigitalInput doorIsOpenSwitch;
 	public DigitalInput doorIsClosedSwitch;
-	
+	public int increment = 0;
 	public SSDoor(){
 		hingeMotor = new CANTalon(11);
 		doorIsOpenSwitch = new DigitalInput(8);
@@ -51,8 +51,12 @@ public class SSDoor extends Subsystem {
     public void enableBrakeMode(boolean pBrake){
     	hingeMotor.enableBrakeMode(pBrake);
     }
+    public void stopDoor(){
+    	setDoorSpeed(0.0);
+    }
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
+    	SmartDashboard.putNumber("DoorCounter",increment++);
     	if(Robot.ssDoor.doorIsOpenSwitch.get())
     		SmartDashboard.putString("DoorOpenLimitSwitch", "true");
     	else
