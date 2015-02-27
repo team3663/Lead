@@ -57,8 +57,7 @@ public class Robot extends IterativeRobot {
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
     	ssFork = new SSFork();
-    	//ssArms = new SSArms();
-    	//ssDoor = new SSDoor();
+    	ssDoor = new SSDoor();
     	ssArmsIntake = new SSArmsIntake();
     	ssArmsSolenoids = new SSArmsSolenoids();
     	ssArmsUpDown = new SSArmsUpDown();
@@ -224,7 +223,7 @@ public class Robot extends IterativeRobot {
             ssDriveTrain.updateStatus();
             ssElevator.updateStatus();
             ssFork.updateStatus();
-            //ssDoor.updateStatus();
+            ssDoor.updateStatus();
         }
     }
 }

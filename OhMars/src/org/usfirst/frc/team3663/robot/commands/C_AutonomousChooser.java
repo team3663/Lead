@@ -36,6 +36,7 @@ public class C_AutonomousChooser extends Command {
     			break;
     		case 3:
     			theOneToRun_C = new C_Hard90(.2, true);
+    			theOneToRun_C.start();
     			break;
     	}
     	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser initialize");

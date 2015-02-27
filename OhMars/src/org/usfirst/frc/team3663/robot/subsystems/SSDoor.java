@@ -2,25 +2,25 @@ package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ ****THIS CODE HAS BEEN REMOVED FROM robot BECAUSE IT CRASHES ssAUTONOMOUS
  */
 public class SSDoor extends Subsystem {
-	public Talon hingeMotor;
-	//public DigitalInput doorIsOpenSwitch;
-	//public DigitalInput doorIsClosedSwitch;
-	public boolean doorIsClosed;
+	public CANTalon hingeMotor;
+	public DigitalInput doorIsOpenSwitch;
+	public DigitalInput doorIsClosedSwitch;
 	
 	public SSDoor(){
-		hingeMotor = new Talon(11);
-		//doorIsOpenSwitch = new DigitalInput(8);
-		//doorIsClosedSwitch = new DigitalInput(9);
-		
+		hingeMotor = new CANTalon(11);
+		doorIsOpenSwitch = new DigitalInput(8);
+		doorIsClosedSwitch = new DigitalInput(9);
+		enableBrakeMode(true);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -32,31 +32,35 @@ public class SSDoor extends Subsystem {
     public double getDoorSpeed(){
     	return Robot.ssDoor.hingeMotor.get();
     }
-    public boolean getIsOpenSwitch(){
-    	if(true/*Robot.ssDoor.doorIsOpenSwitch.get()*/){
-    		doorIsClosed = false;
-    		return true;
-    	}else{
-    		doorIsClosed = true;
-    		return false;
-    	}
+    public boolean openDoor(){
+    	boolean isOpen = Robot.ssDoor.doorIsOpenSwitch.get();
+    	if(isOpen)
+    		setDoorSpeed(0.0);
+    	else
+    		setDoorSpeed(-0.5);
+		return isOpen;
+		}
+    public boolean closeDoor(){
+    	boolean isClosed = Robot.ssDoor.doorIsClosedSwitch.get();
+    	if(isClosed)
+    		setDoorSpeed(0.0);
+    	else
+    		setDoorSpeed(0.5);
+		return isClosed;
     }
-    public boolean getIsClosedSwitch(){
-    	if(true/*Robot.ssDoor.doorIsClosedSwitch.get()*/){
-    		doorIsClosed = true;
-    		return true;
-    	}else{
-    		doorIsClosed = false;
-    		return false;
-    	}
+    public void enableBrakeMode(boolean pBrake){
+    	hingeMotor.enableBrakeMode(pBrake);
     }
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
-    	if(true/*Robot.ssDoor.doorIsOpenSwitch.get()*/)
-    		SmartDashboard.putString("DoorLimitSwitch", "open?");
+    	if(Robot.ssDoor.doorIsOpenSwitch.get())
+    		SmartDashboard.putString("DoorOpenLimitSwitch", "true");
     	else
-    		SmartDashboard.putString("DoorLimitSwitch", "closed?");
+    		SmartDashboard.putString("DoorOpenLimitSwitch", "false");
+    	if(Robot.ssDoor.doorIsClosedSwitch.get())
+    		SmartDashboard.putString("DoorClosedLimitSwitch", "true");
+    	else
+    		SmartDashboard.putString("DoorClosedLimitSwitch", "false");
     }
     
 }
-

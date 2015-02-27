@@ -35,11 +35,11 @@ public class SSFork extends Subsystem {
     {
     	if (movingOut)
     	{
-    		speed = 1;
+    		speed = -1;
     	}
     	else
     	{
-    		speed = -1;
+    		speed = 1;
     	}
     	set(speed);
     }

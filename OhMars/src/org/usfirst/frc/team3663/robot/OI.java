@@ -50,6 +50,9 @@ public class OI {
 	public JoystickButton manualRaiseElevator;
 	public JoystickButton manualForkIn;
 	public JoystickButton manualForkOut;
+	//-------------
+	public JoystickButton openDoor;
+	public JoystickButton closeDoor;
 	
 	Command cgPickUpWithSensor;
 	Command cgScoringPlatform;
@@ -62,6 +65,9 @@ public class OI {
 	Command cElevMoveToDashPos;
 	Command cMotorDriveTest;
 	Command cMoveAndSetZero;
+	
+	Command cOpenDoor;
+	Command cCloseDoor;
 	//-------------
 	//-0-0-0-0-0-0    BOB STUFF
 	public JoystickButton bobs;
@@ -112,18 +118,6 @@ public class OI {
 		cZeroElevator = new C_ElevMoveAndSetZero();
 		resetToStart.whenPressed(cZeroElevator);
 		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
-		
-		manualForkIn = new JoystickButton(buttonController, 5);//left Bumper
-		cForkIn = new C_ForkOut(false, 100);
-		manualForkIn.whenPressed(cForkIn);
-		manualForkIn.whenReleased(new C_Interrupt(cForkIn));
-		
-		manualForkOut = new JoystickButton(buttonController, 6);//right Bumper
-		cForkOut = new C_ForkOut(true, 100);
-		manualForkOut.whenPressed(cForkOut);
-		manualForkOut.whenReleased(new C_Interrupt(cForkOut));
-		
-		
 		//----------------
 		motorDriveTest = new JoystickButton(testStick, 1);
 		cMotorDriveTest = new C_MotorDriveTest();
@@ -164,6 +158,16 @@ public class OI {
 		
 		armOpenCloseToggle = new JoystickButton(driveController, 6);
 		armOpenCloseToggle.whenPressed(new C_ArmsOpenCloseHold2(false));
+
+		openDoor = new JoystickButton(buttonController,9);
+		cOpenDoor = new C_DoorOpenClose(false);
+		openDoor.whenPressed(cOpenDoor);
+		openDoor.whenReleased(new C_Interrupt(cOpenDoor));
+		
+		closeDoor = new JoystickButton(buttonController,10);
+		cCloseDoor = new C_DoorOpenClose(true);
+		closeDoor.whenPressed(cCloseDoor);
+		closeDoor.whenReleased(new C_Interrupt(cCloseDoor));
 		
 	}
 	public void updateStatus(){

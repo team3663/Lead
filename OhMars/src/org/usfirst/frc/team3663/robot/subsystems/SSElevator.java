@@ -112,6 +112,7 @@ public class SSElevator extends Subsystem {
     
     public boolean manualMoveElevator(double pSpeed)
     {
+    	int currTicks = winchEncoder.get();
     	double newSpeed = lastSpeed;
     	int dir = 1;
     	if (pSpeed < 0)
@@ -119,7 +120,11 @@ public class SSElevator extends Subsystem {
     		dir = -1;
     	}
     	Robot.ssDashBoard.putDashNumber("Elevator: pSpeed: ", pSpeed);
-    	if (lastSpeed > Math.abs(pSpeed))
+    	if (currTicks < lowestPos+30 || currTicks > 1075-25)
+		{
+    		newSpeed-=delta;
+		}
+    	else if (lastSpeed > Math.abs(pSpeed))
     	{
     		newSpeed-=delta;
     	}
@@ -129,9 +134,9 @@ public class SSElevator extends Subsystem {
     	}
     //	int currTicks = winchEncoder.get();
     	//if near end or if manual is stopping, then terminate
-    	if (newSpeed < 0.2 && lastSpeed >= 0.2)//currTicks < lowestPos || currTicks > 1070//temp highest pos 
-    			//|| (Math.abs(pSpeed) < 0.2 && Math.abs(lastSpeed) <= absMinSpeed
-    			//|| !elevZeroed))
+    	if (currTicks < lowestPos || currTicks > 1070//temp highest pos 
+    			|| (newSpeed < 0.2 && lastSpeed >= 0.2)
+    			|| !elevZeroed)
     			 
     	{
 			terminateMove();
@@ -296,8 +301,6 @@ public class SSElevator extends Subsystem {
     }
     
     public boolean getToteSwitch(){
-    	if(toteSensor.get())
-    		//Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 500);
     	return toteSensor.get();
     }
     
