@@ -35,7 +35,7 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_C.start();
     			break;
     		case 3:
-    			theOneToRun_C = new C_Hard90(.2, true);
+    			theOneToRun_C = new C_Right90(.2);
     			theOneToRun_C.start();
     			break;
     	}

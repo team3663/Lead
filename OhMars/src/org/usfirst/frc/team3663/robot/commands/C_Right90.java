@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class C_Right90 extends Command {
-
-    public C_Right90() {
+	double speed;
+    public C_Right90(double pSpeed) {
+    	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
         requires(Robot.ssDriveTrain);
     }
@@ -21,7 +22,7 @@ public class C_Right90 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ssDriveTrain.motorLeftSet(.2);
+    	Robot.ssDriveTrain.motorLeftSet(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
