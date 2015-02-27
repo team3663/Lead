@@ -233,7 +233,7 @@ public class SSElevator extends Subsystem {
     	if (!elevLimitSwitch.get())
     	{
     		terminateMove();
-        	speed = absMinSpeed + 0.1;
+        	speed = absMinSpeed + 0.2;
     		return false;
     	}
     	speed-=elevDelta;
