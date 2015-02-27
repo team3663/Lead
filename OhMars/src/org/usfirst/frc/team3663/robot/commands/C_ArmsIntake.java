@@ -12,6 +12,8 @@ import org.usfirst.frc.team3663.robot.OI;
  */
 public class C_ArmsIntake extends Command {
 	double leftSpeed, rightSpeed;
+	boolean canReverseR = true;
+	boolean canReverseL = true;
     public C_ArmsIntake(){
     	requires(Robot.ssArmsIntake);
     }
@@ -29,6 +31,8 @@ public class C_ArmsIntake extends Command {
     	 * something is stuck to the light sensor and then the arms are useless
     	 */
     	if(Robot.ssElevator.getToteSwitch()){
+    		//For unknown reasons, ^this does not work. It does not make the motors turn off
+    		//when the switch is tripped, nor does it prevent the motors from turning off.
     		if(Robot.oi.driveController.getRawButton(1))
     			Robot.ssArmsIntake.intakeMotorsSet(0.0);
     		if(Robot.oi.driveController.getRawButton(2))
@@ -36,14 +40,17 @@ public class C_ArmsIntake extends Command {
     		if(Robot.oi.driveController.getRawButton(3))
     			Robot.ssArmsIntake.intakeMotorsSet(1.0);
 
-    		leftSpeed = -Robot.ssArmsIntake.intakeMotorL.get();
-    		rightSpeed = -Robot.ssArmsIntake.intakeMotorR.get();
+    		leftSpeed = Robot.ssArmsIntake.intakeMotorL.get();
+    		rightSpeed = Robot.ssArmsIntake.intakeMotorR.get();
     		
     		//code below: if POV left, reverse current left motor speed. Vice versa for POV right
-    		if(Robot.oi.buttonController.getPOV() == 90)
-    			Robot.ssArmsIntake.intakeMotorLSet(-leftSpeed);
-    		else if(Robot.oi.driveController.getPOV() == 270)
-    			Robot.ssArmsIntake.intakeMotorRSet(-rightSpeed);
+    		//80% chance this code below works. Will not change back to original speeds after POV is lifted.
+    		//CONFIRMED however that the POV is responding to input though
+    		if(Robot.oi.buttonController.getPOV() == 90){
+    			Robot.ssArmsIntake.intakeMotorLSet(-1);
+    		}
+    		else if(Robot.oi.buttonController.getPOV() == 270)
+    			Robot.ssArmsIntake.intakeMotorRSet(-1);
     	}else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}

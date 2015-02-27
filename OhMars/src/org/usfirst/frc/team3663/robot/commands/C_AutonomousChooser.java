@@ -35,6 +35,8 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_C.start();
     			break;
     		case 3:
+    			theOneToRun_CG = new CG_ArmGrabbingSequence();
+    			theOneToRun_CG.start();
     			break;
     	}
     	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser initialize");

@@ -8,12 +8,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ ****THIS CODE HAS BEEN REMOVED FROM robot BECAUSE IT CRASHES ssAUTONOMOUS
  */
 public class SSDoor extends Subsystem {
 	public Talon hingeMotor;
-	//public DigitalInput doorIsOpenSwitch;
-	//public DigitalInput doorIsClosedSwitch;
+	public DigitalInput doorIsOpenSwitch;
+	public DigitalInput doorIsClosedSwitch;
+	
+	//These have been removed because I thought they were causing problems.
+	//However, after their removal, the problem persisted, leading to the complete
+	//removal of the whole subsystem, as stated above.
 	public boolean doorIsClosed;
 	
 	public SSDoor(){
@@ -33,7 +37,7 @@ public class SSDoor extends Subsystem {
     	return Robot.ssDoor.hingeMotor.get();
     }
     public boolean getIsOpenSwitch(){
-    	if(true/*Robot.ssDoor.doorIsOpenSwitch.get()*/){
+    	if(Robot.ssDoor.doorIsOpenSwitch.get()){
     		doorIsClosed = false;
     		return true;
     	}else{
@@ -42,7 +46,7 @@ public class SSDoor extends Subsystem {
     	}
     }
     public boolean getIsClosedSwitch(){
-    	if(true/*Robot.ssDoor.doorIsClosedSwitch.get()*/){
+    	if(Robot.ssDoor.doorIsClosedSwitch.get()){
     		doorIsClosed = true;
     		return true;
     	}else{
@@ -52,7 +56,7 @@ public class SSDoor extends Subsystem {
     }
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
-    	if(true/*Robot.ssDoor.doorIsOpenSwitch.get()*/)
+    	if(Robot.ssDoor.doorIsOpenSwitch.get())
     		SmartDashboard.putString("DoorLimitSwitch", "open?");
     	else
     		SmartDashboard.putString("DoorLimitSwitch", "closed?");
