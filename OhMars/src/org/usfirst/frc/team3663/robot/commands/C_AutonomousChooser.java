@@ -27,7 +27,7 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_CG.start();
     			break;
     		case 1:
-    			theOneToRun_C = new C_EncoderDriveStraight(10, .2);
+    			theOneToRun_C = new C_EncoderDriveStraight(-10, .2);
     			theOneToRun_C.start();
     			break;
     		case 2:
@@ -35,6 +35,7 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_C.start();
     			break;
     		case 3:
+    			theOneToRun_C = new C_Hard90(.2, true);
     			break;
     	}
     	SmartDashboard.putString("ssAutonomous", "C_AutonomousChooser initialize");

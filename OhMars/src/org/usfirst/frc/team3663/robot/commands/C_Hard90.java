@@ -15,7 +15,7 @@ public class C_Hard90 extends Command {
     	speed = pSpeed;
     	turnLeft = pTurnLeft;
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ssDriveTrain);
     }
 
     // Called just before this Command runs the first time

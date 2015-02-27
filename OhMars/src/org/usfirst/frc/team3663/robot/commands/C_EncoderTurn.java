@@ -17,7 +17,7 @@ public class C_EncoderTurn extends Command {
     	radius = pRadius;
     	speed = pSpeed;
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ssDriveTrain);
     }
 
     // Called just before this Command runs the first time

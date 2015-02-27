@@ -297,7 +297,7 @@ public class SSElevator extends Subsystem {
     
     public boolean getToteSwitch(){
     	if(toteSensor.get())
-    		Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 500);
+    		//Robot.oi.driveController.setRumble(Joystick.RumbleType.kRightRumble, 500);
     	return toteSensor.get();
     }
     
