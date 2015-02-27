@@ -33,6 +33,10 @@ public class C_ManualForkInAndOut extends Command {
     	{
     		Robot.ssFork.moveOut(true);	
     	}
+    	else
+    	{
+    		Robot.ssFork.set(0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
