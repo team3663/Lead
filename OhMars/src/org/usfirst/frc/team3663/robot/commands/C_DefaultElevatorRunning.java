@@ -22,19 +22,18 @@ public class C_DefaultElevatorRunning extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	lastAxis2 = 0;
     }
 
     protected void execute() {
     	button5Pressed = Robot.oi.buttonController.getRawButton(5);
-    	currAxis2 = -Robot.oi.buttonController.getRawAxis(2);
+    	currAxis2 = Robot.oi.buttonController.getRawAxis(2);
     	if (button5Pressed)
     	{
     		currAxis = 1.0;
     	}
     	else if (currAxis2 > 0.1)
     	{
-    		currAxis = currAxis2;
+    		currAxis = -currAxis2;
     	}
     	else
     	{
@@ -42,7 +41,6 @@ public class C_DefaultElevatorRunning extends Command {
     	}
     	//currAxis = Robot.oi.buttonController.getRawAxis(3)-Robot.oi.buttonController.getRawAxis(2);
     	Robot.ssElevator.manualMoveElevator(currAxis);
-    	lastAxis2 = currAxis2;
     }
 
     // Make this return true when this Command no longer needs to run execute()
