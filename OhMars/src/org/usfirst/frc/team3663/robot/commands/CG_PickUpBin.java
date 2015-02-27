@@ -5,17 +5,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_Auto1 extends CommandGroup {
+public class CG_PickUpBin extends CommandGroup {
     
-    public  CG_Auto1() {
+    public  CG_PickUpBin() {
         // Add Commands here:
-    	addParallel(new CG_RestartToStartPos());
-    	addSequential(new C_EncoderDriveStraight(3, .2));
-    	addSequential(new C_ArmsOpenCloseTogether(false));
-        addSequential(new C_EncoderDriveStraight(-128,.2));
-    	addSequential(new C_ArmsOpenCloseTogether(true));
-        addSequential(new C_EncoderDriveStraight(5,.2));
-        
+        // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 
