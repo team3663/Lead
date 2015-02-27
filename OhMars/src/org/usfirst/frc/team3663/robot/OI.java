@@ -118,7 +118,6 @@ public class OI {
 		cZeroElevator = new C_ElevMoveAndSetZero();
 		resetToStart.whenPressed(cZeroElevator);
 		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
-		
 		//----------------
 		motorDriveTest = new JoystickButton(testStick, 1);
 		cMotorDriveTest = new C_MotorDriveTest();

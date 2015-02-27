@@ -9,7 +9,7 @@ import org.usfirst.frc.team3663.robot.Robot;
 public class C_ManualForkInAndOut extends Command {
 
 	boolean goingOut;
-	double axis2;
+	double axis3;
 	boolean button6Pressed;
 	
     public C_ManualForkInAndOut() {
@@ -24,6 +24,15 @@ public class C_ManualForkInAndOut extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	button6Pressed = Robot.oi.buttonController.getRawButton(6);
+    	axis3 = Robot.oi.buttonController.getRawAxis(3);
+    	if (axis3 > 0.2)
+    	{
+    		Robot.ssFork.moveOut(false);
+    	}
+    	else if (button6Pressed)
+    	{
+    		Robot.ssFork.moveOut(true);	
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
