@@ -49,6 +49,7 @@ public class OI {
 	public JoystickButton resetToStart;
 	public JoystickButton manualRaiseElevator;
 	public JoystickButton releaseBrake;
+	public JoystickButton moveToContainerPos;
 	//-------------
 	public JoystickButton openDoor;
 	public JoystickButton closeDoor;
@@ -65,6 +66,7 @@ public class OI {
 	Command cMotorDriveTest;
 	Command cMoveAndSetZero;
 	Command cReleaseBrake;
+	Command cMoveToContainerPos;
 	
 	Command cOpenDoor;
 	Command cCloseDoor;
@@ -115,13 +117,18 @@ public class OI {
 		dropOnStep.whenReleased(new C_Interrupt(cgStep));
 		
 		resetToStart = new JoystickButton(buttonController, 8);
-		cZeroElevator = new C_ElevMoveAndSetZero();
+		cZeroElevator = new C_ElevMoveAndSetZero();//CG_RestartToStartPos();//
 		resetToStart.whenPressed(cZeroElevator);
 		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
 		
 		releaseBrake = new JoystickButton(buttonController, 7);
 		cReleaseBrake = new C_ReleaseBrake();
 		releaseBrake.whileHeld(cReleaseBrake);
+		//temp for until moveSetPos starts working
+		moveToContainerPos = new JoystickButton(buttonController, 4);
+		cMoveToContainerPos = new C_ElevMoveToPos(Robot.ssElevator.readyForBinPos);
+		moveToContainerPos.whenPressed(cMoveToContainerPos);
+		moveToContainerPos.whenReleased(new C_Interrupt(cMoveToContainerPos));
 		
 		//----------------
 		motorDriveTest = new JoystickButton(testStick, 1);

@@ -31,11 +31,13 @@ public class C_ManualForkInAndOut extends Command {
     	}
     	else if (button6Pressed)
     	{
+    		Robot.ssDoor.openDoor();
     		Robot.ssFork.moveOut(true);	
     	}
     	else
     	{
     		Robot.ssFork.set(0);
+    		Robot.ssDoor.setDoorSpeed(0);
     	}
     }
 
