@@ -31,8 +31,8 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_CG.start();
     			break;
     		case 2:
-    			//theOneToRun_C = new C_EncoderTurn(26, 30, true, .2);
-    			//theOneToRun_C.start();
+    			theOneToRun_C = new C_EncoderDriveStraight(-40, .7);
+    			theOneToRun_C.start();
     			break;
     		case 3:
     			//do nothing!!!!!!!!!!!!!!

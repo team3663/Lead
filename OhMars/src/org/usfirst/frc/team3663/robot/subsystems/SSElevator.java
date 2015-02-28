@@ -48,9 +48,10 @@ public class SSElevator extends Subsystem {
 	public final int lowStepPos = 50;
 	public final int onScoringPlatformPos = 275;
 	public final int onStepPos = 525;
+	public final int readyForBinPos = 218;
 	public final int noTotePos = 600;
 	public final int nextToteReadyPos = 1075;
-	public final int highestPos = 1165;
+	public final int highestPos = 1075;//1165;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
@@ -126,7 +127,7 @@ public class SSElevator extends Subsystem {
     		desiredSpeed = 0;
     	}
     	Robot.ssDashBoard.putDashNumber("Elevator: pSpeed: ", pSpeed);
-    	if ((dir == -1 && currTicks < lowestPos+30) || (dir == 1 && currTicks > 1075-25))
+    	if ((dir == -1 && currTicks < lowestPos+30) || (dir == 1 && currTicks > highestPos-25))
 		{
     		newSpeed-=delta;
 		}
@@ -145,7 +146,7 @@ public class SSElevator extends Subsystem {
     		stop = true;
         	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "slowed down");
     	}
-    	if ((dir == 1 && currTicks > 1075) || (dir == -1 && currTicks < lowestPos))
+    	if ((dir == 1 && currTicks > highestPos) || (dir == -1 && currTicks < lowestPos))
     	{
     		stop = true;
         	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "reached limit");
@@ -178,6 +179,8 @@ public class SSElevator extends Subsystem {
     
     public boolean moveToSetPos(int pTicks, double pMaxSpeed)
     {
+    	Robot.ssDashBoard.putDashNumber("Elevator: pTicks(SetPos): ", pTicks);
+    	Robot.ssDashBoard.putDashNumber("Elevator: pMaxSpeed(SetPos): ", pMaxSpeed);
     	maxSpeed = Math.abs(pMaxSpeed);
     	int acceleration = 1;//default to accelerating
     	int dir = 1;//default to going up
@@ -246,6 +249,7 @@ public class SSElevator extends Subsystem {
     }
     public boolean moveAndSetZero()
     {
+		Robot.ssDashBoard.putDashBool("Elevator: Zeroed: ", elevZeroed);
 		Robot.ssDashBoard.putDashNumber("encoderTicks: ", winchEncoder.get());
 		if (elevLimitSwitch.get())
 		{

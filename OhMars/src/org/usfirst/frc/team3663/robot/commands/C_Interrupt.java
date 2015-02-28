@@ -20,6 +20,7 @@ public class C_Interrupt extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putString("Interrupter", "C_Interrupt initialize");
     	command.cancel();
     }
 
@@ -34,12 +35,12 @@ public class C_Interrupt extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	SmartDashboard.putString("ssElevator", "C_Interrupt end");
+    	SmartDashboard.putString("Interrupter", "C_Interrupt end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	SmartDashboard.putString("ssElevator", "C_Interrupt interrupted");
+    	SmartDashboard.putString("Interrupter", "C_Interrupt interrupted");
     }
 }
