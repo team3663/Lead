@@ -33,7 +33,7 @@ public class C_ArmsIntake extends Command {
     		//For unknown reasons, ^this does not work. It does not make the motors turn off
     		//when the switch is tripped, nor does it prevent the motors from turning off.
     		pov = Robot.oi.buttonController.getPOV();
-    		if(pov > 0){
+    		if(pov > -1){
     			isPovActive = true;
     		}else{
     			isPovActive = false;
@@ -47,8 +47,12 @@ public class C_ArmsIntake extends Command {
     		else if(isPovActive){
 	    		if(pov == 270)
 	    			Robot.ssArmsIntake.intakeMotorRSet(-1.0);
-	    		else if(pov == 90){
+	    		else if(pov == 90)
 	    			Robot.ssArmsIntake.intakeMotorLSet(-1.0);
+    			else if(pov == 0)
+    				Robot.ssArmsIntake.intakeMotorRSet(1.0);
+    			else if(pov == 180)
+    				Robot.ssArmsIntake.intakeMotorLSet(1.0);
 	    		}
     		}
     	}else{
