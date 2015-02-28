@@ -72,6 +72,7 @@ public class Robot extends IterativeRobot {
 		//armExecutables = new CG_ArmsExecute();
 		defaultElevator = new C_DefaultElevatorRunning(0);
 		pickUpWithSensor = new CG_PickUpWithSensor();
+		SmartDashboard.putString("RobotState", "robotInit");
     }
 	
 	public void disabledPeriodic() {
@@ -79,6 +80,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+		SmartDashboard.putString("RobotState", "AutoInit");
     	Auto.start();
     }
 
@@ -92,6 +94,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+		SmartDashboard.putString("RobotState", "TeleopInit");
         arcadeDrive.start();
 		//armExecutables.start();
 		defaultElevator.start();
@@ -104,6 +107,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
+		SmartDashboard.putString("RobotState", "Disabled");
     	ssArmsIntake.intakeMotorsSet(0.0);
     }
 
