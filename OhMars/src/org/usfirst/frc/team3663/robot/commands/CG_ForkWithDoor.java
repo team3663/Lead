@@ -1,23 +1,15 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveToPos;
-import org.usfirst.frc.team3663.robot.commands.C_ElevMoveAndSetZero;
 
 /**
  *
  */
-public class CG_RestartToStartPos extends CommandGroup {
+public class CG_ForkWithDoor extends CommandGroup {
     
-    public  CG_RestartToStartPos() {
-    	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos start");
-    	addSequential(new C_ElevMoveAndSetZero());
-    	addSequential(new C_Delay(0.05));
-    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.readyForBinPos));
-    	SmartDashboard.putString("ssElevatorCG", "CG_RestartToStartPos end");
+    public  CG_ForkWithDoor() {
+    	addParallel(new C_DoorOpenClose(false));
+    	addSequential(new C_ForkOut(true, 7));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

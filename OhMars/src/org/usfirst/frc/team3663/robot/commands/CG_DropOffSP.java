@@ -15,7 +15,8 @@ public class CG_DropOffSP extends CommandGroup {
     public  CG_DropOffSP() {
     	SmartDashboard.putString("ssElevatorCG", "CG_DropOffSP start");
     	addSequential(new C_ElevMoveToPos(Robot.ssElevator.onScoringPlatformPos));
-    	addSequential(new C_ForkOut(true, 7));
+    	//addSequential(new C_ForkOut(true, 7));
+    	addSequential(new CG_ForkWithDoor());
     	addSequential(new C_ElevMoveToPos(Robot.ssElevator.lowestPos));
     	addSequential(new C_ForkOut(false, 7));
     	addSequential(new C_ElevMoveToPos(Robot.ssElevator.noTotePos));
