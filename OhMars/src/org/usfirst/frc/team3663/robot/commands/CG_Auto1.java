@@ -12,9 +12,10 @@ public class CG_Auto1 extends CommandGroup {
     	addParallel(new CG_RestartToStartPos());
     	addSequential(new C_EncoderDriveStraight(3, .2));
     	addSequential(new C_ArmsOpenCloseTogether(false));
-        addSequential(new C_EncoderDriveStraight(-128,.2));
+    	addParallel(new C_ArmsIntakeSet(1.0,1.0));
+        addSequential(new C_EncoderDriveStraight(-84,.5));
     	addSequential(new C_ArmsOpenCloseTogether(true));
-        addSequential(new C_EncoderDriveStraight(5,.2));
+        addSequential(new C_EncoderDriveStraight(-5,.2));
         
         //      addSequential(new Command2());
         // these will run in order.
