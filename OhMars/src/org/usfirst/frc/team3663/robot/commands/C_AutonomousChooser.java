@@ -31,7 +31,7 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_CG.start();
     			break;
     		case 2:
-    			theOneToRun_C = new C_EncoderDriveStraight(-40, .7);
+    			theOneToRun_C = new C_Right90(.4);
     			theOneToRun_C.start();
     			break;
     		case 3:

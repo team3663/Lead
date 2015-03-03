@@ -29,13 +29,17 @@ public class C_ArmsIntake extends Command {
     	 * and not being able to operate the arm wheels if need be. Say, a fleck of
     	 * something is stuck to the light sensor and then the arms are useless
     	 */
-    	if(Robot.ssElevator.getToteSwitch()){
+    	if(Robot.ssElevator.getToteSwitch())
+    	{
     		//For unknown reasons, ^this does not work. It does not make the motors turn off
     		//when the switch is tripped, nor does it prevent the motors from turning off.
     		pov = Robot.oi.buttonController.getPOV();
-    		if(pov > -1){
+    		if(pov > -1)
+    		{
     			isPovActive = true;
-    		}else{
+    		}
+    		else
+    		{
     			isPovActive = false;
     		}
       		if(Robot.oi.driveController.getRawButton(1))
@@ -44,7 +48,8 @@ public class C_ArmsIntake extends Command {
     			Robot.ssArmsIntake.intakeMotorsSet(-1.0);
     		else if(Robot.oi.driveController.getRawButton(3))
     			Robot.ssArmsIntake.intakeMotorsSet(1.0);
-    		else if(isPovActive){
+    		else if(isPovActive)
+    		{
 	    		if(pov == 270)
 	    			Robot.ssArmsIntake.intakeMotorRSet(-1.0);
 	    		else if(pov == 90)
@@ -53,9 +58,10 @@ public class C_ArmsIntake extends Command {
     				Robot.ssArmsIntake.intakeMotorRSet(1.0);
     			else if(pov == 180)
     				Robot.ssArmsIntake.intakeMotorLSet(1.0);
-	    		}
-    		}
-    	}else{
+	    	}
+    	}
+    	else
+    	{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}
     }
