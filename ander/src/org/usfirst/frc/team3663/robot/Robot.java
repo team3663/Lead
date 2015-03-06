@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team3663.robot.commands.ExampleCommand;
-import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
+
+import org.usfirst.frc.team3663.robot.subsystems.SSDriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,7 +17,7 @@ import org.usfirst.frc.team3663.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final SSDriveTrain ssDriveTrain = new SSDriveTrain();
 	public static OI oi;
 
     Command autonomousCommand;
@@ -29,7 +29,6 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
     }
 	
 	public void disabledPeriodic() {
@@ -67,8 +66,12 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during operator control
      */
+	int counter = 0;
+	
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        if ((counter++ % 5) == 0)
+        	ssDriveTrain.updateStatus();
     }
     
     /**
