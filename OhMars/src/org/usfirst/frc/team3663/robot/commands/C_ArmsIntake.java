@@ -32,7 +32,7 @@ public class C_ArmsIntake extends Command {
     	if(Robot.ssElevator.getToteSwitch()){
     		//For unknown reasons, ^this does not work. It does not make the motors turn off
     		//when the switch is tripped, nor does it prevent the motors from turning off.
-    		pov = Robot.oi.buttonController.getPOV();
+    		pov = Robot.oi.buttonController.getPOV(); 
     		if(pov > -1){
     			isPovActive = true;
     		}else{
@@ -53,9 +53,9 @@ public class C_ArmsIntake extends Command {
     				Robot.ssArmsIntake.intakeMotorRSet(1.0);
     			else if(pov == 180)
     				Robot.ssArmsIntake.intakeMotorLSet(1.0);
-	    		}
     		}
-    	}else{
+      		
+		}else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}
     }

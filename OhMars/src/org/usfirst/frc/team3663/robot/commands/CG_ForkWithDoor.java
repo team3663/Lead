@@ -9,7 +9,7 @@ public class CG_ForkWithDoor extends CommandGroup {
     
     public  CG_ForkWithDoor() {
     	addParallel(new C_DoorOpenClose(false));
-    	addSequential(new C_ForkOut(true, 7));
+    	addSequential(new C_ForkOut(true, 9));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
