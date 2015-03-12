@@ -183,8 +183,8 @@ public class SSDriveTrain extends Subsystem {
     }
     
     public void difference(){
-    	diffTicksR = rightEncoder.get() - finalTicksR;
-    	diffTicksL = leftEncoder.get() - finalTicksL;
+    	diffTicksR = finalTicksR - rightEncoder.get();
+    	diffTicksL = finalTicksL - leftEncoder.get();
     }  
     
     public boolean rampDown(double pNumberMultiplied)
