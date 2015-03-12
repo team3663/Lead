@@ -44,11 +44,12 @@ public class SSElevator extends Subsystem {
 	int terminateCounter = 0;
 
 	public boolean brakeOn;
-	public final int lowestPos = -20;//-15;
+	public final int lowestPos = -20;
 	public final int lowStepPos = 50;
-	public final int onScoringPlatformPos = 220;//275;
+	public final int onScoringPlatformPos = 220;//220 is new good position moving from 275
 	public final int onStepPos = 525;
 	public final int readyForBinPos = 218;
+	//public final int puttingStackPos = 458;492,437,491,519,520
 	public final int noTotePos = 600;
 	public final int nextToteReadyPos = 1075;
 	public final int highestPos = 1075;//1165;
@@ -66,8 +67,8 @@ public class SSElevator extends Subsystem {
     	winchEncoder = new Encoder(1,2);
     	elevLimitSwitch = new DigitalInput(0);
     	
-    	elevMotor1.enableBrakeMode(false);
-    	elevMotor2.enableBrakeMode(false);
+    	elevMotor1.enableBrakeMode(true);//false);
+    	elevMotor2.enableBrakeMode(true);//false);
     	
     	bikeBrakeTriggerClose();
 
@@ -197,7 +198,7 @@ public class SSElevator extends Subsystem {
     	{
     		dir = -1;
     	}
-    	if (tickDelta < 50)
+    	if (tickDelta < 75)
     	{
     		acceleration = -1;
     	}
@@ -275,21 +276,51 @@ public class SSElevator extends Subsystem {
     {
     	if (enable)
     	{
-	    	//elevMotor1.enableBrakeMode(true);
-	    	//elevMotor2.enableBrakeMode(true);
+	    	elevMotor1.enableBrakeMode(true);
+	    	elevMotor2.enableBrakeMode(true);
     	}
     	else
     	{
-    		elevMotor1.enableBrakeMode(false);
-    		elevMotor2.enableBrakeMode(false);
+    		//elevMotor1.enableBrakeMode(false);
+    		//elevMotor2.enableBrakeMode(false);
     	}
     }
+    
+    double ticksPerSec = 0;
+    double lastTime = 0;
+    
+    
+    public void updateTicksPerSec()
+    {
+    	int currTicks = winchEncoder.get();
+    	double currTime = Timer.getFPGATimestamp();
+    	ticksPerSec = (currTicks-lastTicks)/(currTime-lastTime);
+    	lastTime = currTime;
+    	lastTicks = currTicks;
+    }
+    
     public void updateStatus(){
-    	SmartDashboard.putNumber("ElevEncoder", Robot.ssElevator.winchEncoder.get());
-    	SmartDashboard.putNumber("ElevMotor1", Robot.ssElevator.elevMotor1.get());
-    	SmartDashboard.putNumber("ElevMotor2", Robot.ssElevator.elevMotor2.get());
-    	SmartDashboard.putNumber("ElevMotor1Draw", Robot.ssElevator.elevMotor1.getOutputCurrent());
-    	SmartDashboard.putNumber("ElevMotor2Draw", Robot.ssElevator.elevMotor2.getOutputCurrent());
+    	updateTicksPerSec();
+    	if (elevMotor1.get() == 1)
+    	{
+	    	if (Math.abs(ticksPerSec) >= 30)
+	    	{
+	    		SmartDashboard.putString("ElevTicksPerSec", "Elevator running on speed" + ticksPerSec);
+	    	}
+	    	else if (ticksPerSec == 0)
+	    	{
+	    		SmartDashboard.putString("ElevTicksPerSec", "Elevator running okay");
+	    	}
+	    	else
+	    	{
+	    		SmartDashboard.putString("ElevTicksPerSec", "Elevator running TOO SLOW!!!" + ticksPerSec);
+	    	}
+    	}
+    	SmartDashboard.putNumber("ElevEncoder", winchEncoder.get());
+    	SmartDashboard.putNumber("ElevMotor1", elevMotor1.get());
+    	SmartDashboard.putNumber("ElevMotor2", elevMotor2.get());
+    	SmartDashboard.putNumber("ElevMotor1Draw", elevMotor1.getOutputCurrent());
+    	SmartDashboard.putNumber("ElevMotor2Draw", elevMotor2.getOutputCurrent());
     	if(Robot.ssElevator.toteSensor.get()){
     		SmartDashboard.putString("ElevToteSensor", "noTote");
     	}else{
