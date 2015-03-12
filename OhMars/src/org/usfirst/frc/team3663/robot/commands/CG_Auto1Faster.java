@@ -18,7 +18,7 @@ public class CG_Auto1Faster extends CommandGroup {
     	addParallel(new C_ArmsIntakeSet(1.0,1.0));
     	addSequential(new C_Delay(1.5));
         addSequential(new C_EncoderDriveStraight(-42,.8));
-        addSequential(new C_EncoderDriveStraight(-42,.5));
+        addSequential(new C_EncoderDriveStraight(-50,.5));
         addSequential(new C_EncoderDriveStraight(-5,.2));
         addParallel(new C_ArmsIntakeSet(0.0,0.0));
     	addParallel(new C_ArmsOpenCloseTogether(true));
