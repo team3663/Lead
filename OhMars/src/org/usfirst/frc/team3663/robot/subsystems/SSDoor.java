@@ -31,6 +31,7 @@ public class SSDoor extends Subsystem {
     public double getDoorSpeed(){
     	return Robot.ssDoor.hingeMotor.get();
     }
+    //top openSwitch true when open && bottom closeSwitch true when closed
     public boolean openDoor(){
     	boolean isOpen = Robot.ssDoor.doorIsOpenSwitch.get();
     	if(isOpen)
@@ -47,6 +48,7 @@ public class SSDoor extends Subsystem {
     		setDoorSpeed(0.5);
 		return isClosed;
     }
+    
     public void enableBrakeMode(boolean pBrake){
     	hingeMotor.enableBrakeMode(pBrake);
     }

@@ -46,7 +46,7 @@ public class SSElevator extends Subsystem {
 	public boolean brakeOn;
 	public final int lowestPos = -15;
 	public final int lowStepPos = 50;
-	public final int onScoringPlatformPos = 275;
+	public final int onScoringPlatformPos = 220;//275;
 	public final int onStepPos = 525;
 	public final int readyForBinPos = 218;
 	public final int noTotePos = 600;

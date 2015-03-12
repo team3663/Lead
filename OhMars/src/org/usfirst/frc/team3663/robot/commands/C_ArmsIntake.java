@@ -55,7 +55,8 @@ public class C_ArmsIntake extends Command {
     				Robot.ssArmsIntake.intakeMotorLSet(1.0);
 	    		}
     		}
-    	}else{
+    	
+    else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}
     }
