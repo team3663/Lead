@@ -61,6 +61,7 @@ public class SSDoor extends Subsystem {
     }
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
+    	SmartDashboard.putNumber("DoorHingeMotorDraw",Robot.ssDoor.hingeMotor.getOutputCurrent());
     	if(doorIsOpen)
     		SmartDashboard.putString("Door", "Open");
     	else

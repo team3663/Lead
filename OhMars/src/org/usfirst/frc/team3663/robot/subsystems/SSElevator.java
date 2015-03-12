@@ -288,6 +288,8 @@ public class SSElevator extends Subsystem {
     	SmartDashboard.putNumber("ElevEncoder", Robot.ssElevator.winchEncoder.get());
     	SmartDashboard.putNumber("ElevMotor1", Robot.ssElevator.elevMotor1.get());
     	SmartDashboard.putNumber("ElevMotor2", Robot.ssElevator.elevMotor2.get());
+    	SmartDashboard.putNumber("ElevMotor1Draw", Robot.ssElevator.elevMotor1.getOutputCurrent());
+    	SmartDashboard.putNumber("ElevMotor2Draw", Robot.ssElevator.elevMotor2.getOutputCurrent());
     	if(Robot.ssElevator.toteSensor.get()){
     		SmartDashboard.putString("ElevToteSensor", "noTote");
     	}else{
