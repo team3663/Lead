@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team3663.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
@@ -9,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3663.robot.commands.*;
 import org.usfirst.frc.team3663.robot.subsystems.*;
 
@@ -213,6 +216,27 @@ public class Robot extends IterativeRobot {
     	}
     	SmartDashboard.putString("testMotor: ", testMotorName);
     }
+    public void updateRobotState(){
+    	String mode;
+        if (DriverStation.getInstance().isBrownedOut())
+          mode = "BrownOut";
+        else if (DriverStation.getInstance().isAutonomous())
+          mode = "Autonomous";
+        else if (DriverStation.getInstance().isOperatorControl())
+          mode = "Teleop";
+        else if (DriverStation.getInstance().isTest())
+          mode = "Test";
+        else
+          mode = "Unknown";
+
+        SmartDashboard.putString("Mode:",mode);
+    }
+    public void updatePosition(){
+    	String position = "blue";
+    	if(DriverStation.getInstance().getAlliance() == Alliance.Red)
+    		position = "red";
+    	SmartDashboard.putString("DS_Position:",position+DriverStation.getInstance().getLocation());
+    }
     public void updateStatus()
     {
         double currentTime = Timer.getFPGATimestamp();
@@ -230,6 +254,11 @@ public class Robot extends IterativeRobot {
             ssFork.updateStatus();
             ssDoor.updateStatus();
             oi.updateStatus();
+            
+            updatePosition();
+            updateRobotState();
+            SmartDashboard.putNumber("MatchTime", DriverStation.getInstance().getMatchTime());
+            SmartDashboard.putBoolean("FMS_Attached: ",DriverStation.getInstance().isFMSAttached());
         }
     }
 }

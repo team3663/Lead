@@ -45,23 +45,20 @@ public class C_ArmsIntake extends Command {
       		if(Robot.oi.driveController.getRawButton(1))
     			Robot.ssArmsIntake.intakeMotorsSet(0.0);
     		else if(Robot.oi.driveController.getRawButton(2))
-    			Robot.ssArmsIntake.intakeMotorsSet(-1.0);
+    			Robot.ssArmsIntake.intakeMotorsSet(-0.7);
     		else if(Robot.oi.driveController.getRawButton(3))
-    			Robot.ssArmsIntake.intakeMotorsSet(1.0);
-    		else if(isPovActive)
-    		{
+    			Robot.ssArmsIntake.intakeMotorsSet(0.7);
+    		else if(isPovActive){
 	    		if(pov == 270)
-	    			Robot.ssArmsIntake.intakeMotorRSet(-1.0);
+	    			Robot.ssArmsIntake.intakeMotorRSet(-0.7);
 	    		else if(pov == 90)
-	    			Robot.ssArmsIntake.intakeMotorLSet(-1.0);
+	    			Robot.ssArmsIntake.intakeMotorLSet(-0.7);
     			else if(pov == 0)
-    				Robot.ssArmsIntake.intakeMotorRSet(1.0);
+    				Robot.ssArmsIntake.intakeMotorRSet(0.7);
     			else if(pov == 180)
-    				Robot.ssArmsIntake.intakeMotorLSet(1.0);
-	    	}
-    	}
-    	else
-    	{
+    				Robot.ssArmsIntake.intakeMotorLSet(0.7);
+    		}
+		}else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}
     }

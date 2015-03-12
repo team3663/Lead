@@ -248,6 +248,8 @@ public class SSDriveTrain extends Subsystem {
     	SmartDashboard.putNumber("DriveMotorR1", Robot.ssDriveTrain.driveMotorR1.get());
     	SmartDashboard.putNumber("DriveEncoderL", Robot.ssDriveTrain.leftEncoder.get());
     	SmartDashboard.putNumber("DriveEncoderR", Robot.ssDriveTrain.rightEncoder.get());
+    	SmartDashboard.putNumber("DriveMotorL1Draw", Robot.ssDriveTrain.driveMotorL1.getOutputCurrent());
+    	SmartDashboard.putNumber("DriveMotorR1Draw", Robot.ssDriveTrain.driveMotorR1.getOutputCurrent());
     }
 }
 
