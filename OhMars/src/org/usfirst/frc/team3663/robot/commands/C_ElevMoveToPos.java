@@ -28,9 +28,6 @@ public class C_ElevMoveToPos extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	finished = Robot.ssElevator.moveToSetPos(origTicks, 1.0);
-    	Robot.ssDashBoard.putDashBool("Elevator: Button2Pressed: ", Robot.oi.buttonController.getRawButton(2));
-    	Robot.ssDashBoard.putDashBool("Elevator: Button3Pressed: ", Robot.oi.buttonController.getRawButton(3));
-    	Robot.ssDashBoard.putDashBool("Elevator: Button1Pressed: ", Robot.oi.buttonController.getRawButton(1));
     }
 
     // Make this return true when this Command no longer needs to run execute()

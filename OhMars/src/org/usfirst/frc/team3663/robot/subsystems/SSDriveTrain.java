@@ -41,7 +41,7 @@ public class SSDriveTrain extends Subsystem {
     public SSDriveTrain()
     {
     	//Timer.getFPGATimestamp();
-    	//theG = new Gyro(0);
+    	theG = new Gyro(0);
     	driveMotorL1 = new CANTalon(10);
     	/*11 and 21 are not connected*/
     	//driveMotorL2 = new CANTalon(11);
@@ -255,13 +255,13 @@ public class SSDriveTrain extends Subsystem {
     public int gyroFinal;
     public boolean negative;
        public void setFinalGyro(int pAngle){
-       	gyroFinal = (int)(pAngle + theG.getAngle());
-       	if(pAngle > 0){
-       		negative = false;
-       	}
-       	else{
+       		gyroFinal = (int)(pAngle + theG.getAngle());
+       		if(pAngle > 0){
+       			negative = false;
+       		}
+       		else{
        		negative = true;
-       	}
+       		}
        }
        
      public boolean CheckGyro(){

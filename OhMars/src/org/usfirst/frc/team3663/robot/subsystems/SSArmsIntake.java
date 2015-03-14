@@ -33,6 +33,9 @@ public class SSArmsIntake extends Subsystem {
     {
     	intakeMotorR.set(speed);
     }
+    public boolean armsAreSameDirection(){
+    	return intakeMotorL.get()*intakeMotorR.get() >= 0;
+    }
     public void updateStatus(){
         SmartDashboard.putNumber("ArmIntakeL", Robot.ssArmsIntake.intakeMotorL.get());
         SmartDashboard.putNumber("ArmIntakeR", Robot.ssArmsIntake.intakeMotorR.get());

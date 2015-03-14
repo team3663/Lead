@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3663.robot.commands;
 
+import org.usfirst.frc.team3663.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -9,16 +11,15 @@ public class CG_AutoPickUpGreenCan extends CommandGroup {
     
     public  CG_AutoPickUpGreenCan() {
         // Add Commands here:
-    	addSequential(new C_ElevMoveAndSetZero());
-    	addSequential(new C_ElevMoveToPos(30));
+    	addSequential(new C_EncoderDriveStraight(3, .2));
+    	addSequential(new CG_RestartToStartPos());
+    	addParallel(new C_ElevMoveToPos(185));
+    	addSequential(new C_ArmsOpenCloseTogether(false));
     	addParallel(new C_ArmsIntakeSet(1.0,1.0));
-    	addParallel(new C_ArmsOpenCloseTogether(false));
-    	addSequential(new C_ElevMoveToPos(0));
+    	addSequential(new C_Delay(1.5));
+        addParallel(new C_ArmsIntakeSet(0.0,0.0));
     	addParallel(new C_ArmsOpenCloseTogether(true));
-    	addSequential(new C_Delay(1));
-    	addParallel(new C_ArmsOpenCloseTogether(false));
-    	addSequential(new C_Delay(1));
-    	addParallel(new C_ArmsOpenCloseTogether(true));
+    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.nextToteReadyPos));
         //      addSequential(new Command2());
         // these will run in order.
 
