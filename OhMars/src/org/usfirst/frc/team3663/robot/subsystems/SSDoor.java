@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SSDoor extends Subsystem {
 	public CANTalon hingeMotor;
-	public DigitalInput doorIsOpenSwitch;
-	public DigitalInput doorIsClosedSwitch;
+	public DigitalInput doorIsOpenSwitch;   //Top Switch
+	public DigitalInput doorIsClosedSwitch; //Bottom Switch
 	boolean doorIsOpen;
 	public SSDoor(){
 		hingeMotor = new CANTalon(11);
@@ -64,6 +64,14 @@ public class SSDoor extends Subsystem {
     public void updateStatus(){
     	SmartDashboard.putNumber("DoorHingeMotor", Robot.ssDoor.hingeMotor.get());
     	SmartDashboard.putNumber("DoorHingeMotorDraw",Robot.ssDoor.hingeMotor.getOutputCurrent());
+    	if(Robot.ssDoor.doorIsOpenSwitch.get())
+    		SmartDashboard.putString("Door(TopCam)","Open    (true)");
+    	else
+    		SmartDashboard.putString("Door(TopCam)","Not Open(false)");
+    	if(Robot.ssDoor.doorIsClosedSwitch.get())
+    		SmartDashboard.putString("Door(BottomCam)","Closed    (true)");
+    	else
+    		SmartDashboard.putString("Door(BottomCam)","Not Closed(false)");
     	if(doorIsOpen)
     		SmartDashboard.putString("Door", "Open");
     	else
