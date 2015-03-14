@@ -254,9 +254,9 @@ public class SSDriveTrain extends Subsystem {
      * -> as the gyro turns right it goes positive*/
     public int gyroFinal;
     public boolean negative;
-       public void setFinalGyro(int pAngel){
-       	gyroFinal = (int)(pAngel + theG.getAngle());
-       	if(pAngel > 0){
+       public void setFinalGyro(int pAngle){
+       	gyroFinal = (int)(pAngle + theG.getAngle());
+       	if(pAngle > 0){
        		negative = false;
        	}
        	else{
@@ -268,7 +268,7 @@ public class SSDriveTrain extends Subsystem {
     	if(theG.getAngle() > gyroFinal && !negative){
     		return true;
     	}
-    	else if(theG.Angle() < gyroFinal && negative){
+    	else if(theG.getAngle() < gyroFinal && negative){
     		return true;
     	}
     	return false;
