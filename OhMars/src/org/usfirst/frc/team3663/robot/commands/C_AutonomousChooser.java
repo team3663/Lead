@@ -28,7 +28,8 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_CG.start();
     			break;
     		case 1:
-    			//<nothing>
+    			theOneToRun_CG = new CG_AutoPickUpGreenCan();
+    			theOneToRun_CG.start();
     			break;
     		case 2:
     			//theOneToRun_C = new C_EncoderDriveStraight(-40, .7);

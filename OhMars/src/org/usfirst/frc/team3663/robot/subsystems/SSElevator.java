@@ -44,16 +44,20 @@ public class SSElevator extends Subsystem {
 	int terminateCounter = 0;
 
 	public boolean brakeOn;
-	public final int lowestPos = -20;
+	public final int lowestPos = -5;
 	public final int lowStepPos = 50;
 	public final int onScoringPlatformPos = 220;//220 is new good position moving from 275
 	public final int onStepPos = 525;
 	public final int readyForBinPos = 218;
-	//public final int puttingStackPos = 458;492,437,491,519,520
+	public final int puttingStackPos = 485;
 	public final int noTotePos = 600;
 	public final int nextToteReadyPos = 1075;
 	public final int highestPos = 1075;//1165;
 	
+	//Stuff to print
+	public int setTickPos;
+	public double maxSpeedSetPos;
+	public String message;
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
     }
@@ -94,7 +98,6 @@ public class SSElevator extends Subsystem {
     	{
 	    	bikeBreak.set(DoubleSolenoid.Value.kForward);
 	    	brakeOn = false;
-	    	Robot.ssDashBoard.putDashBool("brakeOn: ", brakeOn);
     	}
     }
     public void bikeBrakeTriggerClose(){
@@ -102,7 +105,6 @@ public class SSElevator extends Subsystem {
     	{
 	    	bikeBreak.set(DoubleSolenoid.Value.kReverse);
 	    	brakeOn = true;
-	    	Robot.ssDashBoard.putDashBool("brakeOn: ", brakeOn);
     	}
     }
     
@@ -127,7 +129,6 @@ public class SSElevator extends Subsystem {
     	{
     		desiredSpeed = 0;
     	}
-    	Robot.ssDashBoard.putDashNumber("Elevator: pSpeed: ", pSpeed);
     	if ((dir == -1 && currTicks < lowestPos+30) || (dir == 1 && currTicks > highestPos-25))
 		{
     		newSpeed-=delta;
@@ -145,34 +146,30 @@ public class SSElevator extends Subsystem {
     	if (desiredSpeed == 0 && (newSpeed < 0.2 && lastSpeed >=0.2))
     	{
     		stop = true;
-        	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "slowed down");
+        	message = "slowed down";
     	}
     	if ((dir == 1 && currTicks > highestPos) || (dir == -1 && currTicks < lowestPos))
     	{
     		stop = true;
-        	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "reached limit");
+        	message = "reached limit";
     	}
     	if (!elevZeroed)
     	{
     		stop = true;
-        	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "not zeroed");
+    		message = "not zeroed";
     	}
     	//if near end or if manual is stopping, then terminate
     	if (stop)
     	{
 				terminateMove();
-				Robot.ssDashBoard.putDashNumber("Elevator: terminate: ", terminateCounter++);
+				terminateCounter++;
 				return true;
     	}
-    	Robot.ssDashBoard.putDashString("Elevator: stopped: ", "not stopped");
+    	message = "not stopped";
     	if (newSpeed != 0)
     	{
     		bikeBrakeTriggerOpen();
     	}
-		Robot.ssDashBoard.putDashNumber("Elevator: speed: ", newSpeed);
-    	Robot.ssDashBoard.putDashNumber("Elevator: counter", counter++);
-		Robot.ssDashBoard.putDashNumber("encoderTicks: ", currTicks);
-		
     	motorsSet(dir*newSpeed);
     	lastSpeed = newSpeed;
     	return false;
@@ -180,8 +177,8 @@ public class SSElevator extends Subsystem {
     
     public boolean moveToSetPos(int pTicks, double pMaxSpeed)
     {
-    	Robot.ssDashBoard.putDashNumber("Elevator: pTicks(SetPos): ", pTicks);
-    	Robot.ssDashBoard.putDashNumber("Elevator: pMaxSpeed(SetPos): ", pMaxSpeed);
+    	setTickPos = pTicks;
+    	maxSpeedSetPos = pMaxSpeed;
     	maxSpeed = Math.abs(pMaxSpeed);
     	int acceleration = 1;//default to accelerating
     	int dir = 1;//default to going up
@@ -191,7 +188,7 @@ public class SSElevator extends Subsystem {
     	{
     		terminateMove();
     		minSpeedAdjust = 0;
-    		Robot.ssDashBoard.putDashNumber("Elevator: terminate: ", terminateCounter++);
+    		terminateCounter++;
     		return true;
     	}
     	if (currTicks > pTicks)
@@ -250,8 +247,6 @@ public class SSElevator extends Subsystem {
     }
     public boolean moveAndSetZero()
     {
-		Robot.ssDashBoard.putDashBool("Elevator: Zeroed: ", elevZeroed);
-		Robot.ssDashBoard.putDashNumber("encoderTicks: ", winchEncoder.get());
 		if (elevLimitSwitch.get())
 		{
     		winchEncoder.reset();
@@ -259,7 +254,6 @@ public class SSElevator extends Subsystem {
     		elevZeroed = true;
     		return true;
 		}
-		Robot.ssDashBoard.putDashNumber("Elevator: setZero speed:", speed+((double)counter++/10000.0));
 		if (speed != 0)
 		{
 			bikeBrakeTriggerOpen();
@@ -300,6 +294,10 @@ public class SSElevator extends Subsystem {
     }
     
     public void updateStatus(){
+    	SmartDashboard.putString("Elevator stopped:", message);
+    	SmartDashboard.putNumber("ElevSetTickPos", setTickPos);
+    	SmartDashboard.putNumber("ElevMaxSpeedSet", maxSpeedSetPos);
+    	SmartDashboard.putNumber("ElevTerminateCounter", terminateCounter);
     	updateTicksPerSec();
     	if (elevMotor1.get() == 1)
     	{

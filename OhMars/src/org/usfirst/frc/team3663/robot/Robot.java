@@ -33,7 +33,6 @@ public class Robot extends IterativeRobot {
 	public static SSDriveTrain ssDriveTrain;
 	public static SSElevator ssElevator;
 	public static SSFork ssFork;
-  	public static SSDashBoard ssDashBoard;
   	public static SSAutonomous ssAutonomous;
 	public static OI oi;
 
@@ -56,7 +55,6 @@ public class Robot extends IterativeRobot {
 
 	
     public void robotInit() {
-    	ssDashBoard = new SSDashBoard();
     	ssDriveTrain = new SSDriveTrain();
     	ssElevator = new SSElevator();
     	ssFork = new SSFork();
@@ -70,8 +68,6 @@ public class Robot extends IterativeRobot {
 		//Auto = new C_EncoderTurn(0,90, true);
 		Auto = new C_AutonomousChooser();
 		arcadeDrive = new C_ArcadeDrive();
-		ALog = new A_Log();
-		ALog.start();
 		//armExecutables = new CG_ArmsExecute();
 		defaultElevator = new C_DefaultElevatorRunning(0);
 		pickUpWithSensor = new CG_PickUpWithSensor();

@@ -10,27 +10,32 @@ import org.usfirst.frc.team3663.robot.OI;
 /**
  *
  */
-public class C_ArmsOpenCloseTogether extends Command {
-	
+public class C_ArmsOpenCloseIndividual extends Command {
 	boolean open;
-	
-    public C_ArmsOpenCloseTogether(boolean pOpen) {
+	boolean isLeft;
+    public C_ArmsOpenCloseIndividual(boolean pOpen, boolean pIsLeft) {
     	requires(Robot.ssArmsSolenoids);
         open= pOpen;
-    	
+    	isLeft = pIsLeft;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(open){
-    		Robot.ssArmsSolenoids.armLOpen();
-			Robot.ssArmsSolenoids.armROpen();
+    	if(isLeft){
+	    	if(open){
+				Robot.ssArmsSolenoids.armLOpen();
+	    	}
+	    	else{
+				Robot.ssArmsSolenoids.armLClose();
+	    	}
+    	}else{
+    		if(open){
+    			Robot.ssArmsSolenoids.armROpen();
+    		}else{
+    			Robot.ssArmsSolenoids.armRClose();
+    		}
     	}
-    	else{
-    		Robot.ssArmsSolenoids.armLClose();
-			Robot.ssArmsSolenoids.armRClose();
-    	}
-    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseTogether initialize");
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseIndividual initialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,12 +50,12 @@ public class C_ArmsOpenCloseTogether extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseTogether end");
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseIndividual end");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseTogether interrupted");
+    	SmartDashboard.putString("ssArmsSolenoid", "C_ArmsOpenCloseIndividual interrupted");
     }
 }

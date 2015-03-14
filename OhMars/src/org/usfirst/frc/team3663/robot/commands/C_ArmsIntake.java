@@ -50,22 +50,20 @@ public class C_ArmsIntake extends Command {
     			Robot.ssArmsIntake.intakeMotorsSet(0.9);
     		else if(isPovActive){
 	    		if(pov == 270){
-	    			Robot.ssArmsIntake.intakeMotorRSet(-0.9);
-	    			Robot.ssArmsIntake.intakeMotorLSet(0.9);
+	    			Robot.ssArmsIntake.intakeMotorRSet(-0.3);
+	    			Robot.ssArmsIntake.intakeMotorLSet(0.3);
 	    		}
 	    		else if(pov == 90){
-	    			Robot.ssArmsIntake.intakeMotorLSet(-0.9);
-    				Robot.ssArmsIntake.intakeMotorRSet(0.9);
+	    			Robot.ssArmsIntake.intakeMotorLSet(-0.3);
+    				Robot.ssArmsIntake.intakeMotorRSet(0.3);
     			}
-    			/*else if(pov == 0){
-    				Robot.ssArmsIntake.intakeMotorRSet(0.8);
-	    			Robot.ssArmsIntake.intakeMotorLSet(0.8);
-	    		}*/
     			else if(pov == 180){
-    				Robot.ssArmsIntake.intakeMotorLSet(0.0);
-	    			Robot.ssArmsIntake.intakeMotorRSet(0.0);
+    				Robot.ssArmsIntake.intakeMotorsSet(0.0);
 	    		}
     		}
+    		/*else if(!Robot.ssArmsIntake.armsAreSameDirection()){
+				Robot.ssArmsIntake.intakeMotorsSet(0.0);
+    		}*/
 		}else{
     		Robot.ssArmsIntake.intakeMotorsSet(0.0);
     	}
