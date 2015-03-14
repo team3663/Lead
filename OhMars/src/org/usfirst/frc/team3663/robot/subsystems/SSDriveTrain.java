@@ -268,7 +268,7 @@ public class SSDriveTrain extends Subsystem {
     	if(theG.getAngle() > gyroFinal && !negative){
     		return true;
     	}
-    	else if(theG.Angle() < gyroFinal && negative){
+    	else if(theG.getAngle() < gyroFinal && negative){
     		return true;
     	}
     	return false;
