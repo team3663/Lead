@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ArcadeDrive;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
@@ -28,6 +29,7 @@ public class SSDriveTrain extends Subsystem {
 	public boolean encoderDriving = false;
     public int lastDistanceR;
     public int lastDistanceL;
+    public Gyro theG;
     
 
     public void initDefaultCommand() {
@@ -37,6 +39,7 @@ public class SSDriveTrain extends Subsystem {
     
     public SSDriveTrain()
     {
+    	theG = new Gyro(0);
     	driveMotorL1 = new CANTalon(10);
     	/*11 and 21 are not connected*/
     	//driveMotorL2 = new CANTalon(11);
@@ -243,7 +246,18 @@ public class SSDriveTrain extends Subsystem {
     		}
     	}
     }
+    
+    /*this is not used in the current build of the Bot (we need to have a gyro)
+     * NOTES
+     * -> as the gyro turns right it goes positive*/
+    public boolean CheckGyro(int pAngle){
+    	if(theG.getAngle() > pAngle){
+    		return true;
+    	}
+    	return false;
+    }
     public void updateStatus(){
+    	SmartDashboard.putNumber("Gyro Angle", Robot.ssDriveTrain.theG.getAngle());
     	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());
     	SmartDashboard.putNumber("DriveMotorR1", Robot.ssDriveTrain.driveMotorR1.get());
     	SmartDashboard.putNumber("DriveEncoderL", Robot.ssDriveTrain.leftEncoder.get());
