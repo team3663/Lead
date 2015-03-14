@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -39,7 +40,8 @@ public class SSDriveTrain extends Subsystem {
     
     public SSDriveTrain()
     {
-    	theG = new Gyro(0);
+    	//Timer.getFPGATimestamp();
+    	//theG = new Gyro(0);
     	driveMotorL1 = new CANTalon(10);
     	/*11 and 21 are not connected*/
     	//driveMotorL2 = new CANTalon(11);
@@ -250,20 +252,48 @@ public class SSDriveTrain extends Subsystem {
     /*this is not used in the current build of the Bot (we need to have a gyro)
      * NOTES
      * -> as the gyro turns right it goes positive*/
-    public boolean CheckGyro(int pAngle){
-    	if(theG.getAngle() > pAngle){
+    public int gyroFinal;
+    public boolean negative;
+       public void setFinalGyro(int pAngel){
+       	gyroFinal = (int)(pAngel + theG.getAngle());
+       	if(pAngel > 0){
+       		negative = false;
+       	}
+       	else{
+       		negative = true;
+       	}
+       }
+       
+     public boolean CheckGyro(){
+    	if(theG.getAngle() > gyroFinal && !negative){
+    		return true;
+    	}
+    	else if(theG.Angle() < gyroFinal && negative){
     		return true;
     	}
     	return false;
     }
     public void updateStatus(){
-    	SmartDashboard.putNumber("Gyro Angle", Robot.ssDriveTrain.theG.getAngle());
+    	//SmartDashboard.putNumber("Gyro Angle", Robot.ssDriveTrain.theG.getAngle());
     	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());
     	SmartDashboard.putNumber("DriveMotorR1", Robot.ssDriveTrain.driveMotorR1.get());
     	SmartDashboard.putNumber("DriveEncoderL", Robot.ssDriveTrain.leftEncoder.get());
     	SmartDashboard.putNumber("DriveEncoderR", Robot.ssDriveTrain.rightEncoder.get());
     	SmartDashboard.putNumber("DriveMotorL1Draw", Robot.ssDriveTrain.driveMotorL1.getOutputCurrent());
     	SmartDashboard.putNumber("DriveMotorR1Draw", Robot.ssDriveTrain.driveMotorR1.getOutputCurrent());
+    }
+    
+    public int finalTime;
+    public void setEndTime(int seconds){
+    	finalTime = (int)(seconds + Timer.getFPGATimestamp());
+    }
+    
+    public boolean CheckFinalTime(){
+    	if(finalTime < Timer.getFPGATimestamp())
+    	{
+    		return true;
+    	}
+    	return false;
     }
 }
 
