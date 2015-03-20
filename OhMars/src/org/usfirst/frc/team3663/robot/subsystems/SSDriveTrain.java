@@ -274,7 +274,7 @@ public class SSDriveTrain extends Subsystem {
     	return false;
     }
     public void updateStatus(){
-    	//SmartDashboard.putNumber("Gyro Angle", Robot.ssDriveTrain.theG.getAngle());
+    	SmartDashboard.putNumber("Gyro Angle", Robot.ssDriveTrain.theG.getAngle());
     	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());
     	SmartDashboard.putNumber("DriveMotorR1", Robot.ssDriveTrain.driveMotorR1.get());
     	SmartDashboard.putNumber("DriveEncoderL", Robot.ssDriveTrain.leftEncoder.get());
