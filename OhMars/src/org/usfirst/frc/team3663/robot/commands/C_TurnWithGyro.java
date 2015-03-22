@@ -19,7 +19,7 @@ public class C_TurnWithGyro extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ssDriveTrain.setFinalGyro(angle);
+    	Robot.ssDriveTrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -39,20 +39,19 @@ public class C_TurnWithGyro extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.ssDriveTrain.CheckGyro()){
-    		Robot.ssDriveTrain.motorRightSet(0);
-    		Robot.ssDriveTrain.motorLeftSet(0);
-    		return true;
-    	}
-    	return false;
+    	return Robot.ssDriveTrain.checkGyro(angle);
     }
 
     // Called once after isFinished returns true
     protected void end() {
+		Robot.ssDriveTrain.motorRightSet(0);
+		Robot.ssDriveTrain.motorLeftSet(0);
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

@@ -273,6 +273,14 @@ public class SSDriveTrain extends Subsystem {
     	}
     	return false;
     }
+     
+    public void resetGyro(){
+   		theG.reset();
+    }
+    
+    public boolean checkGyro(int pAngle){
+    	return Math.abs(theG.getAngle())> Math.abs(pAngle);    	
+    }
     public void updateStatus(){
     	SmartDashboard.putNumber("Gyro Angle", Robot.ssDriveTrain.theG.getAngle());
     	SmartDashboard.putNumber("DriveMotorL1", Robot.ssDriveTrain.driveMotorL1.get());

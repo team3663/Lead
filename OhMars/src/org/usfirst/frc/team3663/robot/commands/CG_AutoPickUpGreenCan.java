@@ -19,7 +19,7 @@ public class CG_AutoPickUpGreenCan extends CommandGroup {
     	addSequential(new C_Delay(1.5));
         addParallel(new C_ArmsIntakeSet(0.0,0.0));
     	addParallel(new C_ArmsOpenCloseTogether(true));
-    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.nextToteReadyPos));
+    	//addSequential(new C_ElevMoveToPos(Robot.ssElevator.nextToteReadyPos));
         //      addSequential(new Command2());
         // these will run in order.
 

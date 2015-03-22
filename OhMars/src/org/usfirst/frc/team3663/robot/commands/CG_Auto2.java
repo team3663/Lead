@@ -22,7 +22,7 @@ public class CG_Auto2 extends CommandGroup {
     	addSequential(new C_Delay(1.5));    	
     	addParallel(new C_ArmsOpenCloseTogether(true));
     	addParallel(new C_ArmsIntakeSet(0,0));
-    	addSequential(new C_ElevMoveToPos(Robot.ssElevator.nextToteReadyPos));
+    	//addSequential(new C_ElevMoveToPos(Robot.ssElevator.nextToteReadyPos));
     	
         //      addSequential(new Command2());
         // these will run in order.

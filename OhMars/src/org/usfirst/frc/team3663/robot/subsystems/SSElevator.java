@@ -227,7 +227,7 @@ public class SSElevator extends Subsystem {
     {
 		bikeBrakeTriggerOpen();
     	speed = -absMinSpeed;
-    	maxSpeed = 1.0;
+    	maxSpeed = .5;
     }
     public boolean moveDownToZero()
     {
