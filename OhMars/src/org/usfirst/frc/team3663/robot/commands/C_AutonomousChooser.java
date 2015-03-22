@@ -32,8 +32,7 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_CG.start();
     			break;
     		case 2:
-    			theOneToRun_C = new C_TurnWithGyro(.2, -90);
-    			theOneToRun_C.start();
+    			//this will soon do something
     			break;
     		case 3:
     			//do nothing!!!!!!!!!!!!!! <Dead Fish> 

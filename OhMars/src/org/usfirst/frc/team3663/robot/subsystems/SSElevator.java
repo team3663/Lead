@@ -57,7 +57,7 @@ public class SSElevator extends Subsystem {
 	//Stuff to print
 	public int setTickPos;
 	public double maxSpeedSetPos;
-	public String message;
+	public String message = "";
     public void initDefaultCommand() {
     	setDefaultCommand(new C_DefaultElevatorRunning(0));
     }
@@ -148,7 +148,7 @@ public class SSElevator extends Subsystem {
     		stop = true;
         	message = "slowed down";
     	}
-    	if ((dir == 1 && currTicks > highestPos) || (dir == -1 && currTicks < lowestPos))
+    	if ((dir == 1 && currTicks > highestPos-35) || (dir == -1 && currTicks < lowestPos))
     	{
     		stop = true;
         	message = "reached limit";
