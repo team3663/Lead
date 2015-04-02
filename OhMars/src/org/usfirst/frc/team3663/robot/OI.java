@@ -103,12 +103,12 @@ public class OI {
 		
 		//----------------
 		pickUp = new JoystickButton(buttonController, 1);
-		cgPickUpWithSensor = new CG_PickUpWithSensor();
+		cgPickUpWithSensor = new CG_PickUp();
 		pickUp.whenPressed(cgPickUpWithSensor);
 		pickUp.whenReleased(new C_Interrupt(cgPickUpWithSensor));
 		
 		dropOnSP = new JoystickButton(buttonController, 3);
-		cgScoringPlatform = new CG_DropOffSP();
+		cgScoringPlatform = new C_ElevMoveToPos(Robot.ssElevator.puttingStackPos);
 		dropOnSP.whenPressed(cgScoringPlatform);
 		dropOnSP.whenReleased(new C_Interrupt(cgScoringPlatform));
 		

@@ -26,7 +26,7 @@ public class SSElevator extends Subsystem {
 	public Encoder winchEncoder;
 	public DigitalInput elevLimitSwitch, toteSensor;
 
-	final double elevDelta = 0.05;
+	final double elevDelta = 0.25;//0.05;
 	final double absMaxSpeed = 1.0;
 	final double absMinSpeed = 0.2;
 	
@@ -51,8 +51,8 @@ public class SSElevator extends Subsystem {
 	public final int readyForBinPos = 218;
 	public final int puttingStackPos = 485;
 	public final int noTotePos = 600;
-	public final int nextToteReadyPos = 1075;
-	public final int highestPos = 1075;//1165;
+	public final int nextToteReadyPos = 1040;
+	public final int highestPos = 1040;//1075;1165;
 	
 	//Stuff to print
 	public int setTickPos;
@@ -119,21 +119,13 @@ public class SSElevator extends Subsystem {
     {
     	int currTicks = winchEncoder.get();
     	double newSpeed = lastSpeed;
-    	int dir = 1;
-    	if (pSpeed < 0)
-    	{
-    		dir = -1;
-    	}
-    	double desiredSpeed = Math.abs(pSpeed);
-    	if (desiredSpeed < 0.2)
-    	{
-    		desiredSpeed = 0;
-    	}
-    	if ((dir == -1 && currTicks < lowestPos+30) || (dir == 1 && currTicks > highestPos-25))
+    	double desiredSpeed = pSpeed;
+    	if ((Math.abs(desiredSpeed) < 0.2) || ((pSpeed<0) && (currTicks < lowestPos+60)) || ((pSpeed>0) && (currTicks > highestPos-60)))
 		{
-    		newSpeed-=delta;
+    		desiredSpeed = 0;
 		}
-    	else if (lastSpeed > desiredSpeed)
+    	SmartDashboard.putNumber("Elev desiredSpeed: ", desiredSpeed);
+    	if (lastSpeed > desiredSpeed)
     	{
     		newSpeed-=delta;
     	}
@@ -141,14 +133,13 @@ public class SSElevator extends Subsystem {
     	{
     		newSpeed+=delta;
     	}
-    //	int currTicks = winchEncoder.get();
     	boolean stop = false;
-    	if (desiredSpeed == 0 && (newSpeed < 0.2 && lastSpeed >=0.2))
+    	if (desiredSpeed == 0 && (Math.abs(newSpeed) < 0.2))
     	{
     		stop = true;
         	message = "slowed down";
     	}
-    	if ((dir == 1 && currTicks > highestPos-35) || (dir == -1 && currTicks < lowestPos))
+    	if ((currTicks > highestPos) || (currTicks < lowestPos))//dir == 1 or dir == -1 with these
     	{
     		stop = true;
         	message = "reached limit";
@@ -161,16 +152,26 @@ public class SSElevator extends Subsystem {
     	//if near end or if manual is stopping, then terminate
     	if (stop)
     	{
-				terminateMove();
-				terminateCounter++;
-				return true;
+        	SmartDashboard.putNumber("Elev lastSpeed", lastSpeed);
+			terminateMove();
+			terminateCounter++;
+			return true;
     	}
     	message = "not stopped";
+    	if (newSpeed > 1)
+    	{
+    		newSpeed = 1;
+    	}
+    	if (newSpeed < -1)
+    	{
+    		newSpeed = -1;
+    	}
     	if (newSpeed != 0)
     	{
     		bikeBrakeTriggerOpen();
     	}
-    	motorsSet(dir*newSpeed);
+    	motorsSet(newSpeed);
+    	SmartDashboard.putNumber("Elev lastSpeed", lastSpeed);
     	lastSpeed = newSpeed;
     	return false;
     }
