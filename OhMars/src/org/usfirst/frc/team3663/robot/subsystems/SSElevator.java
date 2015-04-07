@@ -49,7 +49,7 @@ public class SSElevator extends Subsystem {
 	public final int onScoringPlatformPos = 220;//220 is new good position moving from 275
 	public final int onStepPos = 525;
 	public final int readyForBinPos = 218;
-	public final int puttingStackPos = 485;
+	public final int puttingStackPos = 455;
 	public final int noTotePos = 600;
 	public final int nextToteReadyPos = 1040;
 	public final int highestPos = 1040;//1075;1165;
