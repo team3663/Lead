@@ -34,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static SSElevator ssElevator;
 	public static SSFork ssFork;
   	public static SSAutonomous ssAutonomous;
+  	public static SSFishingPull ssFishingPull;
 	public static OI oi;
 
 	Command arcadeDrive;
@@ -62,6 +63,7 @@ public class Robot extends IterativeRobot {
     	ssArmsIntake = new SSArmsIntake();
     	ssArmsSolenoids = new SSArmsSolenoids();
     	ssArmsUpDown = new SSArmsUpDown();
+    	ssFishingPull = new SSFishingPull();
     	
     	ssAutonomous = new SSAutonomous();
 		oi = new OI();

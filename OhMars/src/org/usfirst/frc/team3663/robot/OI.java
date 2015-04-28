@@ -17,7 +17,7 @@ public class OI {
 	
 	public Joystick driveController = new Joystick(0);
 	public Joystick buttonController = new Joystick(1);
-	public Joystick logitech = new Joystick(2);
+	public Joystick curtisTest = new Joystick(2);
 	public Joystick buttonStick = new Joystick(3);
 	public Joystick testStick = new Joystick(5);
 	public Joystick bobStick = new Joystick(4);
@@ -43,6 +43,7 @@ public class OI {
 	public JoystickButton armIntakeToggleReverse;
 	public JoystickButton armExecutables;
 	public JoystickButton armIntakeReverse;
+	public JoystickButton trashCanArms;
 	//-------------
 	public JoystickButton pickUp;
 	public JoystickButton dropOnSP;
@@ -54,6 +55,10 @@ public class OI {
 	//-------------
 	public JoystickButton openDoor;
 	public JoystickButton closeDoor;
+	
+	public JoystickButton raiseFishingPull;
+	public JoystickButton lowerFishingPull;
+	public JoystickButton toggleFishingPull;
 	
 	Command cgPickUpWithSensor;
 	Command cgScoringPlatform;
@@ -112,15 +117,21 @@ public class OI {
 		dropOnSP.whenPressed(cgScoringPlatform);
 		dropOnSP.whenReleased(new C_Interrupt(cgScoringPlatform));
 		
-		dropOnStep = new JoystickButton(buttonController, 2);
+		toggleFishingPull = new JoystickButton(buttonController, 2);
+		toggleFishingPull.whenPressed(new C_ToggleFishing());
+		
+		/*dropOnStep = new JoystickButton(buttonController, 2);
 		cgStep = new CG_DropOffStep();
 		dropOnStep.whenPressed(cgStep);
-		dropOnStep.whenReleased(new C_Interrupt(cgStep));
+		dropOnStep.whenReleased(new C_Interrupt(cgStep));*/
 		
 		resetToStart = new JoystickButton(buttonController, 8);
 		cZeroElevator = new C_ElevMoveAndSetZero();//CG_RestartToStartPos();//
 		resetToStart.whenPressed(cZeroElevator);
 		resetToStart.whenReleased(new C_Interrupt(cZeroElevator));
+		
+		//trashCanArms = new JoystickButton(buttonController, 6);
+		//trashCanArms.whenPressed(new );
 		
 		releaseBrake = new JoystickButton(buttonController, 7);
 		cReleaseBrake = new C_ReleaseBrake();
@@ -181,6 +192,11 @@ public class OI {
 		cCloseDoor = new C_DoorOpenClose(true);
 		closeDoor.whenPressed(cCloseDoor);
 		closeDoor.whenReleased(new C_Interrupt(cCloseDoor));
+		
+		raiseFishingPull = new JoystickButton(curtisTest, 1);
+		raiseFishingPull.whenPressed(new C_Raise_LowerFishingPull(true));
+		lowerFishingPull = new JoystickButton(curtisTest, 4);
+		lowerFishingPull.whenPressed(new C_Raise_LowerFishingPull(false));
 		
 	}
 	public void updateStatus(){

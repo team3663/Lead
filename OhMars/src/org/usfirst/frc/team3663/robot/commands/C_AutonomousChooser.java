@@ -32,7 +32,8 @@ public class C_AutonomousChooser extends Command {
     			theOneToRun_CG.start();
     			break;
     		case 2:
-    			//this will soon do something
+    			theOneToRun_CG = new CG_AutoWithFishingPull();
+    			theOneToRun_CG.start();
     			break;
     		case 3:
     			//do nothing!!!!!!!!!!!!!! <Dead Fish> 

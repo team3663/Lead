@@ -329,6 +329,16 @@ public class SSElevator extends Subsystem {
     		SmartDashboard.putString("ElevBrake", "on");
     	}else{
     		SmartDashboard.putString("ElevBrake", "off");
+    	}    
+    }
+    
+    
+    //curtis Code 	DO NOT USE IT IS FOR A HIGHLY SPECIFIC PORPOIS!!!
+    	public boolean safeToRun(){
+    		if(winchEncoder.get() > 100 && winchEncoder.get() < 700){
+    			return true;
+    		}
+    		return false;
     	}
     }
-}
+    
